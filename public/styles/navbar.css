@@ -1,0 +1,204 @@
+.navbar-wrapper{
+    position: absolute;
+    height: 119px;
+    width: 100%;
+    padding: 24px 48px;
+    z-index: 1000;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 2.5rem;
+    align-items: center;
+}
+
+.navbar-wrapper a{
+    text-decoration: none;
+    color: #1A1A1A;
+}
+
+.navbar-logo{
+    display: inline-flex;
+}
+
+.brand-logo{
+    width: 120px;
+}
+
+.navbar-items{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 2.5rem;
+}
+
+.navbar-icons{
+    display: flex;
+    justify-content: end;
+    grid-column-start: 3;
+    grid-column-end: 4;
+    text-align: end;
+}
+
+.navbar-wrapper ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.navbar-btn{
+    display: none;
+}
+
+.navbar-btn-inside{
+    border: none;
+    background: none;
+}
+
+.navbar-wrapper li{
+    display: inline-block;
+}
+
+.search-btn{
+    background: none;
+    border: none;
+}
+
+/* Override Bootstrap classes */
+
+.offcanvas{
+    border-radius: 10px;
+}
+
+.offcanvas-header{
+    padding: 32px 32px 0;
+}
+
+#navbarOffcanvas .offcanvas-title{
+    font-family: 'DINPro-Bold', sans-serif;
+    color: #1A1A1A;
+    font-size: 2.5rem;
+}
+
+.offcanvas-body{
+    padding: 32px;
+}
+
+.offcanvas-body a{
+    text-decoration: none;
+    color: #1A1A1A;
+}
+
+.offcanvas-body .navbar-item{
+    font-size: 1.5rem;
+}
+
+.search-offcanvas {
+    --bs-offcanvas-width: min(95vw, 650px) !important;
+}
+
+.search-offcanvas form{
+    width: 80%;
+}
+
+.search-offcanvas input{
+    font-size: 1.4rem;
+    width: 100%;
+    color: #1A1A1A;
+    border: none;
+}
+
+.search-offcanvas input:focus{
+    outline: none;
+    border: none;
+}
+
+.search-offcanvas input::placeholder{
+    opacity: .85;
+}
+
+.search-offcanvas .offcanvas-header{
+    margin: 32px 40px 0;
+    padding: 0 0 12px;
+    position: relative;
+    border-bottom: 2px solid rgba(26, 26, 26, .1);
+    transition: all 0.25s ease;
+}
+
+.search-offcanvas .clear-btn{
+    border: none;
+    background: none;
+    font-family: 'DINPro-Medium', sans-serif;
+    color: #1A1A1A;
+    opacity: 0;
+    transition: all 0.25s ease;
+}
+
+.btn-close:focus{
+    box-shadow: none;
+}
+
+.search-offcanvas .offcanvas-body{
+    padding: 0 40px 40px 40px;
+    margin: 32px 0 0 0;
+}
+
+.search-result-img{
+    width: 96px;
+}
+
+.search-result-supertype{
+    font-family: 'DINPro-Medium', sans-serif;
+    font-size: 12px;
+    color: #1A1A1AB3;
+}
+
+.search-result-name{
+    font-size: 16px;
+    color: #1A1A1A;
+    line-height: 1.5rem;
+}
+
+.search-result-price{
+    font-family: 'DINPro-Medium', sans-serif;
+    font-size: 16px;
+    color: #E74C3C;
+}
+
+.img-placeholder{
+    width: 96px;
+    height: 96px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.text-placeholder{
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+@media (max-width: 992px) {
+    .navbar-items{
+        display: none;
+    }
+    .navbar-btn{
+        display: inline-flex;
+    }
+    .navbar-wrapper{
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 1.5rem;
+    }
+    .navbar-btn{
+        display: inline-flex;
+    }
+    .navbar-logo{
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar-wrapper{
+        height: 76px;
+        padding: 12px 20px;
+    }
+    .brand-logo{
+        width: 100px;
+    }
+}

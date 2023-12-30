@@ -1,0 +1,63 @@
+<div class="container-fluid">
+  <!-- Page Heading -->
+  <div class="row d-flex justify-content-between mb-4">
+    <h1 class="h3 mb-2 text-gray-800 col">Set Details</h1>
+  </div>
+  <div class="card mb-4 p-3 border-bottom-primary row">
+    <div class="container-fluid m-0 row">
+      <!-- Form -->
+      <div class="col-md-12">
+        <form>
+          <!-- Form Row -->
+          <div class="form-row">
+            <!-- Set Name -->
+            <div class="form-group col-md-8">
+              <label for="setName">Set name</label>
+              <input type="text" class="form-control" id="setName" name="setName" placeholder="Set Name" value="<%= set.name %>" />
+            </div>
+            <!-- Set ID -->
+            <div class="form-group col-md-4">
+              <label for="setID">Set ID</label>
+              <input type="text" class="form-control" id="setID" name="setID" placeholder="Set ID" value="<%= set.id %>" readonly/>
+            </div>
+          </div>
+          <!-- End Form Row -->
+
+          <!-- Form Row -->
+          <div class="form-row">
+            <!-- Set Name -->
+            <div class="form-group col-md-8">
+              <label for="series">Series</label>
+              <input type="text" class="form-control" id="series" name="series" placeholder="Series" value="<%= set.series %>" />
+            </div>
+            <div class="form-group col-md-4">
+              <label for="isActive">Active</label>
+              <select class="form-control custom-select" id="isActive" name="isActive">
+                <option value="true" <%= set.isActive === true ? 'selected' : '' %>>True</option>
+                <option value="false" <%= set.isActive === false ? 'selected' : '' %>>False</option>
+              </select>
+            </div>
+          </div>
+          <!-- End Form Row -->
+
+        </form>
+      </div>
+
+    </div>
+
+    <div class="d-flex">
+      <div class="col-md-9">
+        <a href="/admin/set">
+          <button type="button" class="btn btn-primary" id="confirmBtn">
+            Confirm
+          </button>
+        </a>
+        <a href="/admin/set">
+          <button type="button" class="btn btn-secondary" id="cancelBtn">
+            Cancel
+          </button>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

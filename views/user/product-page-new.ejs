@@ -1,0 +1,833 @@
+<main>
+    <section>
+        <div class="page-title">
+            <div class="vstack gap-4 align-items-center text-center">
+                <h1>POCKET MONSTERS CARD GAME cards list</h1>
+                <h5>POCKET MONSTERS CARD GAME japanese cards list liste des cartes japonaises</h5>
+                <a href="/">Return to the POKÉMON CARD GAME dedicated landing page</a>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="product-view-wrapper">
+            <div class="product-view-grid">
+                <div class="hstack gap-3 filter">
+                    <svg role="presentation" fill="none" focusable="false" stroke-width="2" width="20" height="14" class="icon-subdued icon icon-filter" viewBox="0 0 20 14">
+                        <path d="M1 2C0.447715 2 0 2.44772 0 3C0 3.55228 0.447715 4 1 4V2ZM1 4H5V2H1V4Z" fill="currentColor"></path>
+                        <path d="M1 10C0.447715 10 0 10.4477 0 11C0 11.5523 0.447715 12 1 12V10ZM1 12H11V10H1V12Z" fill="currentColor"></path>
+                        <path d="M10 2H9V4H10V2ZM19 4C19.5523 4 20 3.55228 20 3C20 2.44772 19.5523 2 19 2V4ZM10 4H19V2H10V4Z" fill="currentColor"></path>
+                        <path d="M16 10H15V12H16V10ZM19 12C19.5523 12 20 11.5523 20 11C20 10.4477 19.5523 10 19 10V12ZM16 12H19V10H16V12Z" fill="currentColor"></path>
+                        <circle cx="7" cy="3" r="2" stroke="currentColor"></circle>
+                        <circle cx="13" cy="11" r="2" stroke="currentColor"></circle>
+                    </svg>
+                    <span class="light-text">Filters</span>
+                </div>
+                <div class="d-flex justify-content-end align-items-center position-relative sort">
+                    <span class="heavy-text">Sort by:</span>
+                    <button id="sortBtn" class="sort-btn" type="button" aria-expanded="false" onclick="toggleSortBtn(this)">
+                        <span id="selectedSort" class="light-text">Date, new to old</span>
+                        <div class="circle">
+                            <svg role="presentation" focusable="false" width="8" height="6" class="icon icon-chevron-bottom-small reverse-icon" viewBox="0 0 8 6">
+                                <path d="m1 1.5 3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.5"></path>
+                            </svg>
+                        </div>
+                    </button>
+                    <div class="sort-dropdown" id="sortDropdown" aria-describedby="#sortBtn">
+                        <div role="listbox" class="sort-dropdown-options">
+                            <button type="button" tabindex="-1" class="dropdown-option" role="option" value="price-ascending" onclick="handleOptionClick(this, true)">
+                                <span>Price, low to high</span>
+                            </button>
+                            <button type="button" tabindex="-1" class="dropdown-option" role="option" value="price-descending" onclick="handleOptionClick(this, true)">
+                                <span>Price, high to low</span>
+                            </button>
+                            <button type="button" tabindex="-1" class="dropdown-option" role="option" value="created-ascending" onclick="handleOptionClick(this, true)">
+                                <span>Date, old to new</span>
+                            </button>
+                            <button type="button" tabindex="-1" class="dropdown-option" role="option" value="created-descending" aria-selected="true" onclick="handleOptionClick(this)">
+                                <span>Date, new to old</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="filter-menus">
+                    <div class="sticky-top" style="top: 20px;">
+                        <form id="filterForm" action="/products/filter">
+                            <!-- RARITY FILTER -->
+                            <div class="filter-tab">
+                                <details aria-expanded="false">
+                                    <summary>
+                                        <div class="filter-toggle">
+                                            <span class="heavy-text">Rarity</span>
+                                            <div class="circle">
+                                                <svg role="presentation" focusable="false" width="8" height="6" class="icon icon-chevron-bottom-small reverse-icon" viewBox="0 0 8 6">
+                                                    <path d="m1 1.5 3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.5"></path>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </summary>
+                                </details>
+                                <div class="filter-content">
+                                    <div class="checkbox-list" id="rarity-filter">
+                                        <div class="d-flex align-items-center">
+                                            <input id="rarity-filter-amazing-rare" type="checkbox" class="checkbox" name="rarity" value="Amazing Rare">
+                                            <label for="rarity-filter-amazing-rare">Amazing Rare</label>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <input id="rarity-filter-common" type="checkbox" class="checkbox" name="rarity" value="Common">
+                                            <label for="rarity-filter-common">Common</label>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <input id="rarity-filter-legend" type="checkbox" class="checkbox" name="rarity" value="LEGEND">
+                                            <label for="rarity-filter-legend">LEGEND</label>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <input id="rarity-filter-promo" type="checkbox" class="checkbox" name="rarity" value="Promo">
+                                            <label for="rarity-filter-promo">Promo</label>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <input id="rarity-filter-rare" type="checkbox" class="checkbox" name="rarity" value="Rare">
+                                            <label for="rarity-filter-rare">Rare</label>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <input id="rarity-filter-rare-ace" type="checkbox" class="checkbox" name="rarity" value="Rare ACE">
+                                            <label for="rarity-filter-rare-ace">Rare ACE</label>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <input id="rarity-filter-rare-break" type="checkbox" class="checkbox" name="rarity" value="Rare BREAK">
+                                            <label for="rarity-filter-rare-break">Rare BREAK</label>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <input id="rarity-filter-rare-holo" type="checkbox" class="checkbox" name="rarity" value="Rare Holo">
+                                            <label for="rarity-filter-rare-holo">Rare Holo</label>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <input id="rarity-filter-rare-holo-ex" type="checkbox" class="checkbox" name="rarity" value="Rare Holo EX">
+                                            <label for="rarity-filter-rare-holo-ex">Rare Holo EX</label>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <input id="rarity-filter-rare-holo-gx" type="checkbox" class="checkbox" name="rarity" value="Rare Holo GX">
+                                            <label for="rarity-filter-rare-holo-gx">Rare Holo GX</label>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <input id="rarity-filter-rare-holo-lv-x" type="checkbox" class="checkbox" name="rarity" value="Rare Holo LV.X">
+                                            <label for="rarity-filter-rare-holo-lv-x">Rare Holo LV.X</label>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <input id="rarity-filter-rare-holo-star" type="checkbox" class="checkbox" name="rarity" value="Rare Holo Star">
+                                            <label for="rarity-filter-rare-holo-star">Rare Holo Star</label>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <input id="rarity-filter-rare-holo-v" type="checkbox" class="checkbox" name="rarity" value="Rare Holo V">
+                                            <label for="rarity-filter-rare-holo-v">Rare Holo V</label>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <input id="rarity-filter-rare-holo-vmax" type="checkbox" class="checkbox" name="rarity" value="Rare Holo VMAX">
+                                            <label for="rarity-filter-rare-holo-vmax">Rare Holo VMAX</label>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <input id="rarity-filter-rare-prime" type="checkbox" class="checkbox" name="rarity" value="Rare Prime">
+                                            <label for="rarity-filter-rare-prime">Rare Prime</label>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <input id="rarity-filter-rare-prism-star" type="checkbox" class="checkbox" name="rarity" value="Rare Prism Star">
+                                            <label for="rarity-filter-rare-prism-star">Rare Prism Star</label>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <input id="rarity-filter-rare-rainbow" type="checkbox" class="checkbox" name="rarity" value="Rare Rainbow">
+                                            <label for="rarity-filter-rare-rainbow">Rare Rainbow</label>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <input id="rarity-filter-rare-secret" type="checkbox" class="checkbox" name="rarity" value="Rare Secret">
+                                            <label for="rarity-filter-rare-secret">Rare Secret</label>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <input id="rarity-filter-rare-shining" type="checkbox" class="checkbox" name="rarity" value="Rare Shining">
+                                            <label for="rarity-filter-rare-shining">Rare Shining</label>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <input id="rarity-filter-rare-shiny" type="checkbox" class="checkbox" name="rarity" value="Rare Shiny">
+                                            <label for="rarity-filter-rare-shiny">Rare Shiny</label>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <input id="rarity-filter-rare-shiny-gx" type="checkbox" class="checkbox" name="rarity" value="Rare Shiny GX">
+                                            <label for="rarity-filter-rare-shiny-gx">Rare Shiny GX</label>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <input id="rarity-filter-rare-ultra" type="checkbox" class="checkbox" name="rarity" value="Rare Ultra">
+                                            <label for="rarity-filter-rare-ultra">Rare Ultra</label>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <input id="rarity-filter-uncommon" type="checkbox" class="checkbox" name="rarity" value="Uncommon">
+                                            <label for="rarity-filter-uncommon">Uncommon</label>
+                                        </div>                                                                                     
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- SUPERTYPE FILTER -->
+                            <div class="filter-tab">
+                                <details aria-expanded="false">
+                                    <summary>
+                                        <div class="filter-toggle">
+                                            <span class="heavy-text">Supertype</span>
+                                            <div class="circle">
+                                                <svg role="presentation" focusable="false" width="8" height="6" class="icon icon-chevron-bottom-small reverse-icon" viewBox="0 0 8 6">
+                                                    <path d="m1 1.5 3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.5"></path>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </summary>
+                                </details>
+                                <div class="filter-content">
+                                    <div class="checkbox-list" id="supertype-filter">
+                                        <div class="d-flex align-items-center">
+                                            <input id="supertype-filter-energy" type="checkbox" class="checkbox" name="supertype" value="Energy">
+                                            <label for="supertype-filter-energy">Energy</label>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <input id="supertype-filter-pokemon" type="checkbox" class="checkbox" name="supertype" value="Pokémon">
+                                            <label for="supertype-filter-pokemon">Pokémon</label>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <input id="supertype-filter-trainer" type="checkbox" class="checkbox" name="supertype" value="Trainer">
+                                            <label for="supertype-filter-trainer">Trainer</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- SUBTYPE FILTER -->
+                            <div class="filter-tab">
+                                <details aria-expanded="false">
+                                    <summary>
+                                        <div class="filter-toggle">
+                                            <span class="heavy-text">Subtype</span>
+                                            <div class="circle">
+                                                <svg role="presentation" focusable="false" width="8" height="6" class="icon icon-chevron-bottom-small reverse-icon" viewBox="0 0 8 6">
+                                                    <path d="m1 1.5 3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.5"></path>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </summary>
+                                </details>
+                                <div class="filter-content">
+                                    <div class="checkbox-list" id="subtype-filter">
+                                        <div class="d-flex align-items-center">
+                                            <input id="subtype-filter-break" type="checkbox" class="checkbox" name="subtype" value="BREAK">
+                                            <label for="subtype-filter-break">BREAK</label>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <input id="subtype-filter-baby" type="checkbox" class="checkbox" name="subtype" value="Baby">
+                                            <label for="subtype-filter-baby">Baby</label>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <input id="subtype-filter-basic" type="checkbox" class="checkbox" name="subtype" value="Basic">
+                                            <label for="subtype-filter-basic">Basic</label>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <input id="subtype-filter-ex" type="checkbox" class="checkbox" name="subtype" value="EX">
+                                            <label for="subtype-filter-ex">EX</label>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <input id="subtype-filter-gx" type="checkbox" class="checkbox" name="subtype" value="GX">
+                                            <label for="subtype-filter-gx">GX</label>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <input id="subtype-filter-goldenrod-game-corner" type="checkbox" class="checkbox" name="subtype" value="Goldenrod Game Corner">
+                                            <label for="subtype-filter-goldenrod-game-corner">Goldenrod Game Corner</label>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <input id="subtype-filter-item" type="checkbox" class="checkbox" name="subtype" value="Item">
+                                            <label for="subtype-filter-item">Item</label>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <input id="subtype-filter-legend" type="checkbox" class="checkbox" name="subtype" value="LEGEND">
+                                            <label for="subtype-filter-legend">LEGEND</label>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <input id="subtype-filter-level-up" type="checkbox" class="checkbox" name="subtype" value="Level-Up">
+                                            <label for="subtype-filter-level-up">Level-Up</label>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <input id="subtype-filter-mega" type="checkbox" class="checkbox" name="subtype" value="MEGA">
+                                            <label for="subtype-filter-mega">MEGA</label>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <input id="subtype-filter-pokemon-tool" type="checkbox" class="checkbox" name="subtype" value="Pokémon Tool">
+                                            <label for="subtype-filter-pokemon-tool">Pokémon Tool</label>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <input id="subtype-filter-pokemon-tool-f" type="checkbox" class="checkbox" name="subtype" value="Pokémon Tool F">
+                                            <label for="subtype-filter-pokemon-tool-f">Pokémon Tool F</label>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <input id="subtype-filter-rapid-strike" type="checkbox" class="checkbox" name="subtype" value="Rapid Strike">
+                                            <label for="subtype-filter-rapid-strike">Rapid Strike</label>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <input id="subtype-filter-restored" type="checkbox" class="checkbox" name="subtype" value="Restored">
+                                            <label for="subtype-filter-restored">Restored</label>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <input id="subtype-filter-rockets-secret-machine" type="checkbox" class="checkbox" name="subtype" value="Rocket's Secret Machine">
+                                            <label for="subtype-filter-rockets-secret-machine">Rocket's Secret Machine</label>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <input id="subtype-filter-single-strike" type="checkbox" class="checkbox" name="subtype" value="Single Strike">
+                                            <label for="subtype-filter-single-strike">Single Strike</label>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <input id="subtype-filter-special" type="checkbox" class="checkbox" name="subtype" value="Special">
+                                            <label for="subtype-filter-special">Special</label>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <input id="subtype-filter-stadium" type="checkbox" class="checkbox" name="subtype" value="Stadium">
+                                            <label for="subtype-filter-stadium">Stadium</label>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <input id="subtype-filter-stage-1" type="checkbox" class="checkbox" name="subtype" value="Stage 1">
+                                            <label for="subtype-filter-stage-1">Stage 1</label>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <input id="subtype-filter-stage-2" type="checkbox" class="checkbox" name="subtype" value="Stage 2">
+                                            <label for="subtype-filter-stage-2">Stage 2</label>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <input id="subtype-filter-supporter" type="checkbox" class="checkbox" name="subtype" value="Supporter">
+                                            <label for="subtype-filter-supporter">Supporter</label>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <input id="subtype-filter-tag-team" type="checkbox" class="checkbox" name="subtype" value="TAG TEAM">
+                                            <label for="subtype-filter-tag-team">TAG TEAM</label>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <input id="subtype-filter-technical-machine" type="checkbox" class="checkbox" name="subtype" value="Technical Machine">
+                                            <label for="subtype-filter-technical-machine">Technical Machine</label>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <input id="subtype-filter-v" type="checkbox" class="checkbox" name="subtype" value="V">
+                                            <label for="subtype-filter-v">V</label>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <input id="subtype-filter-vmax" type="checkbox" class="checkbox" name="subtype" value="VMAX">
+                                            <label for="subtype-filter-vmax">VMAX</label>
+                                        </div>                                                                                  
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- TYPE FILTER -->
+                            <div class="filter-tab">
+                                <details aria-expanded="false">
+                                    <summary>
+                                        <div class="filter-toggle">
+                                            <span class="heavy-text">Type</span>
+                                            <div class="circle">
+                                                <svg role="presentation" focusable="false" width="8" height="6" class="icon icon-chevron-bottom-small reverse-icon" viewBox="0 0 8 6">
+                                                    <path d="m1 1.5 3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.5"></path>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </summary>
+                                </details>
+                                <div class="filter-content">
+                                    <div class="checkbox-list" id="type-filter">
+                                        <div class="d-flex align-items-center">
+                                            <input id="type-filter-colorless" type="checkbox" class="checkbox" name="type" value="Colorless">
+                                            <label for="type-filter-colorless">Colorless</label>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <input id="type-filter-darkness" type="checkbox" class="checkbox" name="type" value="Darkness">
+                                            <label for="type-filter-darkness">Darkness</label>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <input id="type-filter-dragon" type="checkbox" class="checkbox" name="type" value="Dragon">
+                                            <label for="type-filter-dragon">Dragon</label>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <input id="type-filter-fairy" type="checkbox" class="checkbox" name="type" value="Fairy">
+                                            <label for="type-filter-fairy">Fairy</label>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <input id="type-filter-fighting" type="checkbox" class="checkbox" name="type" value="Fighting">
+                                            <label for="type-filter-fighting">Fighting</label>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <input id="type-filter-fire" type="checkbox" class="checkbox" name="type" value="Fire">
+                                            <label for="type-filter-fire">Fire</label>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <input id="type-filter-grass" type="checkbox" class="checkbox" name="type" value="Grass">
+                                            <label for="type-filter-grass">Grass</label>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <input id="type-filter-lightning" type="checkbox" class="checkbox" name="type" value="Lightning">
+                                            <label for="type-filter-lightning">Lightning</label>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <input id="type-filter-metal" type="checkbox" class="checkbox" name="type" value="Metal">
+                                            <label for="type-filter-metal">Metal</label>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <input id="type-filter-psychic" type="checkbox" class="checkbox" name="type" value="Psychic">
+                                            <label for="type-filter-psychic">Psychic</label>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <input id="type-filter-water" type="checkbox" class="checkbox" name="type" value="Water">
+                                            <label for="type-filter-water">Water</label>
+                                        </div>                                                                           
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- IN STOCK FILTER -->
+                            <div class="filter-tab">
+                                <div class="filter-toggle">
+                                    <label for="inStockFilter" class="heavy-text">In stock only</label>
+                                    <input id="inStockFilter" type="checkbox" class="switch" name="in-stock" value="1">
+                                </div>
+                            </div>
+                            <!-- PRICE RANGE FILTER -->
+                            <div class="filter-tab">
+                                <details aria-expanded="false">
+                                    <summary>
+                                        <div class="filter-toggle">
+                                            <span class="heavy-text">Price range</span>
+                                            <div class="circle">
+                                                <svg role="presentation" focusable="false" width="8" height="6" class="icon icon-chevron-bottom-small reverse-icon" viewBox="0 0 8 6">
+                                                    <path d="m1 1.5 3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.5"></path>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </summary>
+                                </details>
+                                <div class="filter-content">
+                                    <label id="minPriceRangeLabel" for="minPriceRange">Min: 0</label>
+                                    <input class="price-range" id="minPriceRange" type="range" min="0" max="200" step="0.1" name="min" value="0">
+                                    <label id="maxPriceRangeLabel" for="maxPriceRange">Max: 200</label>
+                                    <input class="price-range" id="maxPriceRange" type="range" min="0" max="200" step="0.1" name="max" value="200">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div id="productList" class="product-list">
+                </div>
+                <div class="product-pagination">
+                    <button id="prevPageBtn" class="pagination-btn disabled">
+                        <i class="fa-solid fa-angle-left" style="color: #1a1a1a;"></i>
+                    </button>
+                    <span id="currentPageText" class="pagination-current">1&nbsp;&nbsp;/&nbsp;&nbsp;3</span>
+                    <button id="nextPageBtn" class="pagination-btn">
+                        <i class="fa-solid fa-angle-right" style="color: #1a1a1a;"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <button type="button" class="black-btn filter-and-sort-btn" data-bs-toggle="offcanvas" data-bs-target="#filterAndSortOffcanvas" aria-controls="filterAndSortOffcanvas">
+            <svg role="presentation" fill="none" focusable="false" stroke-width="2" width="18" height="18" class="icon icon-filter" viewBox="0 0 20 14">
+                <path d="M1 2C0.447715 2 0 2.44772 0 3C0 3.55228 0.447715 4 1 4V2ZM1 4H5V2H1V4Z" fill="currentColor"></path>
+                <path d="M1 10C0.447715 10 0 10.4477 0 11C0 11.5523 0.447715 12 1 12V10ZM1 12H11V10H1V12Z" fill="currentColor"></path>
+                <path d="M10 2H9V4H10V2ZM19 4C19.5523 4 20 3.55228 20 3C20 2.44772 19.5523 2 19 2V4ZM10 4H19V2H10V4Z" fill="currentColor"></path>
+                <path d="M16 10H15V12H16V10ZM19 12C19.5523 12 20 11.5523 20 11C20 10.4477 19.5523 10 19 10V12ZM16 12H19V10H16V12Z" fill="currentColor"></path>
+                <circle cx="7" cy="3" r="2" stroke="currentColor"></circle>
+                <circle cx="13" cy="11" r="2" stroke="currentColor"></circle>
+            </svg>
+            <span>Filter and sort</span>
+        </button>
+
+        <!-- FILTER AND SORT OFFCANVAS -->
+        <div class="offcanvas offcanvas-bottom filter-offcanvas" tabindex="-1" id="filterAndSortOffcanvas">
+            <div class="offcanvas-body">
+                <form id="filterFormSmall" action="/products/filter">
+                    <!-- SORT -->
+                    <div class="filter-tab">
+                        <details aria-expanded="false">
+                            <summary>
+                                <div class="filter-toggle">
+                                    <span class="heavy-text">Sort by</span>
+                                    <div class="circle">
+                                        <svg role="presentation" focusable="false" width="8" height="6" class="icon icon-chevron-bottom-small reverse-icon" viewBox="0 0 8 6">
+                                            <path d="m1 1.5 3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.5"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </summary>
+                        </details>
+                        <div class="filter-content">
+                            <div class="checkbox-list">
+                                <div class="d-flex align-items-center">
+                                    <input id="sort-by-small-featured" type="radio" class="checkbox" name="sort-by" value="featured">
+                                    <label for="sort-by-small-featured">Featured</label>
+                                </div>  
+                                <div class="d-flex align-items-center">
+                                    <input id="sort-by-small-best-selling" type="radio" class="checkbox" name="sort-by" value="best-selling">
+                                    <label for="sort-by-small-best-selling">Best selling</label>
+                                </div>   
+                                <div class="d-flex align-items-center">
+                                    <input id="sort-by-small-title-ascending" type="radio" class="checkbox" name="sort-by" value="title-ascending">
+                                    <label for="sort-by-small-title-ascending">Alphabetically, A-Z</label>
+                                </div>  
+                                <div class="d-flex align-items-center">
+                                    <input id="sort-by-small-title-descending" type="radio" class="checkbox" name="sort-by" value="title-descending">
+                                    <label for="sort-by-small-title-descending">Alphabetically, Z-A</label>
+                                </div>  
+                                <div class="d-flex align-items-center">
+                                    <input id="sort-by-small-price-ascending" type="radio" class="checkbox" name="sort-by" value="price-ascending">
+                                    <label for="sort-by-small-price-ascending">Price, low to high/label>
+                                </div>     
+                                <div class="d-flex align-items-center">
+                                    <input id="sort-by-small-price-descending" type="radio" class="checkbox" name="sort-by" value="price-descending">
+                                    <label for="sort-by-small-price-descending">Price, high to low/label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="sort-by-small-created-ascending" type="radio" class="checkbox" name="sort-by" value="created-ascending">
+                                    <label for="sort-by-small-created-ascending">Date, old to new</label>
+                                </div>     
+                                <div class="d-flex align-items-center">
+                                    <input id="sort-by-small-created-descending" type="radio" class="checkbox" name="sort-by" value="created-descending" checked>
+                                    <label for="sort-by-small-created-descending">Date, new to old</label>
+                                </div>                                                                                   
+                            </div>
+                        </div>
+                    </div>
+                    <!-- RARITY FILTER -->
+                    <div class="filter-tab">
+                        <details aria-expanded="false">
+                            <summary>
+                                <div class="filter-toggle">
+                                    <span class="heavy-text">Rarity</span>
+                                    <div class="circle">
+                                        <svg role="presentation" focusable="false" width="8" height="6" class="icon icon-chevron-bottom-small reverse-icon" viewBox="0 0 8 6">
+                                            <path d="m1 1.5 3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.5"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </summary>
+                        </details>
+                        <div class="filter-content">
+                            <div class="checkbox-list" id="rarity-small-filter">
+                                <div class="d-flex align-items-center">
+                                    <input id="rarity-filter-small-amazing-rare" type="checkbox" class="checkbox" name="rarity" value="Amazing Rare">
+                                    <label for="rarity-filter-small-amazing-rare">Amazing Rare</label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="rarity-filter-small-common" type="checkbox" class="checkbox" name="rarity" value="Common">
+                                    <label for="rarity-filter-small-common">Common</label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="rarity-filter-small-legend" type="checkbox" class="checkbox" name="rarity" value="LEGEND">
+                                    <label for="rarity-filter-small-legend">LEGEND</label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="rarity-filter-small-promo" type="checkbox" class="checkbox" name="rarity" value="Promo">
+                                    <label for="rarity-filter-small-promo">Promo</label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="rarity-filter-small-rare" type="checkbox" class="checkbox" name="rarity" value="Rare">
+                                    <label for="rarity-filter-small-rare">Rare</label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="rarity-filter-small-rare-ace" type="checkbox" class="checkbox" name="rarity" value="Rare ACE">
+                                    <label for="rarity-filter-small-rare-ace">Rare ACE</label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="rarity-filter-small-rare-break" type="checkbox" class="checkbox" name="rarity" value="Rare BREAK">
+                                    <label for="rarity-filter-small-rare-break">Rare BREAK</label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="rarity-filter-small-rare-holo" type="checkbox" class="checkbox" name="rarity" value="Rare Holo">
+                                    <label for="rarity-filter-small-rare-holo">Rare Holo</label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="rarity-filter-small-rare-holo-ex" type="checkbox" class="checkbox" name="rarity" value="Rare Holo EX">
+                                    <label for="rarity-filter-small-rare-holo-ex">Rare Holo EX</label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="rarity-filter-small-rare-holo-gx" type="checkbox" class="checkbox" name="rarity" value="Rare Holo GX">
+                                    <label for="rarity-filter-small-rare-holo-gx">Rare Holo GX</label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="rarity-filter-small-rare-holo-lv-x" type="checkbox" class="checkbox" name="rarity" value="Rare Holo LV.X">
+                                    <label for="rarity-filter-small-rare-holo-lv-x">Rare Holo LV.X</label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="rarity-filter-small-rare-holo-star" type="checkbox" class="checkbox" name="rarity" value="Rare Holo Star">
+                                    <label for="rarity-filter-small-rare-holo-star">Rare Holo Star</label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="rarity-filter-small-rare-holo-v" type="checkbox" class="checkbox" name="rarity" value="Rare Holo V">
+                                    <label for="rarity-filter-small-rare-holo-v">Rare Holo V</label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="rarity-filter-small-rare-holo-vmax" type="checkbox" class="checkbox" name="rarity" value="Rare Holo VMAX">
+                                    <label for="rarity-filter-small-rare-holo-vmax">Rare Holo VMAX</label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="rarity-filter-small-rare-prime" type="checkbox" class="checkbox" name="rarity" value="Rare Prime">
+                                    <label for="rarity-filter-small-rare-prime">Rare Prime</label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="rarity-filter-small-rare-prism-star" type="checkbox" class="checkbox" name="rarity" value="Rare Prism Star">
+                                    <label for="rarity-filter-small-rare-prism-star">Rare Prism Star</label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="rarity-filter-small-rare-rainbow" type="checkbox" class="checkbox" name="rarity" value="Rare Rainbow">
+                                    <label for="rarity-filter-small-rare-rainbow">Rare Rainbow</label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="rarity-filter-small-rare-secret" type="checkbox" class="checkbox" name="rarity" value="Rare Secret">
+                                    <label for="rarity-filter-small-rare-secret">Rare Secret</label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="rarity-filter-small-rare-shining" type="checkbox" class="checkbox" name="rarity" value="Rare Shining">
+                                    <label for="rarity-filter-small-rare-shining">Rare Shining</label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="rarity-filter-small-rare-shiny" type="checkbox" class="checkbox" name="rarity" value="Rare Shiny">
+                                    <label for="rarity-filter-small-rare-shiny">Rare Shiny</label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="rarity-filter-small-rare-shiny-gx" type="checkbox" class="checkbox" name="rarity" value="Rare Shiny GX">
+                                    <label for="rarity-filter-small-rare-shiny-gx">Rare Shiny GX</label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="rarity-filter-small-rare-ultra" type="checkbox" class="checkbox" name="rarity" value="Rare Ultra">
+                                    <label for="rarity-filter-small-rare-ultra">Rare Ultra</label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="rarity-filter-small-uncommon" type="checkbox" class="checkbox" name="rarity" value="Uncommon">
+                                    <label for="rarity-filter-small-uncommon">Uncommon</label>
+                                </div>                                                                                     
+                            </div>
+                        </div>
+                    </div>
+                    <!-- SUPERTYPE FILTER -->
+                    <div class="filter-tab">
+                        <details aria-expanded="false">
+                            <summary>
+                                <div class="filter-toggle">
+                                    <span class="heavy-text">Supertype</span>
+                                    <div class="circle">
+                                        <svg role="presentation" focusable="false" width="8" height="6" class="icon icon-chevron-bottom-small reverse-icon" viewBox="0 0 8 6">
+                                            <path d="m1 1.5 3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.5"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </summary>
+                        </details>
+                        <div class="filter-content">
+                            <div class="checkbox-list" id="supertype-small-filter">
+                                <div class="d-flex align-items-center">
+                                    <input id="supertype-filter-small-energy" type="checkbox" class="checkbox" name="supertype" value="Energy">
+                                    <label for="supertype-filter-small-energy">Energy</label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="supertype-filter-small-pokemon" type="checkbox" class="checkbox" name="supertype" value="Pokémon">
+                                    <label for="supertype-filter-small-pokemon">Pokémon</label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="supertype-filter-small-trainer" type="checkbox" class="checkbox" name="supertype" value="Trainer">
+                                    <label for="supertype-filter-small-trainer">Trainer</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- SUBTYPE FILTER -->
+                    <div class="filter-tab">
+                        <details aria-expanded="false">
+                            <summary>
+                                <div class="filter-toggle">
+                                    <span class="heavy-text">Subtype</span>
+                                    <div class="circle">
+                                        <svg role="presentation" focusable="false" width="8" height="6" class="icon icon-chevron-bottom-small reverse-icon" viewBox="0 0 8 6">
+                                            <path d="m1 1.5 3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.5"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </summary>
+                        </details>
+                        <div class="filter-content">
+                            <div class="checkbox-list" id="subtype-small-filter">
+                                <div class="d-flex align-items-center">
+                                    <input id="subtype-filter-small-break" type="checkbox" class="checkbox" name="subtype" value="BREAK">
+                                    <label for="subtype-filter-small-break">BREAK</label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="subtype-filter-small-baby" type="checkbox" class="checkbox" name="subtype" value="Baby">
+                                    <label for="subtype-filter-small-baby">Baby</label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="subtype-filter-small-basic" type="checkbox" class="checkbox" name="subtype" value="Basic">
+                                    <label for="subtype-filter-small-basic">Basic</label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="subtype-filter-small-ex" type="checkbox" class="checkbox" name="subtype" value="EX">
+                                    <label for="subtype-filter-small-ex">EX</label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="subtype-filter-small-gx" type="checkbox" class="checkbox" name="subtype" value="GX">
+                                    <label for="subtype-filter-small-gx">GX</label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="subtype-filter-small-goldenrod-game-corner" type="checkbox" class="checkbox" name="subtype" value="Goldenrod Game Corner">
+                                    <label for="subtype-filter-small-goldenrod-game-corner">Goldenrod Game Corner</label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="subtype-filter-small-item" type="checkbox" class="checkbox" name="subtype" value="Item">
+                                    <label for="subtype-filter-small-item">Item</label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="subtype-filter-small-legend" type="checkbox" class="checkbox" name="subtype" value="LEGEND">
+                                    <label for="subtype-filter-small-legend">LEGEND</label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="subtype-filter-small-level-up" type="checkbox" class="checkbox" name="subtype" value="Level-Up">
+                                    <label for="subtype-filter-small-level-up">Level-Up</label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="subtype-filter-small-mega" type="checkbox" class="checkbox" name="subtype" value="MEGA">
+                                    <label for="subtype-filter-small-mega">MEGA</label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="subtype-filter-small-pokemon-tool" type="checkbox" class="checkbox" name="subtype" value="Pokémon Tool">
+                                    <label for="subtype-filter-small-pokemon-tool">Pokémon Tool</label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="subtype-filter-small-pokemon-tool-f" type="checkbox" class="checkbox" name="subtype" value="Pokémon Tool F">
+                                    <label for="subtype-filter-small-pokemon-tool-f">Pokémon Tool F</label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="subtype-filter-small-rapid-strike" type="checkbox" class="checkbox" name="subtype" value="Rapid Strike">
+                                    <label for="subtype-filter-small-rapid-strike">Rapid Strike</label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="subtype-filter-small-restored" type="checkbox" class="checkbox" name="subtype" value="Restored">
+                                    <label for="subtype-filter-small-restored">Restored</label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="subtype-filter-small-rockets-secret-machine" type="checkbox" class="checkbox" name="subtype" value="Rocket's Secret Machine">
+                                    <label for="subtype-filter-small-rockets-secret-machine">Rocket's Secret Machine</label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="subtype-filter-small-single-strike" type="checkbox" class="checkbox" name="subtype" value="Single Strike">
+                                    <label for="subtype-filter-small-single-strike">Single Strike</label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="subtype-filter-small-special" type="checkbox" class="checkbox" name="subtype" value="Special">
+                                    <label for="subtype-filter-small-special">Special</label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="subtype-filter-small-stadium" type="checkbox" class="checkbox" name="subtype" value="Stadium">
+                                    <label for="subtype-filter-small-stadium">Stadium</label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="subtype-filter-small-stage-1" type="checkbox" class="checkbox" name="subtype" value="Stage 1">
+                                    <label for="subtype-filter-small-stage-1">Stage 1</label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="subtype-filter-small-stage-2" type="checkbox" class="checkbox" name="subtype" value="Stage 2">
+                                    <label for="subtype-filter-small-stage-2">Stage 2</label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="subtype-filter-small-supporter" type="checkbox" class="checkbox" name="subtype" value="Supporter">
+                                    <label for="subtype-filter-small-supporter">Supporter</label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="subtype-filter-small-tag-team" type="checkbox" class="checkbox" name="subtype" value="TAG TEAM">
+                                    <label for="subtype-filter-small-tag-team">TAG TEAM</label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="subtype-filter-small-technical-machine" type="checkbox" class="checkbox" name="subtype" value="Technical Machine">
+                                    <label for="subtype-filter-small-technical-machine">Technical Machine</label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="subtype-filter-small-v" type="checkbox" class="checkbox" name="subtype" value="V">
+                                    <label for="subtype-filter-small-v">V</label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="subtype-filter-small-vmax" type="checkbox" class="checkbox" name="subtype" value="VMAX">
+                                    <label for="subtype-filter-small-vmax">VMAX</label>
+                                </div>                                                                                  
+                            </div>
+                        </div>
+                    </div>
+                    <!-- TYPE FILTER -->
+                    <div class="filter-tab">
+                        <details aria-expanded="false">
+                            <summary>
+                                <div class="filter-toggle">
+                                    <span class="heavy-text">Type</span>
+                                    <div class="circle">
+                                        <svg role="presentation" focusable="false" width="8" height="6" class="icon icon-chevron-bottom-small reverse-icon" viewBox="0 0 8 6">
+                                            <path d="m1 1.5 3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.5"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </summary>
+                        </details>
+                        <div class="filter-content">
+                            <div class="checkbox-list" id="type-small-filter">
+                                <div class="d-flex align-items-center">
+                                    <input id="type-filter-small-colorless" type="checkbox" class="checkbox" name="type" value="Colorless">
+                                    <label for="type-filter-small-colorless">Colorless</label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="type-filter-small-darkness" type="checkbox" class="checkbox" name="type" value="Darkness">
+                                    <label for="type-filter-small-darkness">Darkness</label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="type-filter-small-dragon" type="checkbox" class="checkbox" name="type" value="Dragon">
+                                    <label for="type-filter-small-dragon">Dragon</label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="type-filter-small-fairy" type="checkbox" class="checkbox" name="type" value="Fairy">
+                                    <label for="type-filter-small-fairy">Fairy</label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="type-filter-small-fighting" type="checkbox" class="checkbox" name="type" value="Fighting">
+                                    <label for="type-filter-small-fighting">Fighting</label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="type-filter-small-fire" type="checkbox" class="checkbox" name="type" value="Fire">
+                                    <label for="type-filter-small-fire">Fire</label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="type-filter-small-grass" type="checkbox" class="checkbox" name="type" value="Grass">
+                                    <label for="type-filter-small-grass">Grass</label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="type-filter-small-lightning" type="checkbox" class="checkbox" name="type" value="Lightning">
+                                    <label for="type-filter-small-lightning">Lightning</label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="type-filter-small-metal" type="checkbox" class="checkbox" name="type" value="Metal">
+                                    <label for="type-filter-small-metal">Metal</label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="type-filter-small-psychic" type="checkbox" class="checkbox" name="type" value="Psychic">
+                                    <label for="type-filter-small-psychic">Psychic</label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="type-filter-small-water" type="checkbox" class="checkbox" name="type" value="Water">
+                                    <label for="type-filter-small-water">Water</label>
+                                </div>                                                                           
+                            </div>
+                        </div>
+                    </div>
+                    <!-- IN STOCK FILTER -->
+                    <div class="filter-tab">
+                        <div class="filter-toggle">
+                            <label for="inStockFilter-small" class="heavy-text">In stock only</label>
+                            <input id="inStockFilter-small" type="checkbox" class="switch" name="in-stock" value="1">
+                        </div>
+                    </div>
+                    <!-- PRICE RANGE FILTER -->
+                    <input class="price-range" id="minPriceRangeSmall" type="hidden" name="min" value="0">
+                    <input class="price-range" id="maxPriceRangeSmall" type="hidden" name="max" value="200">
+                    <button type="submit" class="black-btn full-width">Apply</button>
+                </form>
+            </div>
+        </div>
+    </section>
+</main>

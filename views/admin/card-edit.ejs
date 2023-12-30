@@ -1,0 +1,202 @@
+<div class="container-fluid">
+  <!-- Page Heading -->
+  <div class="row d-flex justify-content-between mb-4">
+    <h1 class="h3 mb-2 text-gray-800 col">Card Details</h1>
+  </div>
+  <div class="card mb-4 p-3 border-bottom-primary row">
+    <div class="container-fluid m-0 row">
+      <!--Form-->
+      <div class="col-md-9">
+        <form>
+          <!--Form Row-->
+          <div class="form-row">
+            <!--Card Name-->
+            <div class="form-group col-md-6">
+              <label for="cardName">Card name</label>
+              <input type="text" class="form-control" id="cardName" name="cardName" placeholder="Card Name" value="<%= card.name %>" />
+            </div>
+            <!--Card ID-->
+            <div class="form-group col-md-4">
+              <label for="cardID">Card ID</label>
+              <input type="text" class="form-control" id="cardID" name="cardID" placeholder="Card ID" value="<%= card.id %>" readonly />
+            </div>
+            <div class="form-group col-md-2">
+              <label for="isActive">Active</label>
+              <select class="form-control custom-select" id="isActive" name="isActive">
+                <option value="true" <%= card.isActive === true ? 'selected' : '' %>>True</option>
+                <option value="false" <%= card.isActive === false ? 'selected' : '' %>>False</option>
+              </select>
+            </div>
+          </div>
+          <!--End Form Row-->
+
+          <!--Form Row-->
+          <div class="form-row">
+            <!--Set ID-->
+            <div class="form-group col-md-6">
+              <label for="setID">Set</label>
+<select class="form-control custom-select" id="setID" name="setID">
+  <% sets.forEach(function(set) { %>
+    <option value="<%= set.id %>" <%= card.setId === set.id ? 'selected' : '' %>><%= set.name %></option>
+  <% }); %>
+</select>
+
+
+            </div>
+            <!--Card Rarity-->
+            <div class="form-group col-md-6">
+              <label for="cardRarity">Card Rarity</label>
+              <select class="form-control custom-select" id="cardRarity" name="cardRarity">
+                <% rarities.forEach(function(rarity) { %>
+                <option value="<%= rarity.name %>" <%= card.rarity === rarity.name ? 'selected' : '' %>><%= rarity.name %></option>
+                <% }); %>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <!--Types-->
+            <div class="form-group col-md-3">
+              <label for="type">Type</label>
+              <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle custom-button-width d-flex justify-content-between align-items-center" type="button" id="typesDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Select Types
+                </button>
+                <div class="dropdown-menu p-3" aria-labelledby="typesDropdown" style="max-height: 200px; overflow-y: auto;">
+                  <% types.forEach(function(type) { %>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="<%= type.name %>" name="type[]" value="<%= type.name %>" <% if (card.types && card.types.includes(type.name)) { %> checked <% } %> />
+                    <label class="form-check-label" for="<%= type.name %>">
+                      <%= type.name %>
+                    </label>
+                  </div>
+                  <% }); %>
+                </div>
+
+              </div>
+            </div>
+            <!--SuperType-->
+
+
+            <!--Subtype Types-->
+            <div class="form-group col-md-3">
+              <label for="subtypes">Subtypes</label>
+              <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle custom-button-width d-flex justify-content-between align-items-center" type="button" id="subTypesDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Select Subtypes
+                </button>
+                <div class="dropdown-menu p-3" aria-labelledby="subTypesDropdown" style="max-height: 200px; overflow-y: auto;">
+                  <% subtypes.forEach(function(subtype) { %>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="<%= subtype.name %>" name="subtypes[]" value="<%= subtype.name %>" <% if (card.subtypes && card.subtypes.includes(subtype.name)) { %> checked <% } %> />
+                    <label class="form-check-label" for="<%= subtype.name %>">
+                      <%= subtype.name %>
+                    </label>
+                  </div>
+                  <% }); %>
+                </div>
+
+              </div>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="superType">Supertype</label>
+              <select class="form-control custom-select" id="superType" name="superType">
+                <% const superTypes = ["Energy", "Pokémon", "Trainer"]; %>
+                <% superTypes.forEach(function(type) { %>
+                <option value="<%= type.toLowerCase() %>" <%= card.supertype === type ? 'selected' : '' %>><%= type %></option>
+                <% }); %>
+              </select>
+            </div>
+          </div>
+          <!--End Form Row-->
+
+          <!--Form Row-->
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="price">Price</label>
+              <input type="text" class="form-control" id="price" name="price" placeholder="Price" value="<%=card.marketPrices%>" />
+            </div>
+            <div class="form-group col-md-6">
+              <label for="amount">Amount</label>
+              <input type="text" class="form-control" id="amount" name="amount" placeholder="Amount" value="<%=card.amount%>" />
+            </div>
+          </div>
+          <!--End Form Row-->
+        </form>
+      </div>
+      <!--Image-->
+      <div class="col-md-3">
+        <!-- Preview area for the uploaded image -->
+        <div class="row-1">
+          <h6 class="mb-1 font-weight-bold">Card image preview</h6>
+        </div>
+        <div class="d-flex justify-content-center">
+  <div class="card-body p-0">
+    <form id="imageForm" enctype="multipart/form-data">
+      <label for="fileInput" style="cursor: pointer;">
+        <img id="preview-image" alt="Card Preview" src="<%= card.image ? card.image : '/img/card-back.png' %>" class="img-fluid" />
+        <input type="file" id="fileInput" accept="image/*" style="display: none;" required />
+      </label>
+    </form>
+  </div>
+</div>
+
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-end">
+      <div class="col-md-9">
+        <a href="/admin/card">
+          <button type="button" class="btn btn-primary" id="confirmBtn">
+            Confirm
+          </button>
+        </a>
+        <a href="/admin/card">
+          <button type="button" class="btn btn-secondary" id="cancelBtn">
+            Cancel
+          </button>
+        </a>
+      </div>
+      <div class="col-md-3">
+        <div class="row">
+
+          <div class="col-md-4">
+            <div class="d-flex justify-content-center">
+              <div class="card-body p-0">
+                <form id="imageForm" enctype="multipart/form-data">
+                  <label for="fileInput-1" style="cursor: pointer;">
+                    <input type="file" id="fileInput-1" accept="image/*" style="display: none;" required />
+                    <img id="preview-image-1" alt="Card Preview 1" src="<%= card.images ? card.images[1] : '/img/card-back.png' %>" class="img-fluid" />
+                  </label>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="d-flex justify-content-center">
+              <div class="card-body p-0">
+                <form id="imageForm" enctype="multipart/form-data">
+                  <label for="fileInput-2" style="cursor: pointer;">
+                    <input type="file" id="fileInput-2" accept="image/*" style="display: none;" required/>
+                    <img id="preview-image-2" alt="Card Preview 2" src="<%= card.images ? card.images[2] : '/img/card-back.png' %>" class="img-fluid" />
+                  </label>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="d-flex justify-content-center">
+              <div class="card-body p-0">
+                <form id="imageForm" enctype="multipart/form-data">
+                  <label for="fileInput-3" style="cursor: pointer;">
+                    <input type="file" id="fileInput-3" accept="image/*" style="display: none;" required />
+                    <img id="preview-image-3" alt="Card Preview 3" src="<%= card.images ? card.images[3] : '/img/card-back.png' %>" class="img-fluid" />
+                  </label>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,110 @@
+
+body
+{
+    background-color: rgb(243,245,246);
+    font-family: 'DINPro-Bold', sans-serif;
+    width: 100%;
+    display: flex;
+}
+.reversed-link {
+    background: linear-gradient(to right,currentColor,currentColor) 0 min(100%,1.35em) / 0 1px no-repeat;
+    transition: background-size .3s ease-in-out;
+}
+.group:hover  .reversed-link {
+    background-size:100% 1px;
+}
+.group{
+    background-color: rgb(243,245,246);
+}
+.circle-chevron{
+    height: 24px;
+    width: 24px;
+    background: rgba(26, 26, 26, 0.1);
+    flex-shrink: 0;
+    place-items: center;
+    transition: all .2s ease-in-out;
+}
+.group[aria-expanded=true] .circle-chevron
+{
+    transform: rotate(180deg);
+}
+.group:hover  .circle-chevron
+{
+    background: black;
+    color: white;
+}
+.circle-chevron:hover{
+    background: black;
+    color: white;
+}
+.circle-chevron[aria-expanded=true]{
+    background: black;
+    color: white;
+    transform: rotate(180deg);
+}
+.card-titel-text{
+    font-size: 12px;
+    line-height: 1.7;
+    opacity: .7;
+    transition: opacity .2s ease-in-out;
+}
+.table-title {
+    padding-bottom: 15px;
+    background: #299be4;
+    color: #fff;
+    padding: 16px 30px;
+    border-radius: 3px 3px 0 0;
+}
+.slider-wrapper{
+    
+    padding: 119px 48px 72px 48px;
+}
+.form-check-input:checked {
+    background-color: black;
+    border: 0;
+    border-color: black;
+}
+.quantity-selector .quantity-tag{
+    font-family: 'DINPro-Medium', sans-serif;
+    color: #1A1A1A;
+    opacity: .7;
+}
+
+.quantity-btn-group{
+    height: 50px;
+    width: 150px;
+    overflow: hidden;
+    border-radius: 25px;
+    border: solid rgba(26, 26, 26, .38);
+    border-width: 1.5px;
+    background: none;
+}
+
+.quantity-btn-group .minus-btn{
+    width: 50px;
+    height: 50px;
+    border: none;
+    background: none;
+}
+
+.quantity-btn-group .plus-btn{
+    width: 50px;
+    height: 50px;
+    border: none;
+    background: none;
+}
+
+.quantity-btn-group .quantity{
+    width: 50px;
+    height: 50px;
+    border: none;
+    background: none;
+    text-align: center;
+}
+
+.quantity-btn-group .quantity:focus-visible{
+    outline: none;
+}
+input[type="range"] {
+    width: 80%; /* Điều chỉnh chiều rộng tại đây */
+  }

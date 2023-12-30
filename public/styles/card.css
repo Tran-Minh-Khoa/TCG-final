@@ -1,0 +1,126 @@
+.card-image{
+    width: 100%;
+    background-color: #000000;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px 10px 0 0;
+    aspect-ratio: 1 / 1;
+    position: relative;
+}
+
+.card-image img{
+    height: 100%;
+    object-fit: contain;
+}
+
+.card-image .overlay{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.card-image .add-btn{
+    width: 120px;
+    height: 50px;
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
+    border: none;
+    border-radius: 25px;
+    background-color: rgb(26, 26, 26);
+    color: #FFFFFF;
+    font-family: 'DINPro-Bold', sans-serif;
+    font-size: 0.9rem;
+    transform: translate(0, 30px);
+    opacity: 0;
+    transition: all 0.15s ease;
+}
+
+.card-image:hover{
+    cursor: pointer;
+}
+
+.card-image:hover .add-btn{
+    transform: translate(0, 0);
+    opacity: 1;
+    transition: all 0.15s ease;
+}
+
+.card-image .add-btn:hover{
+    background-color: rgba(26, 26, 26, .8);
+}
+
+.card-info{
+    background-color: #FFFFFF;
+    height: 180px;
+    border-radius: 0 0 10px 10px;
+    padding: 24px 32px 32px;
+}
+
+.card-info a{
+    text-decoration: none;
+    color: #000000;
+}
+
+.card-info .card-category{
+    font-family: 'DINPro-Medium', sans-serif;
+    font-size: 0.625rem;
+    opacity: .7;
+    padding-bottom: 5px;
+    transition: all 0.15s ease;
+}
+
+.card-info .card-category:hover{
+    opacity: .8;
+    transition: all 0.15s ease;
+}
+
+.card-info .card-name{
+    font-family: 'DINPro-Bold', sans-serif;
+    font-size: 1rem;
+    padding-bottom: 5px;
+}
+
+.card-info .card-price{
+    font-family: 'DINPro-Medium', sans-serif;
+    color: #E74C3C;
+}
+
+@media (max-width: 1400px) {
+    .card-info{
+        height: 140px;
+        padding: 20px;
+    }
+}
+
+@media (max-width: 992px) {
+    .card-info{
+        height: 116px;
+    }
+}
+
+@media (max-width: 768px) {
+    .card-info{
+        height: 140px;
+    }
+    .card-info .card-name{
+        font-size: 0.9rem;
+    }
+    .card-info .card-price{
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 667px) {
+    .card-info .card-category{
+        font-size: 0.5rem;
+    }
+    .card-info .card-name{
+        font-size: 0.75rem;
+    }
+    .card-info .card-price{
+        font-size: 0.75rem;
+    }
+}

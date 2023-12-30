@@ -1,0 +1,20 @@
+.footer{
+    background-color: #FFFFFF;
+    padding: 64px 48px;
+    font-family: 'DINPro-Medium', sans-serif;
+    color: #1A1A1A;
+}
+
+.footer .heading{
+    font-family: 'DINPro-Bold', sans-serif;
+    opacity: 1;
+}
+
+.footer .text{
+    opacity: .7;
+}
+
+.footer .end{
+    opacity: .7;
+    font-size: 0.75rem;
+}

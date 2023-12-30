@@ -1,0 +1,99 @@
+<main>
+    <section>
+        <div class="account-nav-wrapper">
+            <div class="hstack gap-4 justify-content-center align-items-center account-nav">
+                <span class="account-nav-item chosen"><a href="/account">Orders</a></span>
+                <span class="account-nav-item"><a href="/account/addresses">Profile</a></span>
+                <span class="account-nav-logout"><a href="/logout">Logout</a></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- IF THERE ARE NO ORDERS -->
+    <section>
+        <div class="empty-state-wrapper">
+            <div class="vstack gap-4 align-items-center justify-content-center">
+                <div class="icon-wrapper">
+                    <svg role="presentation" fill="none" focusable="false" stroke-width="1" width="48" height="48" class="icon icon-picto-box" viewBox="0 0 24 24">
+                        <path d="M2.22 5.472a.742.742 0 0 0-.33.194.773.773 0 0 0-.175.48c-.47 4.515-.48 7.225 0 11.707a.792.792 0 0 0 .505.737l9.494 3.696.285.079.286-.08 9.494-3.694a.806.806 0 0 0 .505-.737c.5-4.537.506-7.153 0-11.648a.765.765 0 0 0-.175-.542.739.739 0 0 0-.33-.257v.002" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M22.269 5.997a.771.771 0 0 0-.16-.335.744.744 0 0 0-.33-.257l-9.494-3.629a.706.706 0 0 0-.571 0L6.967 3.623 2.22 5.47a.742.742 0 0 0-.33.192.771.771 0 0 0-.16.336.806.806 0 0 0 .49.592l9.494 3.696h.57l5.216-2.03L21.78 6.59a.794.794 0 0 0 .492-.593h-.002Z" fill="currentColor" fill-opacity=".12"></path>
+                        <path d="m17.5 8.255-5.215 2.03h-.571L2.22 6.59a.806.806 0 0 1-.49-.592.771.771 0 0 1 .16-.336.742.742 0 0 1 .33-.192l4.747-1.847M17.5 8.255 21.78 6.59a.794.794 0 0 0 .492-.593h-.002a.771.771 0 0 0-.16-.335.744.744 0 0 0-.33-.257l-9.494-3.629a.706.706 0 0 0-.571 0L6.967 3.623M17.5 8.255 6.967 3.623M12 22.365v-12.08M15.5 17l4-1.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                    <span class="count-bubble absolute-bubble">0</span>
+                </div>
+                <h1>You haven't placed any orders yet.</h1>
+                <a href="/products">
+                    <button type="button" class="black-btn">Continue shopping</button>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- IF THERE ARE ORDERS -->
+    <section>
+        <div class="section-wrapper">
+            <div class="vstack gap-4 align-items-center justify-content-center">
+                <div class="hstack gap-3 justify-content-center">
+                    <span class="title">Orders</span>
+                    <span class="count-bubble">3</span>
+                </div>
+                <div class="hstack gap-3 flex-wrap">
+                    <div class="order-wrapper" onclick="window.location.href='/orders/abcdef123456'">
+                        <div class="vstack gap-2 justify-content-center align-items-start order-name">
+                            <span>Order on 26/11/2023</span>
+                            <span class="order-id">Order ID: abcdef123456</span>
+                        </div>
+                        <div class="vstack gap-2 justify-content-center align-items-center">
+                            <span class="column-title">Number of items</span>
+                            <span class="column-content">2</span>
+                        </div>
+                        <div class="vstack gap-2 justify-content-center align-items-center">
+                            <span class="column-title">Total</span>
+                            <span class="column-content red-text">210.446₫</span>
+                        </div>
+                        <div class="vstack gap-2 justify-content-center align-items-center order-status">
+                            <span class="column-title">Status</span>
+                            <span class="status-icon status-pending">Pending</span>
+                        </div>
+                    </div>
+                    <div class="order-wrapper" onclick="window.location.href='/orders/meomeomeo456789'">
+                        <div class="vstack gap-2 justify-content-center align-items-start order-name">
+                            <span>Order on 30/02/2023</span>
+                            <span class="order-id">Order ID: meomeomeo456789</span>
+                        </div>
+                        <div class="vstack gap-2 justify-content-center align-items-center">
+                            <span class="column-title">Number of items</span>
+                            <span class="column-content">69</span>
+                        </div>
+                        <div class="vstack gap-2 justify-content-center align-items-center">
+                            <span class="column-title">Total</span>
+                            <span class="column-content red-text">696.969₫</span>
+                        </div>
+                        <div class="vstack gap-2 justify-content-center align-items-center order-status">
+                            <span class="column-title">Status</span>
+                            <span class="status-icon status-received">Received</span>
+                        </div>
+                    </div>
+                    <div class="order-wrapper" onclick="window.location.href='/orders/11111111'">
+                        <div class="vstack gap-2 justify-content-center align-items-start order-name">
+                            <span>Order on 01/01/2023</span>
+                            <span class="order-id">Order ID: 11111111</span>
+                        </div>
+                        <div class="vstack gap-2 justify-content-center align-items-center">
+                            <span class="column-title">Number of items</span>
+                            <span class="column-content">69</span>
+                        </div>
+                        <div class="vstack gap-2 justify-content-center align-items-center">
+                            <span class="column-title">Total</span>
+                            <span class="column-content red-text">696.969₫</span>
+                        </div>
+                        <div class="vstack gap-2 justify-content-center align-items-center order-status">
+                            <span class="column-title">Status</span>
+                            <span class="status-icon status-cancelled">Canceled</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

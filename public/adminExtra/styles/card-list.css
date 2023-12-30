@@ -1,0 +1,8 @@
+.custom-card-badge {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    font-size: 15px;
+    /* Adjust to fit your layout */
+}
