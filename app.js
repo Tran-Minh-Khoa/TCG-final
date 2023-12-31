@@ -22,6 +22,7 @@ var cartRouter = require("./components/user/cart/cart.router");
 var loginRouter = require("./components/user/login/login.router");
 var logoutRouter = require("./components/user/logout/logout.router");
 var registerRouter = require("./components/user/register/register.router");
+var paymentRouter = require("./components/user/payment/payment.router");
 //Admin Routers
 var adminDashboardRouter = require("./components/admin/dashboard/dashboard.router");
 var adminAuthRoute = require("./components/admin/auth/auth.router");
@@ -76,6 +77,7 @@ app.use("/login", loginRouter);
 app.use("/register", registerRouter);
 app.use("/logout", logoutRouter);
 app.use("/account", accountRouter);
+app.use("/payment", paymentRouter);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
