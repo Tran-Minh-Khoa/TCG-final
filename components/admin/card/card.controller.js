@@ -64,7 +64,6 @@ exports.CardAddPage = function (req, res, next) {
 };
 
 exports.CardUpload = async function (req, res, next) {
-  console.log(req.body);
   try {
     if (req.file) {
       const file = req.file;
@@ -75,41 +74,45 @@ exports.CardUpload = async function (req, res, next) {
       // Trả về URL của tệp tin đã tải lên
       console.log(updateCard);
       res.status(200).send(imageUrl);
-    }
-    else {
+    } else {
       const updateCard = await cardService.updateCard(req.body, null);
       res.status(200).send(updateCard);
     }
-
   } catch (error) {
     console.error(error);
     res.status(500).send("Error uploading file.");
   }
 };
 exports.ListCardUpdate = async function (req, res, next) {
+  console.log(req.body);
   try {
     if (req.files && req.files.length > 0) {
       const files = req.files;
-      console.log(files)
+      console.log(files);
       const listImageUrl = [];
-
+      console.log(req.body.imgStatus);
       // Duyệt qua từng file để tải lên và lưu URL vào listImageUrl
-      const imgStatus = req.body.imgStatus;
-
+      const imgStatus = JSON.parse(req.body.imgStatus); // Chuỗi JSON chuyển đoreq.body.imgStatus;
+      let fileIndex=0
       // Duyệt qua từng thuộc tính trong imgStatus để kiểm tra và xử lý tương ứng
       for (let i = 1; i <= Object.keys(imgStatus).length; i++) {
         const key = `image${i}`;
+        console.log(`${key}: ${imgStatus[key]}`);
+
         if (imgStatus[key] === true) {
-          const file = files[i - 1]; // Vị trí file tương ứng với key trong imgStatus
-          const imageUrl = await cardService.uploadCard(file);
+          const file = files[fileIndex++]; // Vị trí file tương ứng với key trong imgStatus
+          const imageUrl = await cardService.uploadCard(file,req.body.id);
           listImageUrl.push(imageUrl);
         } else {
           listImageUrl.push(null);
         }
       }
       // Ở đây, listImageUrl chứa các URL của các file đã được tải lên
-      const updateCard = await cardService.updateListCard(req.body.id, listImageUrl);
-      res.status(200).send("Files uploaded successfully", updateCard);
+      const updateCard = await cardService.updateListCard(
+        req.body.id,
+        listImageUrl
+      );
+      res.status(200).send("Files uploaded successfully");
     } else {
       res.status(400).send("No files uploaded");
     }

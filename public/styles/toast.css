@@ -1,0 +1,48 @@
+.toast{
+    border: none;
+}
+
+.toast-header{
+    padding: 1rem;
+    font-size: 0.95rem;
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    border: none;
+    background-color: #FFFFFF;
+}
+
+.toast-header svg{
+    color: #00A341;
+}
+
+.toast-header span{
+    font-family: 'DINPro-Bold', sans-serif;
+    color: #00A341;
+}
+
+.toast-body{
+    padding: 0 1rem 1rem;
+    font-family: 'DINPro-Medium', sans-serif;
+    font-size: 0.85rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background-color: #FFFFFF;
+}
+
+.toast-body .black-btn{
+    height: 40px;
+    width: 100%;
+    background-color: rgba(26, 26, 26, 1);
+    border: none;
+    border-radius: 20px;
+    color: #FFFFFF;
+    font-size: 0.85rem;
+    transition: all 0.25s ease;
+}
+
+.toast-body .black-btn:hover{
+    background-color: rgba(26, 26, 26, .85);
+    transition: all 0.25s ease;
+}

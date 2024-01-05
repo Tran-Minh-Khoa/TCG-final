@@ -1,106 +1,102 @@
-const Card = require('../../../models/Card');
+const Card = require("../../../models/Card");
 //connect firebase
-const admin = require('firebase-admin');
+const admin = require("firebase-admin");
 
 const bucket = admin.storage().bucket();
-exports.uploadCard = (file) => {
-    return new Promise((resolve, reject) => {
-      try {
-        const filepath = file.fieldname + '/' + file.originalname;
-        const blob = bucket.file(filepath);
-        const blobStream = blob.createWriteStream({
-          resumable: false,
-          metadata: {
-            contentType: file.mimetype,
-          },
-        });
-  
-        blobStream.on('error', err => {
-          console.error(err);
-          reject('Error uploading file.');
-        });
-  
-        blobStream.on('finish', () => {
-          blob.getSignedUrl({
-            action: 'read',
-            expires: '03-09-2024'
-          }, (err, signedUrl) => {
-            if (err) {
-              console.error('Error getting signed URL:', err);
-              reject('Error getting file URL.');
-            }
-            console.log('File uploaded successfully.');
-            resolve(signedUrl);
-          });
-        });
-  
-        blobStream.end(file.buffer);
-      } catch (error) {
-        console.error(error);
-        reject('Error during file upload.');
-      }
-    });
-  };
-
-  exports.updateCard = async (cardInfo, imageUrl) => {
+exports.uploadCard = (file,id) => {
+  return new Promise((resolve, reject) => {
     try {
-      const updateData = {
-        name: cardInfo.name,
-        rarity: cardInfo.rarity,
-        setId: cardInfo.setId,
-        updatedAt: new Date(),
-        types: cardInfo.types,
-        marketPrices: cardInfo.price,
-        timestamp: new Date().timestamp,
-        amount: cardInfo.amount
-      };
-  
-      // Kiểm tra xem imageUrl có được cung cấp không
-      if (imageUrl) {
-        updateData.image = imageUrl; // Hoặc sử dụng 'imageUrl' thay cho 'image'
-      }
-  
-      // Tiến hành cập nhật dữ liệu thẻ
-      const updatedCard = await Card.findOneAndUpdate(
-        { id: cardInfo.id }, // Điều kiện tìm thẻ cần cập nhật (thay id bằng trường khóa chính của thẻ)
-        { $set: updateData }, // Dữ liệu cần cập nhật
-        { new: true } // Trả về thẻ đã cập nhật (nếu không có sẽ trả về thẻ trước khi cập nhật)
-      );
-  
-      // Trả về thông tin thẻ đã cập nhật
-      return updatedCard;
+      const filepath = file.fieldname + `/${id}`+'/' + file.originalname;
+      const blob = bucket.file(filepath);
+      const blobStream = blob.createWriteStream({
+        resumable: false,
+        metadata: {
+          contentType: file.mimetype,
+        },
+      });
+
+      blobStream.on("error", (err) => {
+        console.error(err);
+        reject("Error uploading file.");
+      });
+
+      blobStream.on("finish", () => {
+        blob.getSignedUrl(
+          {
+            action: "read",
+            expires: "03-09-2024",
+          },
+          (err, signedUrl) => {
+            if (err) {
+              console.error("Error getting signed URL:", err);
+              reject("Error getting file URL.");
+            }
+            console.log("File uploaded successfully.");
+            resolve(signedUrl);
+          }
+        );
+      });
+
+      blobStream.end(file.buffer);
     } catch (error) {
-      // Xử lý lỗi nếu có
-      console.error('Error updating card:', error);
-      throw new Error('Error updating card.');
+      console.error(error);
+      reject("Error during file upload.");
     }
-  };
-exports.updateListCard = async (cardID,listImageCardUrl) => {
-  try{
+  });
+};
+
+exports.updateCard = async (cardInfo, imageUrl) => {
+  try {
     const updateData = {
-      listImages: []
+      name: cardInfo.name,
+      rarity: cardInfo.rarity,
+      setId: cardInfo.setId,
+      updatedAt: new Date(),
+      types: cardInfo.types,
+      marketPrices: cardInfo.price,
+      timestamp: new Date().timestamp,
+      amount: cardInfo.amount,
+    };
+
+    // Kiểm tra xem imageUrl có được cung cấp không
+    if (imageUrl) {
+      updateData.image = imageUrl; // Hoặc sử dụng 'imageUrl' thay cho 'image'
     }
-    listImageCardUrl.forEach((imageUrl, index) => {
-      if(imageUrl)
-      {
-        updateData.listImages[index] = imageUrl
-      }
-    });
+
+    // Tiến hành cập nhật dữ liệu thẻ
     const updatedCard = await Card.findOneAndUpdate(
       { id: cardInfo.id }, // Điều kiện tìm thẻ cần cập nhật (thay id bằng trường khóa chính của thẻ)
       { $set: updateData }, // Dữ liệu cần cập nhật
       { new: true } // Trả về thẻ đã cập nhật (nếu không có sẽ trả về thẻ trước khi cập nhật)
     );
-  
+
     // Trả về thông tin thẻ đã cập nhật
     return updatedCard;
-  }
-  catch(error){
+  } catch (error) {
     // Xử lý lỗi nếu có
-    console.error('Error updating card:', error);
-    throw new Error('Error updating card.');
+    console.error("Error updating card:", error);
+    throw new Error("Error updating card.");
   }
-}
+};
+exports.updateListCard = async (id, listImageCardUrl) => {
+  try {
+    const updatedCard = await Card.findOne({ id: id });
+   
+    listImageCardUrl.forEach((imageUrl, index) => {
+      if (listImageCardUrl[index]!= null && updatedCard.listImages[index] != imageUrl) {
+        updatedCard.listImages[index] = imageUrl;
+      }
+    });
+    
+    await updatedCard.save();
+    // Trả về thông tin thẻ đã cập nhật
+    return updatedCard;
+  } catch (error) {
+    // Xử lý lỗi nếu có
+    console.error("Error updating card:", error);
+    throw new Error("Error updating card.");
+  }
+};
 exports.GetAllCards = async () => {
   try {
     const card = await Card.find();
@@ -112,8 +108,7 @@ exports.GetAllCards = async () => {
   }
 };
 
-
 exports.GetCard = async (id) => {
   const card = await Card.findOne({ id: id });
   return card;
-}
+};

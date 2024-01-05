@@ -1,6 +1,8 @@
 function displayErrorModal(title, description, onClick) {
   // Set modal title and body content
+  console.log("Title:", title);
   document.getElementById("errorModalBody").innerHTML = description;
+  document.getElementById("modelTitle").innerHTML = title;
 
   // Update Confirm button based on onClick
   const confirmBtn = document.getElementById("confirmBtn");

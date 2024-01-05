@@ -1,15 +1,23 @@
 const AccountService = require('./account.service');
 
-exports.AccountPage = function (req, res, next) {
-  const scripts = [];
+exports.AccountPage = async (req, res, next) => {
+  try {
+    const scripts = ["/scripts/account.js"];
   const styles = ["/styles/account.css"];
+
+  const orders = await AccountService.getUserOrders(req.user.id)
 
   res.render("user/account-page", {
     layout: "user/layouts/layout",
     title: "Account",
     scripts: scripts,
     styles: styles,
+    orders: orders
   });
+  }
+  catch(error) {
+    console.log(error)
+  }
 };
 
 
@@ -45,7 +53,7 @@ exports.updateProfile = async (req, res, next) => {
       const file = req.file;
       console.log(req.body);
       // Sử dụng await để nhận URL trả về từ hàm uploadCard
-      const imageUrl = await AccountService.uploadAvatar(file);
+      const imageUrl = await AccountService.uploadAvatar(file,req.body.id);
       const updateCard = await AccountService.updateProfile(req.body, imageUrl);
       // Trả về URL của tệp tin đã tải lên
       console.log(updateCard);
@@ -60,4 +68,12 @@ exports.updateProfile = async (req, res, next) => {
     console.error(error);
     res.status(500).send("Error uploading file.");
   }
+}
+
+exports.getOrderDetail = async (req, res, next) => {
+  const orderId = req.params.id
+
+  const order_detail = await AccountService.getUserOrderDetail(orderId)
+
+  res.status(200).json(order_detail)
 }

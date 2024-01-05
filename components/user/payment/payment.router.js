@@ -1,19 +1,47 @@
 const express = require('express');
 const router = express.Router();
 const controller = require('./payment.controler')
+
+//Chuyển đống này qua controller 😺
+const Order = require('../../../models/Order');
+const OrderDetail = require('../../../models/OrderDetail');
+const Card = require('../../../models/Card');
+
+const servicePayment = require('./payment.service');
 // let $ = require('jquery');
 // const request = require('request');
 const moment = require('moment');
 /* GET home page. */
-router.get('/', function (req, res, next) {
-    const scripts = ["/scripts/landing-page.js"];
+router.get('/:id', async (req, res, next) => {
+    const scripts = ["/scripts/checkout.js"];
     const styles = ["/styles/checkout.css"];
+
+    const orderId = req.params.id
+
+    const order = await Order.findOne({id: orderId})
+    const orderDetails = await OrderDetail.find({orderId: orderId})
+
+    const bill_detail = {
+        total_price: order?.totalPrice,
+        bill_items: []
+    }
+
+    for (const item of orderDetails) {
+        const card = await Card.findOne({id: item.cardId})
+        const product = {
+          card : card,
+          quantity: item.quantity,
+          price: item.totalPrice
+        }
+        bill_detail.bill_items.push(product)
+    }
+    
     res.render("user/checkout", {
       layout: "user/layouts/layout",
-      title: "TCG - Trading Card Game Store",
+      title: "Checkout",
       scripts: scripts,
-      styles: styles,})
-
+      styles: styles,
+      bill_detail: bill_detail})
     });
 function sortObject(obj) {
 	let sorted = {};
@@ -31,7 +59,7 @@ function sortObject(obj) {
     return sorted;
 }
 
-router.post('/create_payment_url', function (req, res, next) {
+router.post('/create_payment_url', async (req, res, next) =>{
     
     // process.env.TZ = 'Asia/Ho_Chi_Minh';
     
@@ -43,14 +71,16 @@ router.post('/create_payment_url', function (req, res, next) {
         req.socket.remoteAddress ||
         req.socket.remoteAddress;
 
-    
+    // ipAddr='127.0.0.1';
+
     let tmnCode = process.env.vnp_TmnCode;
     let secretKey = process.env.vnp_HashSecret;
     let vnpUrl = process.env.vnp_Url;
     let returnUrl = process.env.vnp_ReturnUrl;
-    let orderId = moment(date).format('DDHHmmss');
-    let amount = req.body.amount;
-    console.log(amount)
+    let orderId =req.body.orderId || moment(date).format('DDHHmmss');
+    const order= await Order.findOne({id: orderId})
+    let amount = order?.totalPrice;
+
     let bankCode = req.body.bankCode;
     
     let locale = req.body.language;
@@ -62,19 +92,21 @@ router.post('/create_payment_url', function (req, res, next) {
     vnp_Params['vnp_Version'] = '2.1.0';
     vnp_Params['vnp_Command'] = 'pay';
     vnp_Params['vnp_TmnCode'] = tmnCode;
-    vnp_Params['vnp_Locale'] = locale;
+    vnp_Params['vnp_Locale'] = 'vn';
     vnp_Params['vnp_CurrCode'] = currCode;
     vnp_Params['vnp_TxnRef'] = orderId;
     vnp_Params['vnp_OrderInfo'] = 'Thanh toan cho ma GD:' + orderId;
     vnp_Params['vnp_OrderType'] = 'other';
-    vnp_Params['vnp_Amount'] = amount * 100;
+    vnp_Params['vnp_Amount'] = parseInt(amount * 100*1000000);
+    // vnp_Params['vnp_Amount'] = 500000;
+
     vnp_Params['vnp_ReturnUrl'] = returnUrl;
     vnp_Params['vnp_IpAddr'] = ipAddr;
     vnp_Params['vnp_CreateDate'] = createDate;
     if(bankCode !== null && bankCode !== ''){
         vnp_Params['vnp_BankCode'] = bankCode;
     }
-
+    vnp_Params['vnp_BankCode'] = 'NCB';
     vnp_Params = sortObject(vnp_Params);
 
     let querystring = require('qs');
@@ -84,15 +116,15 @@ router.post('/create_payment_url', function (req, res, next) {
     let signed = hmac.update(Buffer.from(signData, 'utf-8')).digest("hex"); 
     vnp_Params['vnp_SecureHash'] = signed;
     vnpUrl += '?' + querystring.stringify(vnp_Params, { encode: false });
-    console.log(vnpUrl)
-    res.redirect(vnpUrl)
+    // console.log(vnpUrl)
+    res.status(201).json({link: vnpUrl})
 });
 
-router.get('/vnpay_return', function (req, res, next) {
+router.get('/vnpay_return', async (req, res, next) =>{
     let vnp_Params = req.query;
-
+    console.log(vnp_Params)
     let secureHash = vnp_Params['vnp_SecureHash'];
-
+    console.log('test hash api')
     delete vnp_Params['vnp_SecureHash'];
     delete vnp_Params['vnp_SecureHashType'];
 
@@ -106,10 +138,19 @@ router.get('/vnpay_return', function (req, res, next) {
     let crypto = require("crypto");     
     let hmac = crypto.createHmac("sha512", secretKey);
     let signed = hmac.update(Buffer.from(signData, 'utf-8')).digest("hex");
-
+    const orderId=vnp_Params['vnp_TxnRef'];
+    if (vnp_Params['vnp_ResponseCode']!== '00') {
+        //Kiem tra xem du lieu trong db co hop le hay khong va thong bao ket qua
+        // console.log('Ket qua thanh cong',vnp_Params['vnp_ResponseCode']);
+       return res.redirect('/account')
+    }
     if(secureHash === signed){
         //Kiem tra xem du lieu trong db co hop le hay khong va thong bao ket qua
-
+        // console.log('Ket qua thanh cong',vnp_Params['vnp_ResponseCode']);
+        const order= await Order.findOne({id: orderId})
+        order.status='pending'
+        await order.save()
+        await serviceCart.RemoveCart(req.user.id)
         res.render('success', {code: vnp_Params['vnp_ResponseCode']})
     } else{
         res.render('success', {code: '97'})
@@ -125,7 +166,7 @@ router.get('/vnpay_ipn', function (req, res, next) {
 
     delete vnp_Params['vnp_SecureHash'];
     delete vnp_Params['vnp_SecureHashType'];
-
+    console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
     vnp_Params = sortObject(vnp_Params);
     let secretKey = process.env.vnp_HashSecret;
     let querystring = require('qs');
@@ -173,5 +214,6 @@ router.get('/vnpay_ipn', function (req, res, next) {
         res.status(200).json({RspCode: '97', Message: 'Checksum failed'})
     }
 });
+
 
 module.exports = router;

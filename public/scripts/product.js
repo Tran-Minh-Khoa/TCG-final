@@ -448,11 +448,11 @@ function showProducts(data){
             </div>
             <div class="card-info">
                 <div class="d-flex flex-column">
-                    <a href="/products?supertype=${item.supertype}&sort_by=created-descending" class="card-category">Pokémon</a>
+                    <a href="/products?supertype=${item.supertype}&sort_by=created-descending" class="card-category">${item.supertype}</a>
                     <a href="/products/detail/${item.id}">
                         <div class="card-name">${item.name}</div>
                     </a>
-                    <div class="card-price">${item.marketPrices}</div>
+                    <div class="card-price">${item.marketPrices}₫</div>
                 </div>
             </div>
         </div>`

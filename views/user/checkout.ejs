@@ -76,19 +76,8 @@
                                 </div>
                                 <label for="shippingMethod1">
                                     <div class="d-flex justify-content-between align-items-center">
-                                        <span>{Shipping method's name}</span>
-                                        <span class="bold-text">{Price}</span>
-                                    </div>
-                                </label>
-                            </div>
-                            <div class="option-box">
-                                <div class="d-flex align-items-center">
-                                    <input type="radio" id="shippingMethod2" name="shippingMethod" class="checkbox" value="">
-                                </div>
-                                <label for="shippingMethod2">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <span>FedEx - Super Fast Wiwiwiiii</span>
-                                        <span class="bold-text">₫69,6969</span>
+                                        <span>General shipping</span>
+                                        <span class="bold-text">Free</span>
                                     </div>
                                 </label>
                             </div>
@@ -99,15 +88,7 @@
                     <span class="fade-text">All transactions are secured and encrypted</span>
                     <div class="spacer"></div>
                     <div class="option-group">
-                        <div class="option-box payment-box">
-                            <input type="radio" id="paymentMethod1" name="paymentMethod" class="hidden-checkbox" value="" checked>
-                            <label for="paymentMethod1">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <span>{Payment method's name}</span>
-                                </div>
-                            </label>
-                        </div>
-                        <div class="option-box payment-box">
+                        <!-- <div class="option-box payment-box">
                             <input type="radio" id="paymentMethod2" name="paymentMethod" class="hidden-checkbox" value="">
                             <label for="paymentMethod2">
                                 <div class="d-flex justify-content-between align-items-center">
@@ -115,9 +96,9 @@
                                     <i class="fa fa-cart-flatbed"></i>
                                 </div>
                             </label>
-                        </div>
+                        </div> -->
                         <div class="option-box payment-box">
-                            <input type="radio" id="paymentMethod3" name="paymentMethod" class="hidden-checkbox" value="">
+                            <input type="radio" id="paymentMethod3" name="paymentMethod" class="hidden-checkbox" value="" checked>
                             <label for="paymentMethod3">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <span>VNPAY</span>
@@ -136,39 +117,31 @@
                     <span class="fade-text align-self-center">Your bill</span>
                     <div class="spacer"></div>
                     <div class="checkout-bill-items">
+                        <% bill_detail.bill_items.forEach(item => { %>
                         <div class="bill-item">
                             <div class="bill-item-img">
-                                <img src="/images/cart1.webp" alt="">
-                                <div class="item-count">{quantity}</div>
+                                <img src="<%= item.card.image %>" alt="">
+                                <div class="item-count"><%= item.quantity %></div>
                             </div>
                             <div class="bill-item-info">
-                                <p>{Item's name}</p>
-                                <span>{Price}</span>
+                                <p><%= item.card.name %></p>
+                                <span>₫<%= item.price %></span>
                             </div>
                         </div>
-                        <div class="bill-item">
-                            <div class="bill-item-img">
-                                <img src="/images/cart2.avif" alt="">
-                                <div class="item-count">1</div>
-                            </div>
-                            <div class="bill-item-info">
-                                <p>[PC11] BATTLE SPIRITS PREMIUM CARD SET</p>
-                                <span>₫448,077</span>
-                            </div>
-                        </div>
+                        <% }) %>
                     </div>
                     <div class="spacer"></div>
                     <div class="checkout-price">
                         <span>Subtotal</span>
-                        <span class="bold-text">₫448,077</span>
+                        <span class="bold-text">₫<%= bill_detail.total_price %></span>
                     </div>
                     <div class="checkout-price">
                         <span>Shipping</span>
-                        <span>₫100,001</span>
+                        <span>₫0</span>
                     </div>
                     <div class="checkout-price">
                         <span class="bold-text lg-text">Total</span>
-                        <span class="bold-text lg-text">₫548,078</span>
+                        <span class="bold-text lg-text">₫<%= bill_detail.total_price %></span>
                     </div>
                 </div>
             </div>

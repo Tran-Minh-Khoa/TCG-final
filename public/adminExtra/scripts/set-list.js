@@ -23,8 +23,10 @@ async function toggleSetStatus(setId, isActive) {
 }
 
 async function deleteSet(setId) {
-  displayErrorModal("Confirm", "Are you sure you wan to delete this set?", () =>
-    ConfirmDelete(setId)
+  displayErrorModal(
+    "Confirm",
+    "Are you sure you want to delete this set?",
+    () => ConfirmDelete(setId)
   );
 }
 

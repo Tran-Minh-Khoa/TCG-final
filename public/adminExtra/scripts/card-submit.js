@@ -8,18 +8,6 @@ document
 async function gatherAndPrintFormData(event) {
   event.preventDefault();
   // Create an object to store form data
-  var formDataObject = {};
-  // imageFiles=[0,1,2]
-  // imageFiles.forEach((file, index) => {
-  //   formDataObject[`test${index + 1}`] = file;
-  // });
-  // Get values from individual form elements by ID
-  formDataObject.name = document.getElementById("cardName").value;
-  formDataObject.id = document.getElementById("cardID").value;
-  formDataObject.isActive = document.getElementById("isActive").value;
-  formDataObject.setId = document.getElementById("setID").value;
-  formDataObject.rarity = document.getElementById("cardRarity").value;
-
   // Types
   var selectedTypes = [];
   document
@@ -27,8 +15,6 @@ async function gatherAndPrintFormData(event) {
     .forEach(function (checkbox) {
       selectedTypes.push(checkbox.value);
     });
-  formDataObject.types = selectedTypes;
-
   // Subtypes
   var selectedSubtypes = [];
   document
@@ -36,56 +22,73 @@ async function gatherAndPrintFormData(event) {
     .forEach(function (checkbox) {
       selectedSubtypes.push(checkbox.value);
     });
-  formDataObject.subtypes = selectedSubtypes;
 
-  formDataObject.supertype = document.getElementById("superType").value;
-  formDataObject.marketPrices = document.getElementById("price").value;
-  formDataObject.amount = document.getElementById("amount").value;
+  var formData = new FormData();
+  formData.append("id", document.getElementById("cardID").value);
+  formData.append("name", document.getElementById("cardName").value);
+  formData.append("isActive", document.getElementById("isActive").value);
+  formData.append("setId", document.getElementById("setID").value);
+  formData.append("rarity", document.getElementById("cardRarity").value);
+  formData.append("subtypes", selectedSubtypes);
+  formData.append("types", selectedTypes);
+  formData.append("supertype", document.getElementById("superType").value);
+  formData.append("marketPrices", document.getElementById("price").value);
+  formData.append("amount", document.getElementById("amount").value);
+  formData.append("updatedAt", GetCurrentDate());
+  formData.append("timestamp", Date.now());
+  formData.append("image", GetFile("fileInput"));
 
-  formDataObject.updatedAt = GetCurrentDate();
+  var newFormData = new FormData();
+  newFormData.append("id", document.getElementById("cardID").value);
 
-  // Add timestamp with the Unix timestamp of the current time
-  formDataObject.timestamp = Date.now();
-  formDataObject.image = GetFile("fileInput");
-  console.log(formDataObject);
-  multipleFormDataObj = { id: formDataObject.id };
-  var images = [];
   var imgStatus = {};
   var img_1 = GetFile("fileInput-1");
   var img_2 = GetFile("fileInput-2");
   var img_3 = GetFile("fileInput-3");
   if (img_1 != null) {
-    images.push(img_1);
+    newFormData.append("image", img_1);
     imgStatus.image1 = true;
   } else {
     imgStatus.image1 = false;
   }
 
   if (img_2 != null) {
-    images.push(img_2);
+    newFormData.append("image", img_2);
     imgStatus.image2 = true;
   } else {
     imgStatus.image2 = false;
   }
 
   if (img_3 != null) {
-    images.push(img_3);
+    newFormData.append("image", img_3);
     imgStatus.image3 = true;
   } else {
     imgStatus.image3 = false;
   }
-
-  multipleFormDataObj.image = createFileList(images);
-  multipleFormDataObj.imgStatus = imgStatus;
-  console.log(multipleFormDataObj);
-  //PostData(formDataObject);
+  newFormData.append("imgStatus", JSON.stringify(imgStatus)); // JSON.stringify(imgStatus);
+  console.log(formData);
+  console.log(newFormData);
+  PostData(formData);
+  PostCardList(newFormData);
 }
 
 function PostData(formDataObject) {
-  formData = ToFormData(formDataObject);
   fetch("/admin/card/upload", {
     method: "POST",
-    body: formData,
+    body: formDataObject,
+  })
+    .then((data) => {
+      console.log("Success:", data);
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+}
+
+function PostCardList(formDataObject) {
+  fetch("/admin/card/updateListCard", {
+    method: "POST",
+    body: formDataObject,
   })
     .then((data) => {
       console.log("Success:", data);
@@ -122,12 +125,10 @@ function GetCurrentDate() {
 }
 function GetFile(inputId) {
   var fileInput = document.getElementById(inputId);
-  console.log(fileInput);
   if (fileInput?.files.length > 0) {
     var file = fileInput.files[0];
     return file;
   } else {
-    console.log("bbbbbbbbbbbb");
     return null;
   }
 }

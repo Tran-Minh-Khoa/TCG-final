@@ -3,12 +3,19 @@
   <!-- Page Heading -->
   <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-    <a
-      href="#"
-      class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
-      ><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a
-    >
-  </div>
+    <div class="dropdown">
+      <div class="row align-items-end justify-content-center">
+
+        <h5 class="col ">Timeframe</h5>
+        <select class="form-control custom-select col" id="isActive" name="isActive" onchange="UpdateAll(this.value)">
+          <option value="7"  selected %>>7 Days</option>
+          <option value="14" %>>14 Days</option>
+          <option value="30"%>>30 Days</option>
+        </select>
+      </div>
+    </div>
+</div>
+
 
   <!-- Small Cards Row -->
   <div class="row">
@@ -18,12 +25,12 @@
         <div class="card-body">
           <div class="row no-gutters align-items-center">
             <div class="col mr-2">
-              <div
-                class="text-xs font-weight-bold text-primary text-uppercase mb-1"
-              >
-                Earnings (Weekly)
+              <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                Earnings (Daily)
               </div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800" id="daily-earning">
+                $0
+              </div>
             </div>
             <div class="col-auto">
               <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -39,12 +46,12 @@
         <div class="card-body">
           <div class="row no-gutters align-items-center">
             <div class="col mr-2">
-              <div
-                class="text-xs font-weight-bold text-success text-uppercase mb-1"
-              >
-                Earnings (Monthly)
+              <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                Earnings (Weekly)
               </div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800" id="weekly-earning">
+                $0
+              </div>
             </div>
             <div class="col-auto">
               <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -60,12 +67,12 @@
         <div class="card-body">
           <div class="row no-gutters align-items-center">
             <div class="col mr-2">
-              <div
-                class="text-xs font-weight-bold text-info text-uppercase mb-1"
-              >
-                Earnings (Annually)
+              <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                Earnings (Monthly)
               </div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800" id="monthly-earning">
+                $0
+              </div>
             </div>
             <div class="col-auto">
               <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
@@ -81,12 +88,12 @@
         <div class="card-body">
           <div class="row no-gutters align-items-center">
             <div class="col mr-2">
-              <div
-                class="text-xs font-weight-bold text-warning text-uppercase mb-1"
-              >
-                Orders
+              <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                Orders (Today)
               </div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800" id="order-amount">
+                18
+              </div>
             </div>
             <div class="col-auto">
               <i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -104,26 +111,13 @@
     <div class="col-xl-8 col-lg-7">
       <div class="card shadow mb-4">
         <!-- Card Header - Dropdown -->
-        <div
-          class="card-header py-3 d-flex flex-row align-items-center justify-content-between"
-        >
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
           <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
           <div class="dropdown no-arrow">
-            <a
-              class="dropdown-toggle"
-              href="#"
-              role="button"
-              id="dropdownMenuLink"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
+            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
             </a>
-            <div
-              class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-              aria-labelledby="dropdownMenuLink"
-            >
+            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
               <div class="dropdown-header">Dropdown Header:</div>
               <a class="dropdown-item" href="#">Action</a>
               <a class="dropdown-item" href="#">Another action</a>
@@ -145,26 +139,13 @@
     <div class="col-xl-4 col-lg-5">
       <div class="card shadow mb-4">
         <!-- Card Header - Dropdown -->
-        <div
-          class="card-header py-3 d-flex flex-row align-items-center justify-content-between"
-        >
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
           <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
           <div class="dropdown no-arrow">
-            <a
-              class="dropdown-toggle"
-              href="#"
-              role="button"
-              id="dropdownMenuLink"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
+            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
             </a>
-            <div
-              class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-              aria-labelledby="dropdownMenuLink"
-            >
+            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
               <div class="dropdown-header">Dropdown Header:</div>
               <a class="dropdown-item" href="#">Action</a>
               <a class="dropdown-item" href="#">Another action</a>
@@ -179,17 +160,63 @@
             <canvas id="myPieChart"></canvas>
           </div>
           <div class="mt-4 text-center small">
+            <% const colors = ['text-primary', 'text-success', 'text-info', 'text-warning']; %>
+            <% setRevenues.forEach((setRev, index) => { %>
             <span class="mr-2">
-              <i class="fas fa-circle text-primary"></i> Direct
+              <i class="fas fa-circle <%= colors[index % colors.length] %>"></i>
+              <%= setRev._id %>
             </span>
-            <span class="mr-2">
-              <i class="fas fa-circle text-success"></i> Social
-            </span>
-            <span class="mr-2">
-              <i class="fas fa-circle text-info"></i> Referral
-            </span>
+            <% }); %>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="card shadow mb-4">
+      <!-- Card Header - Dropdown -->
+      <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">Top Revenue</h6>
+        <div class="dropdown no-arrow">
+          <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+            <div class="dropdown-header">Dropdown Header:</div>
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </div>
+      </div>
+      <!-- Card Body -->
+      <div class="table-responsive">
+        <table class="table table-bordered" id="table-card" width="100%" cellspacing="0">
+          <thead>
+            <tr>
+              <th style="width: 10%">Card ID</th>
+              <th style="width: 30%">Card name</th>
+              <th style="width: 20%">Set ID</th>
+              <th style="width: 10%">Price</th>
+              <th style="width: 10%">Amount</th>
+              <th style="width: 20%">Total Revenue</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% topRevenue.forEach((card) => { %>
+            <tr>
+              <td><%= card.cardId %></td>
+              <td><%= card.cardName %></td>
+              <td><%= card.setId %></td>
+              <td>$<%= card.Price %></td>
+              <td><%= card.amount %></td>
+              <td>$<%= card.totalRevenue %></td>
+            </tr>
+            <% }); %>
+
+          </tbody>
+        </table>
       </div>
     </div>
   </div>

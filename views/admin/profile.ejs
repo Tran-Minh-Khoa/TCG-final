@@ -1,0 +1,104 @@
+<div class="container-fluid">
+  <!-- Page Heading -->
+  <div class="row d-flex justify-content-between mb-4">
+    <h1 class="h3 mb-2 text-gray-800 col">Profile</h1>
+  </div>
+  <div class="card mb-4 p-3 border-bottom-primary row">
+    <div class="container-fluid m-0 row">
+      <!--Form-->
+      <div class="col-md-9">
+        <form id="user-form">
+          <!--Form Row-->
+          <div class="form-row">
+            <!--User Name-->
+            <!--Email (readonly)-->
+            <div class="form-group col-md-8">
+              <label for="email">Email</label>
+              <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="<%= user.email %>" readonly />
+            </div>
+            <!--User ID (readonly)-->
+            <div class="form-group col-md-4">
+              <label for="userID">User ID</label>
+              <input type="text" class="form-control" id="userID" name="userID" placeholder="User ID" value="<%= user.id %>" readonly />
+            </div>
+          </div>
+          <!--End Form Row-->
+
+
+          <!--Form Row-->
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="userName">User Name</label>
+              <input type="text" class="form-control" id="userName" name="userName" placeholder="User Name" value="<%= user.name %>" />
+            </div>
+            <!--Gender (dropdown)-->
+            <div class="form-group col-md-6">
+              <label for="gender">Gender</label>
+              <select class="form-control custom-select" id="gender" name="gender">
+                <option value="male" <%= user.gender === 'male' ? 'selected' : '' %>>Male</option>
+                <option value="female" <%= user.gender === 'female' ? 'selected' : '' %>>Female</option>
+                <option value="other" <%= user.gender === 'other' ? 'selected' : '' %>>Other</option>
+              </select>
+            </div>
+
+          </div>
+          <!--End Form Row-->
+
+          <!--Form Row-->
+          <div class="form-row">
+
+            <!--Phone Number-->
+            <div class="form-group col-md-6">
+              <label for="phoneNumber">Phone Number</label>
+              <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="Phone Number" value="<%= user.phone %>" />
+            </div>
+            <!--Address-->
+            <div class="form-group col-md-6">
+              <label for="address">Address</label>
+              <input type="text" class="form-control" id="address" name="address" placeholder="Address" value="<%= user.address %>" />
+            </div>
+          </div>
+          <!--End Form Row-->
+
+
+
+          <!--Form Row-->
+          <div class="form-row">
+            <!--Avatar (file input)-->
+            <div class="form-group col-md-12">
+              <label for="fileInput">Avatar</label>
+              <input type="file" id="fileInput" accept="image/*" onchange="previewImage()" required />
+            </div>
+          </div>
+          <!--End Form Row-->
+        </form>
+      </div>
+      <!--Image-->
+      <div class="col-md-3">
+        <!-- Preview area for the uploaded image -->
+        <div class="row-1">
+          <h6 class="mb-1 font-weight-bold">Avatar Preview</h6>
+        </div>
+        <div class="d-flex justify-content-center">
+          <div class="card-body p-0">
+            <img id="preview-image" alt="Avatar Preview" src="<%= user.avatar ? user.avatar : '/img/default-avatar.png' %>" class="img-fluid" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-end">
+      <div class="col-md-12">
+        <button type="button" class="btn btn-primary" id="updateBtn">
+          Update
+        </button>
+        <button type="button" class="btn btn-primary" id="changePasswordBtn">
+          Change Password
+        </button>
+          <a href="/admin/dashboard" class="btn btn-secondary">
+            Return
+          </a>
+      </div>
+    </div>
+  </div>
+</div>

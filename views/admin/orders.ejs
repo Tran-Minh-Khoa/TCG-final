@@ -1,0 +1,69 @@
+<!-- Begin Page Content -->
+<div class="container-fluid">
+  <!-- Page Heading -->
+  <div class="row d-flex justify-content-between mb-4">
+    <h1 class="h3 mb-2 text-gray-800 col">Order List</h1>
+  </div>
+
+  <!-- DataTales Example -->
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">Order List</h6>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered" id="table-card" width="100%" cellspacing="0">
+          <thead>
+            <tr>
+              <th style="width: 30%">Order ID</th>
+              <th style="width: 30%">User Email</th>
+              <th style="width: 15%">Order Date</th>
+              <th style="width: 10%">Total Price</th>
+              <th style="width: 10%">Status</th>
+              <th style="width: 5%">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% orders.forEach((order) => { %>
+            <tr>
+              <td><%= order.id %></td>
+              <td><%= order.userMail %></td>
+              <td><%= order.formatedDate %></td>
+              <td><%= order.totalPrice %></td>
+              <td>
+              <% if (order.status === 'unpaid') { %>
+                <span class="badge badge-warning custom-card-badge">Unpaid</span>
+              <% } else if (order.status === 'paid') { %>
+                <span class="badge badge-primary custom-card-badge">Paid</span>
+              <% } else if (order.status === 'shipping') { %>
+                <span class="badge badge-secondary custom-card-badge">Shipping</span>
+              <% } else if (order.status === 'complete') { %>
+                <span class="badge badge-success custom-card-badge">Complete</span>
+              <% } else if (order.status === 'cancelled') { %>
+                <span class="badge badge-danger custom-card-badge">Cancelled</span>
+              <% } else { %>
+                <%= order.status %>
+              <% } %>
+            </td>
+              <td>
+                <div class="d-flex justify-content-center align-items-center">
+                  <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Action
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item" href="/admin/order/edit/<%= order.id %>">Edit</a>
+                      <a class="dropdown-item" href="#" onclick="DeleteOrder('<%= order.id %>')">Delete</a>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /.container-fluid -->

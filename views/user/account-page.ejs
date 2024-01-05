@@ -1,3 +1,7 @@
+<%
+    const ordersLength = orders.length
+%>
+
 <main>
     <section>
         <div class="account-nav-wrapper">
@@ -9,7 +13,7 @@
         </div>
     </section>
 
-    <!-- IF THERE ARE NO ORDERS -->
+    <% if(ordersLength === 0) { %>
     <section>
         <div class="empty-state-wrapper">
             <div class="vstack gap-4 align-items-center justify-content-center">
@@ -28,72 +32,111 @@
             </div>
         </div>
     </section>
+    <% } else { %>
 
-    <!-- IF THERE ARE ORDERS -->
     <section>
         <div class="section-wrapper">
             <div class="vstack gap-4 align-items-center justify-content-center">
                 <div class="hstack gap-3 justify-content-center">
                     <span class="title">Orders</span>
-                    <span class="count-bubble">3</span>
+                    <span class="count-bubble"><%= ordersLength %></span>
                 </div>
                 <div class="hstack gap-3 flex-wrap">
-                    <div class="order-wrapper" onclick="window.location.href='/orders/abcdef123456'">
+                    <% orders.forEach(item => { %>
+                    <div class="order-wrapper" onclick="showOrderDetail('<%= item.id %>')">
                         <div class="vstack gap-2 justify-content-center align-items-start order-name">
-                            <span>Order on 26/11/2023</span>
-                            <span class="order-id">Order ID: abcdef123456</span>
-                        </div>
-                        <div class="vstack gap-2 justify-content-center align-items-center">
-                            <span class="column-title">Number of items</span>
-                            <span class="column-content">2</span>
+                            <span>Order on <%= item.orderDate %></span>
+                            <span class="order-id">Order ID: <%= item.id %></span>
                         </div>
                         <div class="vstack gap-2 justify-content-center align-items-center">
                             <span class="column-title">Total</span>
-                            <span class="column-content red-text">210.446₫</span>
+                            <span class="column-content red-text"><%= item.totalPrice %>₫</span>
                         </div>
                         <div class="vstack gap-2 justify-content-center align-items-center order-status">
                             <span class="column-title">Status</span>
+                            <% if(item.status === "pending") { %>
                             <span class="status-icon status-pending">Pending</span>
+                            <% } %>
                         </div>
                     </div>
-                    <div class="order-wrapper" onclick="window.location.href='/orders/meomeomeo456789'">
-                        <div class="vstack gap-2 justify-content-center align-items-start order-name">
-                            <span>Order on 30/02/2023</span>
-                            <span class="order-id">Order ID: meomeomeo456789</span>
+                    <% }) %>
+                </div>
+            </div>
+        </div>
+    </section>
+    <% } %>
+
+    <!-- ORDER DETAIL MODAL -->
+    <div class="modal fade" id="orderDetailModal" tabindex="-1" aria-labelledby="orderDetailModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span id="orderDetailModalLabel">Order's details</span>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="vstack gap-4">
+                        <div class="vstack gap-3 align-items-center">
+                            <span class="modal-title">Order's information</span>
+                            <div class="vstack gap-2">
+                                <div class="text-container">
+                                    <span class="heavy-text">Order's ID:</span>
+                                    <span>xxxxxx</span>
+                                </div>
+                                <div class="text-container">
+                                    <span class="heavy-text">Created on:</span>
+                                    <span>xxxx-xx-xx</span>
+                                </div>
+                                <div class="text-container">
+                                    <span class="heavy-text">Status:</span>
+                                    <span>xxxxxx</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="vstack gap-2 justify-content-center align-items-center">
-                            <span class="column-title">Number of items</span>
-                            <span class="column-content">69</span>
+                        <div class="vstack gap-3 align-items-center">
+                            <div class="hstack gap-3 justify-content-center">
+                                <span class="modal-title">Items</span>
+                                <span class="count-bubble">x</span>
+                            </div>
+                            <div class="order-items-wrapper">
+                                <div class="left-aligned-column header-column">Product</div>
+                                <div class="center-aligned-column header-column">Quantity</div>
+                                <div class="right-aligned-column header-column">Total</div>
+
+                                <div class="left-aligned-column">
+                                    <img src="" alt="Image">
+                                    <div class="vstack gap-1 justify-content-center">
+                                        <span class="heavy-text">xxxx xxx</span>
+                                        <span class="red-text">xxx</span>
+                                    </div>
+                                </div>
+                                <div class="center-aligned-column">
+                                    <span class="light-text">x</span>
+                                </div>
+                                <div class="right-aligned-column">
+                                    <span class="light-text">xxx</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="vstack gap-2 justify-content-center align-items-center">
-                            <span class="column-title">Total</span>
-                            <span class="column-content red-text">696.969₫</span>
-                        </div>
-                        <div class="vstack gap-2 justify-content-center align-items-center order-status">
-                            <span class="column-title">Status</span>
-                            <span class="status-icon status-received">Received</span>
-                        </div>
-                    </div>
-                    <div class="order-wrapper" onclick="window.location.href='/orders/11111111'">
-                        <div class="vstack gap-2 justify-content-center align-items-start order-name">
-                            <span>Order on 01/01/2023</span>
-                            <span class="order-id">Order ID: 11111111</span>
-                        </div>
-                        <div class="vstack gap-2 justify-content-center align-items-center">
-                            <span class="column-title">Number of items</span>
-                            <span class="column-content">69</span>
-                        </div>
-                        <div class="vstack gap-2 justify-content-center align-items-center">
-                            <span class="column-title">Total</span>
-                            <span class="column-content red-text">696.969₫</span>
-                        </div>
-                        <div class="vstack gap-2 justify-content-center align-items-center order-status">
-                            <span class="column-title">Status</span>
-                            <span class="status-icon status-cancelled">Canceled</span>
+                        <div class="d-flex justify-content-end">
+                            <div class="gap-2 total-wrapper">
+                                <div class="text-container">
+                                    <span class="light-text">Subtotal</span>
+                                    <span class="light-text">xxx</span>
+                                </div>
+                                <div class="text-container">
+                                    <span class="light-text">Shipping</span>
+                                    <span class="light-text">xxx</span>
+                                </div>
+                                <div class="text-container">
+                                    <span class="heavy-text">Total</span>
+                                    <span class="heavy-text">xxx</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 </main>

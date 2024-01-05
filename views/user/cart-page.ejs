@@ -15,78 +15,47 @@
                 <hr class="m-0" />
 
                 <!-- Cart item list zone -->
+                <% cart_items.items.forEach(item => { %>
                 <div class="row">
                   <div class="col-7 product-col">
                     <div class="product-detail">
-                      <img src="/images/cart1.webp" alt="Something" />
+                      <img src="<%= item.card.image %>" alt="Product image" />
                       <div class="vstack gap-1 justify-content-center">
-                        <span>Acrylic Damekan ver1</span>
-                        <span class="item-price">99.082₫</span>
+                        <span><%= item.card.name %></span>
+                        <span class="item-price"><%= item.card.marketPrices %>₫</span>
                       </div>
                     </div>
                   </div>
                   <div class="col-2 quantity-col">
-                    <div
-                      class="vstack gap-2 align-items-center justify-content-center h-100"
-                    >
-                      <input
-                        type="text"
-                        class="quantity-input"
-                        placeholder="1"
-                      />
-                      <span class="remove-text">Remove</span>
+                    <div class="vstack gap-2 align-items-center justify-content-center h-100">
+                      <input type="hidden" id="itemID_<%= item.card.id %>" value="<%= item.card.id %>">
+                      <input type="hidden" id="maxQuantity_<%= item.card.id %>" value="<%= item.card.amount %>">
+                      <input type="hidden" id="oldQuantity_<%= item.card.id %>" value="<%= item.quantity %>">
+                      <input type="hidden" id="itemPrice_<%= item.card.id %>" value="<%= item.card.marketPrices %>">
+                      <input type="text" class="quantity-input" id="quantitySelector_<%= item.card.id %>" value="<%= item.quantity %>"/>
+                      <span class="remove-text" onclick="removeCartItem('<%= item.card.id %>')">Remove</span>
                     </div>
                   </div>
                   <div class="col total-col">
-                    <div
-                      class="d-flex h-100 align-items-center total-price justify-content-end"
-                    >
-                      99.082₫
+                    <div class="d-flex h-100 align-items-center total-price justify-content-end">
+                      <%= item.price %>₫
                     </div>
                   </div>
                 </div>
-                <div class="row">
-                  <div class="col-7 product-col">
-                    <div class="product-detail">
-                      <img src="/images/cart2.avif" alt="Something" />
-                      <div class="vstack gap-1 justify-content-center">
-                        <span>Pokémon Card Game PROMO 047/SV-P</span>
-                        <span class="item-price">111.364₫</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-2 quantity-col">
-                    <div
-                      class="vstack gap-2 align-items-center justify-content-center h-100"
-                    >
-                      <input
-                        type="text"
-                        class="quantity-input"
-                        placeholder="1"
-                      />
-                      <span class="remove-text">Remove</span>
-                    </div>
-                  </div>
-                  <div class="col total-col">
-                    <div
-                      class="d-flex h-100 align-items-center total-price justify-content-end"
-                    >
-                      111.364₫
-                    </div>
-                  </div>
-                </div>
+                <% }) %>
               </div>
+
               <div class="vstack gap-4">
                 <div class="bill-wrapper">
-                  <form action="#" class="vstack gap-4">
+                  <form id="checkoutForm" class="vstack gap-4">
                     <div class="vstack gap-2">
                       <div class="d-flex justify-content-between small-text">
                         <span>Subtotal</span>
-                        <span>210.446₫</span>
+                        <span><%= cart_items.total_price %>₫</span>
                       </div>
                       <div class="d-flex justify-content-between medium-text">
                         <span>Total</span>
-                        <span>210.446VND</span>
+                        <span><%= cart_items.total_price %>VND</span>
                       </div>
                       <span class="xs-text-gray"
                         >Taxes and shipping calculated at checkout</span

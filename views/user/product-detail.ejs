@@ -18,6 +18,7 @@
                 Pokémon Card Game <%= product.name %>
               </div>
               <div class="product-price mb-4"><%= product.marketPrices %>₫</div>
+              <% if (product.amount <= 5) { %>
               <div class="hstack gap-3 stock-warning mb-4">
                 <svg
                   role="presentation"
@@ -37,8 +38,13 @@
                     fill="#ffffff"
                   ></path>
                 </svg>
-                <span>Only 2 units left</span>
+                <span>Only <%= product.amount %> units left</span>
               </div>
+              <% } else { %>
+                <div class="hstack gap-3 mb-4">
+                  <span><%= product.amount %> units left</span>
+                </div>
+              <% } %>
               <hr class="mb-4" />
               <div id="productDetailText">
                 <div class="mb-4">
@@ -48,6 +54,8 @@
                   <i>Please look at the photos carefully.</i>
                 </div>
               </div>
+              <input type="hidden" id="maxQuantity" value="<%= product.amount %>">
+              <input type="hidden" id="itemPrice" value="<%= product.marketPrices %>">
               <div class="quantity-selector mb-4">
                 <div class="mb-2 quantity-tag">Quantity:</div>
                 <div class="d-flex quantity-btn-group align-items-center">
@@ -87,9 +95,7 @@
                 </div>
               </div>
 
-              <a href="/cart">
-                <button type="button" class="add-btn">Add to cart</button>
-              </a>
+              <button type="button" class="add-btn" id="addToCartBtn">Add to cart</button>
 
               <button class="hstack gap-3 mt-4 share-btn">
                 <svg
@@ -145,7 +151,7 @@
                       Pokémon Card Game <%= card.name %>
                     </div>
                   </a>
-                  <div class="card-price"><%= card.marketPrices %></div>
+                  <div class="card-price"><%= card.marketPrices %>₫</div>
                 </div>
               </div>
             </div>
@@ -356,4 +362,6 @@
         
     </div>
   </section>
+
+  <%- include('toast.ejs') %>
 </main>

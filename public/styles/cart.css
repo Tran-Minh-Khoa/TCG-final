@@ -43,6 +43,10 @@ body {
     gap: 1.5rem;
 }
 
+.product-detail img{
+    width: 96px;
+}
+
 .item-price{
     font-family: 'DINPro-Medium', sans-serif;
     color: #E74C3C;

@@ -1,6 +1,9 @@
 const minusBtns = [...document.querySelectorAll('.minus-btn')]
 const plusBtns = [...document.querySelectorAll('.plus-btn')]
 const quantityFields = [...document.querySelectorAll('.quantity')]
+const maxQuantity = document.getElementById('maxQuantity')
+const itemPrice = document.getElementById('itemPrice')
+
 const reviewForm = document.getElementById('reviewForm')
 const reviewList = document.getElementById('userReviews')
 const detailsElement = document.querySelector('details');
@@ -11,7 +14,21 @@ quantityFields.forEach((item, i) => {
     })
     plusBtns[i].addEventListener('click', () => {
         const value = parseInt(item.value)
-        item.value = value + 1 > 99 ? 99 : value + 1
+        const maxValue = parseInt(maxQuantity.value)
+        item.value = value + 1 > maxValue ? maxValue : value + 1
+    })
+    item.addEventListener('change', () => {
+        const value = parseInt(item.value)
+        const maxValue = parseInt(maxQuantity.value)
+        if(value <= 0){
+            item.value = 1
+        }
+        else if(value > maxValue) {
+            item.value = maxValue
+        }
+        else{
+            item.value = value
+        }
     })
 })
 const renderReviews = (reviews) => {
@@ -75,4 +92,41 @@ reviewForm.addEventListener('submit', (e) => {
 })
 window.addEventListener("load", (e) => {
     fetchReviews()
+})
+
+const liveToast = document.getElementById("liveToast")
+const addToCartBtn = document.getElementById("addToCartBtn")
+
+const toastBootstrap = new bootstrap.Toast(liveToast)
+addToCartBtn.addEventListener("click", (e) => {
+    //FETCH
+    const url = window.location.href;
+    const segments = url.split('/');
+    const lastSegment = segments[segments.length - 1];
+    quantity = quantityFields[0].value
+    price = quantity * itemPrice.value
+
+    formBody = {}
+
+    formBody['productId'] = lastSegment
+    formBody['quantity'] = quantity
+    formBody['price'] = price
+
+    console.log(formBody)
+
+    fetch("/cart/add-to-cart", {
+        method: "POST",
+        body: JSON.stringify(formBody),
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        }
+    })
+    .then(response => {
+        if(response.ok){
+            toastBootstrap.show()
+        }
+        else{
+            console.log("Something wrong here")
+        }
+    })
 })

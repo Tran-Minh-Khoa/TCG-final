@@ -1,0 +1,106 @@
+<div class="container-fluid">
+  <!-- Page Heading -->
+  <div class="row d-flex justify-content-between mb-4">
+    <h1 class="h3 mb-2 text-gray-800 col">Order Details</h1>
+  </div>
+  <div class="card mb-4 p-3 border-bottom-primary row">
+    <div class="container-fluid m-0 row">
+      <!--Form-->
+      <div class="col-md-9">
+        <form>
+          <!--Form Row-->
+          <div class="form-row">
+            <!--Order ID-->
+            <div class="form-group col-md-6">
+              <label for="orderID">Order ID</label>
+              <input type="text" class="form-control" id="orderID" name="orderID" placeholder="Order ID" value="<%= order.id %>" readonly />
+            </div>
+            <!--User ID-->
+            <div class="form-group col-md-6">
+              <label for="userID">User ID</label>
+              <input type="text" class="form-control" id="userID" name="userID" placeholder="User ID" value="<%= order.userId %>" readonly />
+            </div>
+          </div>
+          <!--End Form Row-->
+<!--Form Row-->
+          <div class="form-row">
+            <!--Order Date-->
+            <div class="form-group col-md-6">
+              <label for="orderDate">Order Date</label>
+              <input type="text" class="form-control" id="orderDate" name="orderDate" placeholder="Order Date" value="<%= order.orderDate %>" readonly />
+              <!-- Add a date picker library or implement your own date picker here -->
+            </div>
+
+            <!--Total Price-->
+            <div class="form-group col-md-6">
+              <label for="totalPrice">Total Price</label>
+              <input type="text" class="form-control" id="totalPrice" name="totalPrice" placeholder="Total Price" value="<%= order.totalPrice %>" readonly/>
+            </div>
+            <!--Add other order details as needed-->
+          </div>
+          <!--End Form Row-->
+          <!--Form Row-->
+          <div class="form-row">
+            <!--Status-->
+            <div class="form-group col-md-6">
+              <label for="status">Status</label>
+              <select class="form-control custom-select" id="status" name="status">
+                <option value="unpaid" <%= order.status === 'unpaid' ? 'selected' : '' %>>Unpaid</option>
+                <option value="paid" <%= order.status === 'paid' ? 'selected' : '' %>>Paid</option>
+                <option value="shipping" <%= order.status === 'shipping' ? 'selected' : '' %>>Shipping</option>
+                <option value="complete" <%= order.status === 'complete' ? 'selected' : '' %>>Complete</option>
+                <option value="cancelled" <%= order.status === 'cancelled' ? 'selected' : '' %>>Cancelled</option>
+              </select>
+            </div>
+            
+          </div>
+          <!--End Form Row-->
+
+          
+        </form>
+      </div>
+      <!--Other form fields and image section remain unchanged-->
+    </div>
+    <!--Order details-->
+    <div class="card-body col-9">
+      <div class="table-responsive">
+        <table class="table table-bordered" id="table-card" width="100%" cellspacing="0">
+          <thead>
+            <tr>
+              <th>Card ID</th>
+              <th>Quantity</th>
+              <th>Total Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% orderDetails.forEach((orderDetail) => { %>
+            <tr>
+              <td><%= orderDetail.cardId %></td>
+              <td><%= orderDetail.quantity %></td>
+              <td><%= orderDetail.totalPrice %></td>
+
+            </tr>
+            <% }); %>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!--Buttons-->
+    <div class="d-flex ">
+      <div class="col-md-9">
+        <a href="/admin/order">
+          <button type="button" class="btn btn-primary" id="confirmBtn">
+            Confirm
+          </button>
+        </a>
+        <a href="/admin/order">
+          <button type="button" class="btn btn-secondary" id="cancelBtn">
+            Cancel
+          </button>
+        </a>
+      </div>
+      <!--Image preview section remains unchanged-->
+    </div>
+  </div>
+</div>

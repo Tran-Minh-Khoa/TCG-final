@@ -42,7 +42,8 @@ exports.getProductDetail = async (req, res,next) => {
       '/scripts/product-detail.js',
     ];
     const styles = [
-      "/styles/product-detail.css"
+      "/styles/product-detail.css",
+      "/styles/toast.css"
     ];
   
     res.render('user/product-detail', 
