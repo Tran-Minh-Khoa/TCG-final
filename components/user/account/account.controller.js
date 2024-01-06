@@ -25,13 +25,15 @@ exports.AddressPage = async (req, res, next) =>{
   const scripts = ["/scripts/addresses.js"];
   const styles = ["/styles/account.css"];
   const user= await AccountService.getUserProfile(req.user.id);  
+  const addresses = await AccountService.getUserAddresses(req.user.id);
   console.log('aaaaaaaaa',user)
   res.render("user/address-page", {
     layout: "user/layouts/layout",
-    title: "Addresses",
+    title: "Profile",
     scripts: scripts,
     styles: styles,
-    user: user
+    user: user,
+    addresses: addresses
   });
 };
 exports.changePassword = async  (req, res, next)=> {
@@ -77,3 +79,35 @@ exports.getOrderDetail = async (req, res, next) => {
 
   res.status(200).json(order_detail)
 }
+exports.AddressUserAdd = async (req, res, next) => {
+ try {
+  const userId = req.user.id;
+  const address = req.body;
+  const result = await AccountService.addUserAddress(userId, address);
+  return res.status(200).json(result);
+ } catch (error) {
+  return res.status(400).json({ message: 'Error changing password: ' + error.message });
+ }
+}
+exports.AddressUserUpdate = async (req, res, next) => {
+ try {
+  const userId = req.user.id;
+  const address = req.body;
+  const result = await AccountService.updateUserAddress(userId, address);
+  return res.status(200).json(result);
+ } catch (error) {
+  return res.status(400).json({ message: 'Error changing password: ' + error.message });
+ }
+}
+exports.getAddressDetail = async (req, res, next) => {
+  try {
+    const userId = req.user.id
+    const addressId = req.params.id
+
+    const address_detail = await AccountService.getUserAddressDetail(userId, addressId)
+  
+    res.status(200).json(address_detail)
+  } catch (error) {
+   return res.status(400).json({ message: 'Error changing password: ' + error.message });
+  }
+ }

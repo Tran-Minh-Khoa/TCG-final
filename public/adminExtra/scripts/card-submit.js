@@ -7,8 +7,7 @@ document
 
 async function gatherAndPrintFormData(event) {
   event.preventDefault();
-  // Create an object to store form data
-  // Types
+  event.stopPropagation();
   var selectedTypes = [];
   document
     .querySelectorAll('input[name="type[]"]:checked')
@@ -38,9 +37,14 @@ async function gatherAndPrintFormData(event) {
   formData.append("timestamp", Date.now());
   formData.append("image", GetFile("fileInput"));
 
+  var result = CheckValidInput(formData);
+  if (result != null) {
+    displayErrorModal("Error", result);
+    return;
+  }
+
   var newFormData = new FormData();
   newFormData.append("id", document.getElementById("cardID").value);
-
   var imgStatus = {};
   var img_1 = GetFile("fileInput-1");
   var img_2 = GetFile("fileInput-2");
@@ -66,10 +70,27 @@ async function gatherAndPrintFormData(event) {
     imgStatus.image3 = false;
   }
   newFormData.append("imgStatus", JSON.stringify(imgStatus)); // JSON.stringify(imgStatus);
-  console.log(formData);
-  console.log(newFormData);
   PostData(formData);
-  PostCardList(newFormData);
+  if (newFormData.get("image") != null) {
+    PostCardList(newFormData);
+  }
+  window.location.href = "/admin/card";
+}
+
+function CheckValidInput(formData) {
+  const amount = Number(formData.get("amount"));
+  const marketPrices = Number(formData.get("marketPrices"));
+
+  if (typeof amount !== "number" || !Number.isInteger(amount) || amount <= 0) {
+    return "Amount is not a valid positive integer";
+  }
+
+  if (typeof marketPrices !== "number" || marketPrices <= 0) {
+    return "Price is not a valid positive number";
+  }
+
+  // All conditions passed, input is valid
+  return null;
 }
 
 function PostData(formDataObject) {

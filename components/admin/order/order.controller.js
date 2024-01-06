@@ -22,6 +22,7 @@ exports.OrderPage = async function (req, res, next) {
     scripts: scripts,
     styles: styles,
     orders: orders,
+    currentUser: req.user,
   });
 };
 
@@ -47,6 +48,7 @@ exports.OrderEditPage = async function (req, res, next) {
     styles: styles,
     order: order,
     orderDetails: orderDetails,
+    currentUser: req.user,
   });
 };
 
@@ -97,7 +99,7 @@ async function formatAndReplaceOrderDate(order) {
   const year = date.getFullYear();
 
   // Replace the orderDate property with the formatted date
-  order.formatedDate = `${hours}:${minutes} ${day}/${month}/${year}`;
+  order.formatedDate = `${day}/${month}/${year} ${hours}:${minutes}`;
 }
 
 async function roundTotalPrice(order) {

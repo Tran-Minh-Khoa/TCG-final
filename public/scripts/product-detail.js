@@ -7,6 +7,11 @@ const itemPrice = document.getElementById('itemPrice')
 const reviewForm = document.getElementById('reviewForm')
 const reviewList = document.getElementById('userReviews')
 const detailsElement = document.querySelector('details');
+
+const prevPageBtn = document.getElementById('prevPageBtn')
+const nextPageBtn = document.getElementById('nextPageBtn')
+const currentPageText = document.getElementById('currentPageText')
+var currentPage = null
 quantityFields.forEach((item, i) => {
     minusBtns[i].addEventListener('click', () => {
         const value = parseInt(item.value)
@@ -39,12 +44,12 @@ const renderReviews = (reviews) => {
     </div>`
     }).join('')
 }
-const fetchReviews = () => {
+const fetchReviews = (firstTime = true, currentPage = 1) => {
     const url = window.location.href;
     const segments = url.split('/'); // Tách URL thành các phần dựa trên dấu '/'
     const lastSegment = segments[segments.length - 1]; // Lấy phần tử cuối cùng
     console.log(lastSegment);
-    fetch(`/products/detail/reviews/${lastSegment}`)
+    fetch(`/products/detail/reviews/${lastSegment}?page=${currentPage}`)
     .then(res => {
         if (!res.ok) {
             throw new Error('Network response was not ok');
@@ -52,7 +57,10 @@ const fetchReviews = () => {
         return res.json();
     })
     .then(data => {
-        renderReviews(data)
+        renderReviews(data.reviews)
+        if(firstTime){
+            resetPagination(data.totalPages)
+        }
     })
     .catch(error => {
         console.error('Error:', error);
@@ -61,38 +69,36 @@ const fetchReviews = () => {
 
 
 
-
-reviewForm.addEventListener('submit', (e) => {
-    e.preventDefault()
-    const formData = new FormData(reviewForm)
-    const data = Object.fromEntries(formData.entries())
-    const url = window.location.href;
-    const segments = url.split('/'); // Tách URL thành các phần dựa trên dấu '/'
-    const lastSegment = segments[segments.length - 1]; // Lấy phần tử cuối cùng
-    console.log(lastSegment);
-    console.log(data)
-    fetch(`/products/detail/${lastSegment}`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
+if(reviewForm !== null){
+    reviewForm.addEventListener('submit', (e) => {
+        e.preventDefault()
+        const formData = new FormData(reviewForm)
+        const data = Object.fromEntries(formData.entries())
+        const url = window.location.href;
+        const segments = url.split('/'); // Tách URL thành các phần dựa trên dấu '/'
+        const lastSegment = segments[segments.length - 1]; // Lấy phần tử cuối cùng
+        console.log(lastSegment);
+        console.log(data)
+        fetch(`/products/detail/${lastSegment}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(res => {
+            if (!res.ok) {
+                throw new Error('Network response was not ok');
+            }
+            fetchReviews()
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        })
+        detailsElement.removeAttribute('open');
+    
     })
-    .then(res => {
-        if (!res.ok) {
-            throw new Error('Network response was not ok');
-        }
-        fetchReviews()
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    })
-    detailsElement.removeAttribute('open');
-
-})
-window.addEventListener("load", (e) => {
-    fetchReviews()
-})
+}
 
 const liveToast = document.getElementById("liveToast")
 const addToCartBtn = document.getElementById("addToCartBtn")
@@ -129,4 +135,46 @@ addToCartBtn.addEventListener("click", (e) => {
             console.log("Something wrong here")
         }
     })
+})
+
+function resetPagination(pages){
+    prevPageBtn.classList.add("disabled")
+    currentPageText.innerHTML = `1&nbsp;&nbsp;/&nbsp;&nbsp;${pages}`
+    
+    currentPage = 1
+    maxPage = parseInt(pages)
+    if(currentPage === maxPage){
+        nextPageBtn.classList.add("disabled")
+    }
+    else{
+        nextPageBtn.classList.remove("disabled")
+    }
+}
+
+nextPageBtn.addEventListener("click", (e) => {
+    currentPage++
+    if(currentPage === maxPage){
+        nextPageBtn.classList.add("disabled")
+    }
+    if(prevPageBtn.classList.contains("disabled")){
+        prevPageBtn.classList.remove("disabled")
+    }
+    currentPageText.innerHTML = `${currentPage}&nbsp;&nbsp;/&nbsp;&nbsp;${maxPage}`
+    fetchReviews(false, currentPage)
+})
+
+prevPageBtn.addEventListener("click", (e) => {
+    currentPage--
+    if(currentPage === 1){
+        prevPageBtn.classList.add("disabled")
+    }
+    if(nextPageBtn.classList.contains("disabled")){
+        nextPageBtn.classList.remove("disabled")
+    }
+    currentPageText.innerHTML = `${currentPage}&nbsp;&nbsp;/&nbsp;&nbsp;${maxPage}`
+    fetchReviews(false, currentPage)
+})
+
+window.addEventListener("load", (e) => {
+    fetchReviews()
 })

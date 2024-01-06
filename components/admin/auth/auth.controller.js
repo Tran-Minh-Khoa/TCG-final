@@ -5,11 +5,12 @@ exports.LoginPage = (req, res, next) => {
   });
 };
 
-
 exports.RegisterPage = (req, res, next) => {
-  res.render('admin/register', { layout: 'admin/layouts/simple-layout', title: 'Register'}
-)};
-
+  res.render("admin/register", {
+    layout: "admin/layouts/simple-layout",
+    title: "Register",
+  });
+};
 
 exports.Logout = (req, res, next) => {
   req.logOut(function (err) {

@@ -41,6 +41,8 @@
                 <span class="badge badge-success custom-card-badge">Complete</span>
               <% } else if (order.status === 'cancelled') { %>
                 <span class="badge badge-danger custom-card-badge">Cancelled</span>
+              <% } else if (order.status === 'pending') { %>
+                <span class="badge badge-dark custom-card-badge">Pending</span>
               <% } else { %>
                 <%= order.status %>
               <% } %>

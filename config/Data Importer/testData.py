@@ -71,9 +71,10 @@ def FilterProduct(item):
     price = round(price, 2)
     price = max(price, 0.1)
     filtered_item['marketPrices'] = price
+    filtered_item['isActive'] = True
     filtered_item['amount'] = 10
     filtered_item['reviews'] = reviews
-    filtered_item['images'] = [
+    filtered_item['listImages'] = [
         "https://firebasestorage.googleapis.com/v0/b/wibuteam-8d09e.appspot.com/o/card-back.png?alt=media&token=2a3b69e0-c3af-4303-a910-974bbe1ba7d6",
         "https://firebasestorage.googleapis.com/v0/b/wibuteam-8d09e.appspot.com/o/card-back.png?alt=media&token=2a3b69e0-c3af-4303-a910-974bbe1ba7d6",
         "https://firebasestorage.googleapis.com/v0/b/wibuteam-8d09e.appspot.com/o/card-back.png?alt=media&token=2a3b69e0-c3af-4303-a910-974bbe1ba7d6",

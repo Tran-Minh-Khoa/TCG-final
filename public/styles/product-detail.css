@@ -83,6 +83,9 @@ body{
     height: 50px;
     border: none;
     background: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .quantity-btn-group .plus-btn{
@@ -90,6 +93,9 @@ body{
     height: 50px;
     border: none;
     background: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .quantity-btn-group .quantity{
@@ -274,6 +280,35 @@ summary{
     margin: 0;
     text-align: justify;
     text-justify: inter-word;
+}
+
+.review-pagination{
+    margin-top: 1.25rem;
+    background: none;
+    border-radius: 3.75rem;
+    border-width: 1px;
+    border-color: rgba(26, 26, 26, .12);
+    border-style: solid;
+    display: flex;
+    justify-self: center;
+    align-items: center;
+}
+
+.pagination-btn{
+    background: none;
+    border: none;
+    padding: 0 1.25rem;
+}
+
+.disabled{
+    pointer-events: none;
+    opacity: .5;
+}
+
+.pagination-current{
+    padding: 0.75rem 0.5rem;
+    font-family: 'DINPro-Medium', sans-serif;
+    opacity: 0.8;
 }
 
 @media (max-width: 992px){

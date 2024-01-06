@@ -5,44 +5,12 @@ const controller = require('./payment.controler')
 //Chuyển đống này qua controller 😺
 const Order = require('../../../models/Order');
 const OrderDetail = require('../../../models/OrderDetail');
-const Card = require('../../../models/Card');
-
 const servicePayment = require('./payment.service');
 // let $ = require('jquery');
 // const request = require('request');
 const moment = require('moment');
 /* GET home page. */
-router.get('/:id', async (req, res, next) => {
-    const scripts = ["/scripts/checkout.js"];
-    const styles = ["/styles/checkout.css"];
 
-    const orderId = req.params.id
-
-    const order = await Order.findOne({id: orderId})
-    const orderDetails = await OrderDetail.find({orderId: orderId})
-
-    const bill_detail = {
-        total_price: order?.totalPrice,
-        bill_items: []
-    }
-
-    for (const item of orderDetails) {
-        const card = await Card.findOne({id: item.cardId})
-        const product = {
-          card : card,
-          quantity: item.quantity,
-          price: item.totalPrice
-        }
-        bill_detail.bill_items.push(product)
-    }
-    
-    res.render("user/checkout", {
-      layout: "user/layouts/layout",
-      title: "Checkout",
-      scripts: scripts,
-      styles: styles,
-      bill_detail: bill_detail})
-    });
 function sortObject(obj) {
 	let sorted = {};
 	let str = [];
@@ -122,7 +90,7 @@ router.post('/create_payment_url', async (req, res, next) =>{
 
 router.get('/vnpay_return', async (req, res, next) =>{
     let vnp_Params = req.query;
-    console.log(vnp_Params)
+    // console.log(vnp_Params)
     let secureHash = vnp_Params['vnp_SecureHash'];
     console.log('test hash api')
     delete vnp_Params['vnp_SecureHash'];
@@ -150,10 +118,20 @@ router.get('/vnpay_return', async (req, res, next) =>{
         const order= await Order.findOne({id: orderId})
         order.status='pending'
         await order.save()
-        await serviceCart.RemoveCart(req.user.id)
-        res.render('success', {code: vnp_Params['vnp_ResponseCode']})
+        await servicePayment.RemoveCart(req.user.id)
+        const orderDetails = await OrderDetail.find({ orderId: orderId });
+            for (const detail of orderDetails) {
+                // Cập nhật số lượng thẻ sau khi mua hàng thành công
+                await servicePayment.UpdateCardAmount(detail.cardId, detail.quantity);
+            }
+        
+        console.log('Ket qua thanh cong',vnp_Params['vnp_ResponseCode']);
+        // res.render('success', {code: vnp_Params['vnp_ResponseCode']})
+        res.redirect('/account')
     } else{
-        res.render('success', {code: '97'})
+        // res.render('success', {code: '97'})
+        res.redirect('/account')
+
     }
 });
 

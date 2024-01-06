@@ -10,6 +10,7 @@ const cardSchema = new mongoose.Schema({
   rarity: { type: String },
   setId: { type: String, ref: "Set" },
   image: { type: String, required: true },
+  isActive: { type: Boolean, required: true },
   listImages: { type: Array },
   marketPrices: { type: Number, required: true },
   amount: { type: Number, default: 10 },

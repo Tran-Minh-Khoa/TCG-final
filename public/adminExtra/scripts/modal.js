@@ -5,7 +5,7 @@ function displayErrorModal(title, description, onClick) {
   document.getElementById("modelTitle").innerHTML = title;
 
   // Update Confirm button based on onClick
-  const confirmBtn = document.getElementById("confirmBtn");
+  const confirmBtn = document.getElementById("_confirmBtn");
   if (onClick) {
     confirmBtn.style.display = "inline-block"; // Show the Confirm button
     confirmBtn.setAttribute("href", ""); // Clear the href attribute

@@ -37,6 +37,7 @@ exports.getProductsBySearch = async (req, res,next) => {
 }
 exports.getProductDetail = async (req, res,next) => {
     const id = req.params.id;
+    const hasLoggedIn = req.user?.id === undefined ? false : true
     const card = await ProductService.getProductsDetail(id);
     const scripts = [
       '/scripts/product-detail.js',
@@ -49,11 +50,12 @@ exports.getProductDetail = async (req, res,next) => {
     res.render('user/product-detail', 
     {
       layout: 'user/layouts/layout', 
-      title: "Your Shopping Cart",
+      title: `${card.cardInfo.name}`,
       scripts: scripts,
       styles: styles,
       product: card.cardInfo,
-      relatedCards: card.relatedCard
+      relatedCards: card.relatedCard,
+      hasLoggedIn: hasLoggedIn
     });
   }
 exports.postReview = async (req, res,next) => {
@@ -73,7 +75,7 @@ exports.productExample = async (req, res,next) => {
 }
 exports.productsPage = async (req, res,next) => {
   res.render('user/product-page-new', {
-    title: "product page new",
+    title: "All products",
     layout: 'user/layouts/layout',
     scripts:['/scripts/product.js'],
     styles:['/styles/product-new.css']
@@ -110,6 +112,7 @@ exports.filtersBar = async (req, res,next) => {
 }
 exports.ListReviews = async (req, res,next) => {
   const id = req.params.id;
-  const reviews = await ProductService.getReviews(id);
-  res.status(200).send(reviews);
+  const page = req.query.page;
+  const filteredReviews = await ProductService.getReviews(id, page);
+  res.status(200).send(filteredReviews);
 }

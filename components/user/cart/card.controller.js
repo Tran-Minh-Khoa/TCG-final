@@ -8,8 +8,12 @@ exports.CartPage = async (req, res, next) => {
     "/styles/cart.css"
   ];
 
-  const cart = await Cart.findOne({userId: req.user.id})
-
+  var cart = await Cart.findOne({userId: req.user.id})
+  if(!cart){
+    cart = new Cart({
+      userId: req.user.id
+    })
+  }
   const cart_items = {
     total_price : cart.totalPrice,
     items:[]

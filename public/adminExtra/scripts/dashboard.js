@@ -304,7 +304,7 @@ async function UpdateTable(days) {
     console.error("Error updating table:", error);
   }
 }
-UpdateAll(30);
+UpdateAll(7);
 function UpdateAll(days) {
   UpdateChart(days);
   UpdateEarningData();

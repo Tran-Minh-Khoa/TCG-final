@@ -53,8 +53,8 @@
               <td><%= card.marketPrices %></td>
               <td><%= card.amount %></td>
               <td>
-                <div class="badge badge-success border custom-card-badge">
-                  Active
+                <div class="badge <%= card.isActive ? 'badge-success' : 'badge-danger' %> border custom-card-badge">
+                  <%= card.isActive ? 'Active' : 'Disabled' %>
                 </div>
               </td>
               <td>
@@ -66,8 +66,12 @@
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                       <a class="dropdown-item" href="/admin/card/edit/<%= card.id %>">Edit</a>
                       <a class="dropdown-item" href="#">Export</a>
-                      <a class="dropdown-item" href="#">Lock</a>
-                      <a class="dropdown-item" href="#">Delete</a>
+                       <% if (card.isActive) { %>
+                      <a class="dropdown-item" href="#" onclick="toggleCardStatus('<%= card.id %>', false)">Disable</a>
+                      <% } else { %>
+                      <a class="dropdown-item" href="#" onclick="toggleCardStatus('<%= card.id %>', true)">Enable</a>
+                      <% } %>
+                      <a class="dropdown-item" href="#" onclick="deleteCard('<%= card.id %>')">Delete</a>
                     </div>
                   </div>
                 </div>

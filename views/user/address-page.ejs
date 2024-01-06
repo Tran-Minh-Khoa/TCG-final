@@ -1,5 +1,6 @@
 <%
     const truncatedID = user.id.slice(0, 30) + '...';
+    const addressesLength = addresses.length
 %>
 
 <main>
@@ -91,7 +92,7 @@
         </div>
     </section>
 
-    <!-- IF THERE ARE NO ADDRESSES -->
+    <% if(addressesLength === 0) { %>
     <section>
         <div class="empty-state-wrapper">
             <div class="vstack gap-4 align-items-center justify-content-center">
@@ -106,6 +107,7 @@
             </div>
         </div>
     </section>
+    <% } else { %>
 
     <!-- IF THERE ARE ADDRESSES -->
     <section>
@@ -113,51 +115,38 @@
             <div class="vstack gap-4 align-items-center justify-content-center">
                 <div class="hstack gap-3 justify-content-center">
                     <span class="title">Addresses</span>
-                    <span class="count-bubble">2</span>
+                    <span class="count-bubble"><%= addressesLength %></span>
                 </div>
                 <div class="container-fluid">
                     <div class="row justify-content-center g-4">
+                        <% addresses.forEach((item, idx) => { %>
                         <div class="col-md-6 col-lg-3">
                             <div class="address">
                                 <div class="vstack gap-2 h-100">
-                                    <div class="address-name">Default address</div>
+                                    <div class="address-name">Address <%= idx+1 %></div>
                                     <p class="address-info">
-                                        First name + Last name<br>
-                                        Company<br>
-                                        Phone number<br>
-                                        Address<br>
-                                        City<br>
-                                        Zip code<br>
-                                        Country
+                                        <%= item.firstName %> <%= item.lastName %><br>
+                                        <%= item.company %><br>
+                                        <%= item.phone %><br>
+                                        <%= item.address %><br>
+                                        <%= item.city %><br>
+                                        <%= item.zipCode %><br>
+                                        <%= item.country %>
                                     </p>
                                     <div class="hstack gap-3 pt-2 mt-auto">
-                                        <a data-bs-toggle="offcanvas" href="#updateAddressOffcanvas" role="button" aria-controls="updateAddressOffcanvas" class="address-link">Edit</a>
-                                        <span class="address-link">Delete</span>
+                                        <span class="address-link" onclick="editAddress('<%= item.id %>')">Edit</a>
                                     </div>     
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 col-lg-3">
-                            <div class="address">
-                                <div class="vstack gap-2 h-100">
-                                    <div class="address-name">Address 2</div>
-                                    <p class="address-info">
-                                        First name + Last name<br>
-                                        Country
-                                    </p>
-                                    <div class="hstack gap-3 pt-2 mt-auto">
-                                        <a data-bs-toggle="offcanvas" href="#updateAddressOffcanvas" role="button" aria-controls="updateAddressOffcanvas" class="address-link">Edit</a>
-                                        <span class="address-link">Delete</span>
-                                    </div>     
-                                </div>
-                            </div>
-                        </div>
+                        <% }) %>
                    </div>
                 </div>
                 <button type="button" class="black-btn" data-bs-toggle="offcanvas" data-bs-target="#addAddressOffcanvas" aria-controls="addAddressOffcanvas">Add address</button>
             </div>
         </div>
     </section>
+    <% } %>
 
     <!-- Add Address Offcanvas -->
     <div class="offcanvas offcanvas-end" tabindex="-1" id="addAddressOffcanvas" aria-labelledby="addAddressOffcanvasLabel">
@@ -168,52 +157,52 @@
         <div class="offcanvas-body">
             <div class="vstack gap-4">
                 <p>Please fill in the information below:</p>
-                <form class="row g-3" action="/account/address/add" method="post">
+                <form class="row g-3" id="addAddressForm">
                     <div class="col-6">
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First name">
+                            <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First name" required>
                             <label for="firstName">First name</label>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Last name">
+                            <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Last name" required>
                             <label for="lastName">Last name</label>
                         </div>
                     </div>
                     <div class="col-12">
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="company" name="company" placeholder="Company">
+                            <input type="text" class="form-control" id="company" name="company" placeholder="Company" required>
                             <label for="company">Company</label>
                         </div>
                     </div>
                     <div class="col-12">
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="addPhone" name="phone" placeholder="Phone">
+                            <input type="tel" class="form-control" id="addPhone" name="phone" placeholder="Phone" required>
                             <label for="addPhone">Phone</label>
                         </div>
                     </div>
                     <div class="col-12">
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="address" name="address" placeholder="Address">
+                            <input type="text" class="form-control" id="address" name="address" placeholder="Address" required>
                             <label for="address">Address</label>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="city" name="city" placeholder="City">
+                            <input type="text" class="form-control" id="city" name="city" placeholder="City" required>
                             <label for="city">City</label>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="zipCode" name="zipCode" placeholder="Zip code">
+                            <input type="text" class="form-control" id="zipCode" name="zipCode" placeholder="Zip code" required>
                             <label for="zipCode">Zip code</label>
                         </div>
                     </div>
                     <div class="col-12">
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="country" name="country" placeholder="Country">
+                            <input type="text" class="form-control" id="country" name="country" placeholder="Country" required>
                             <label for="country">Country</label>
                         </div>
                     </div>
@@ -231,53 +220,53 @@
         </div>
         <div class="offcanvas-body">
             <div class="vstack gap-4">
-                <form class="row g-3" action="/account/address/update" method="post">
+                <form class="row g-3" id="updateAddressForm">
                     <input type="hidden" id="addressID" name="addressID" value="">
                     <div class="col-6">
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="updateFirstName" name="firstName" placeholder="First name">
+                            <input type="text" class="form-control" id="updateFirstName" name="firstName" placeholder="First name" required>
                             <label for="updateFirstName">First name</label>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="updateLastName" name="lastName" placeholder="Last name">
+                            <input type="text" class="form-control" id="updateLastName" name="lastName" placeholder="Last name" required>
                             <label for="updateLastName">Last name</label>
                         </div>
                     </div>
                     <div class="col-12">
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="updateCompany" name="company" placeholder="Company">
+                            <input type="text" class="form-control" id="updateCompany" name="company" placeholder="Company" required>
                             <label for="updateCompany">Company</label>
                         </div>
                     </div>
                     <div class="col-12">
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="updatePhone" name="phone" placeholder="Phone">
+                            <input type="tel" class="form-control" id="updatePhone" name="phone" placeholder="Phone" required>
                             <label for="updatePhone">Phone</label>
                         </div>
                     </div>
                     <div class="col-12">
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="updateAddress" name="address" placeholder="Address">
+                            <input type="text" class="form-control" id="updateAddress" name="address" placeholder="Address" required>
                             <label for="updateAddress">Address</label>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="updateCity" name="city" placeholder="City">
+                            <input type="text" class="form-control" id="updateCity" name="city" placeholder="City" required>
                             <label for="updateCity">City</label>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="updateZipCode" name="zipCode" placeholder="Zip code">
+                            <input type="text" class="form-control" id="updateZipCode" name="zipCode" placeholder="Zip code" required>
                             <label for="updateZipCode">Zip code</label>
                         </div>
                     </div>
                     <div class="col-12">
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="updateCountry" name="country" placeholder="Country">
+                            <input type="text" class="form-control" id="updateCountry" name="country" placeholder="Country" required>
                             <label for="updateCountry">Country</label>
                         </div>
                     </div>

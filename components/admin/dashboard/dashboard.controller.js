@@ -1,7 +1,7 @@
 const service = require("./dashboard.service");
 
 exports.DashboardPage = async function (req, res, next) {
-  const styles = ["/vendor/chart.js/Chart.min.js"];
+  const styles = [];
   const scripts = [
     "/admin/vendor/chart.js/Chart.min.js",
     "/admin/js/demo/chart-area-demo.js",
@@ -10,7 +10,6 @@ exports.DashboardPage = async function (req, res, next) {
   ];
   const topRevenue = await service.GetTopRevenue(14);
   const setRevenues = await service.GetTopSetRevenue();
-  console.log(topRevenue);
   res.render("admin/dashboard", {
     layout: "admin/layouts/layout",
     title: "Dashboard",
@@ -18,6 +17,7 @@ exports.DashboardPage = async function (req, res, next) {
     scripts: scripts,
     topRevenue: topRevenue,
     setRevenues: setRevenues,
+    currentUser: req.user,
   });
 };
 
@@ -98,7 +98,6 @@ exports.GetTopRevenue = async function (req, res, next) {
   try {
     const day = req.params.days || 14;
     const topRev = await service.GetTopRevenue(day);
-    console.log(topRev);
     res.json(topRev);
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error" });

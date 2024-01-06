@@ -1,0 +1,167 @@
+[{
+  "_id": {
+    "$oid": "656de1cf37168b0994d16976"
+  },
+  "role": "admin",
+  "isBaned": false,
+  "created_at": {
+    "$date": "2023-12-04T14:27:27.064Z"
+  },
+  "id": "2837b31c40a18f32fe6b07d85cf6a4d632f350c3514fc6bfe6b6659e753ffe51",
+  "email": "1@a.c",
+  "password": "$2b$10$BOnQq6M79jCZQrI2ndUteO2sVynRz8ZknNHfSLmHPc1e.Uvb4/nRq",
+  "__v": 0,
+  "emailVerified": true,
+  "gender": "male",
+  "name": "",
+  "phone": "",
+  "avatar": "https://storage.googleapis.com/wibuteam-8d09e.appspot.com/avatar/undefined/SM1_EN_9.png?GoogleAccessId=firebase-adminsdk-99tfq%40wibuteam-8d09e.iam.gserviceaccount.com&Expires=1709917200&Signature=n0%2F0UGAmUEhNY2PGQhIgH2gcDWC2C5NaaxShdYTFCdsHXcrdEwu010jUPYvaAL8Xapbjsfvfw3QxRiq%2Fzl1prM7IantcTmhRF9F2AVPDt5QReJWDy4oZVew23osJ2UxQxdavexAHIQ99D%2FTUxxSVBKFqD80OxNkFo1vnuTPWAmkRB5SWkRL2188q5bTqc9zaBa%2BTdKoKdC3ODT47Z7AN9J6kLoy6x3NMADF0bITeuBGHn7AAM0DBLvK%2Ba1fXhGEOw%2Fa%2FD5DD6nY530FbSSlv5H%2FAGGhnhz%2FxbKhwFYs2XNA1MBjO4oncmJvnYFk3p2nnvvoZSwya1r6EBxI1T2OW%2Fg%3D%3D"
+},
+{
+  "_id": {
+    "$oid": "656f283d272f7d887d6891b9"
+  },
+  "role": "admin",
+  "isBaned": false,
+  "created_at": {
+    "$date": "2023-12-05T13:40:13.110Z"
+  },
+  "id": "51f18cabe58695595f6f02603dec1172b2126681f4b20098fec7ab760fe61d14",
+  "email": "a@a",
+  "password": "$2b$10$zoWc4Nze7.SVsSVNeP3wr.pNfmyU.fbShw2HmFZR3CVX.bC1fdYxu",
+  "__v": 0,
+  "address": [
+    "123/45 Sth Street"
+  ],
+  "name": "admin",
+  "phone": "0123456789",
+  "avatar": "https://storage.googleapis.com/wibuteam-8d09e.appspot.com/avatar/undefined/SM1_EN_9.png?GoogleAccessId=firebase-adminsdk-99tfq%40wibuteam-8d09e.iam.gserviceaccount.com&Expires=1709917200&Signature=n0%2F0UGAmUEhNY2PGQhIgH2gcDWC2C5NaaxShdYTFCdsHXcrdEwu010jUPYvaAL8Xapbjsfvfw3QxRiq%2Fzl1prM7IantcTmhRF9F2AVPDt5QReJWDy4oZVew23osJ2UxQxdavexAHIQ99D%2FTUxxSVBKFqD80OxNkFo1vnuTPWAmkRB5SWkRL2188q5bTqc9zaBa%2BTdKoKdC3ODT47Z7AN9J6kLoy6x3NMADF0bITeuBGHn7AAM0DBLvK%2Ba1fXhGEOw%2Fa%2FD5DD6nY530FbSSlv5H%2FAGGhnhz%2FxbKhwFYs2XNA1MBjO4oncmJvnYFk3p2nnvvoZSwya1r6EBxI1T2OW%2Fg%3D%3D",
+  "gender": "male",
+  "emailVerified": true
+},
+{
+  "_id": {
+    "$oid": "6589b0a0d49db39771600bd0"
+  },
+  "role": "user",
+  "isBaned": false,
+  "created_at": {
+    "$date": "2023-12-25T16:41:04.859Z"
+  },
+  "id": "2cc86e6fd28e1229ae596faf7758822839c9d2271d574b0ef7913fefc1bec9db",
+  "email": "pehox92949@usoplay.com",
+  "password": "$2b$10$XcJu/D/R7M36iSg/tDszYOwBIggnExRGlGQOl.8h70pvMFCkdF2wi",
+  "__v": 0,
+  "emailVerified": true
+},
+{
+  "_id": {
+    "$oid": "658d2e7f2a20f1825dc1fefb"
+  },
+  "address": [],
+  "role": "user",
+  "isBaned": false,
+  "created_at": {
+    "$date": "2023-12-28T08:14:55.310Z"
+  },
+  "id": "3853bcd67706eec6a4fb9fb1e7b3f6446bfb259c4e5f88e79582ce59ed09dfeb",
+  "email": "tminhkhoa91@gmail.com",
+  "googleId": "101935471499837867397",
+  "__v": 0,
+  "password": "$2b$10$HZoaKPRSECnHKWggxV7z1eNVLTLATDG9mNmXGUB3WYmH3hNcWTl5y",
+  "avatar": "https://storage.googleapis.com/wibuteam-8d09e.appspot.com/avatar/3853bcd67706eec6a4fb9fb1e7b3f6446bfb259c4e5f88e79582ce59ed09dfeb/CS201.png?GoogleAccessId=firebase-adminsdk-99tfq%40wibuteam-8d09e.iam.gserviceaccount.com&Expires=1709917200&Signature=FFv9zeVM6u2n2RaNqIkP%2FxXOR1vEqSiQIE0xJ0F14RLNZUcZCn5g1VjYQLui%2FRRyLHsODYd4MGBi5r5nwDmMF6EqHMOMj3AKVybpNodppKSJIBk52J%2BoChSISn%2FmH1BQjaOuoCtnWYmzL8%2BY2BBCln%2F7mgVGWv%2FDE07EDk7yphD75aZxzHCD1TDH7Z3vkbBfc9ibRYIPI7EZJM%2FxKtJcq3vTsznVA462IOXLsPKrzs9ELijK%2FxZ52PQWBffTar1i0YLVrl8nuFFacvjfrOotsFyzchtyVVq%2B1r0kos%2BS9ezkqD7nlNSobVPmjOTSPnjRdkRm%2F8CCQDx2lxncG8rpAA%3D%3D",
+  "gender": "Male",
+  "name": "Trần Minh Khoa",
+  "phone": "0396848173",
+  "dob": "2024-01-05",
+  "emailVerified": true
+},
+{
+  "_id": {
+    "$oid": "658d5ccefce8122cb3aca97a"
+  },
+  "address": [],
+  "role": "user",
+  "isBaned": false,
+  "created_at": {
+    "$date": "2023-12-28T11:32:30.884Z"
+  },
+  "id": "ab5983a0510918036c16871de6b3cd24dadb9cceb2771ea908d0beff9a1abaa6",
+  "email": "hoanglam092003@gmail.com",
+  "googleId": "115038013924498948805",
+  "__v": 0,
+  "password": "$2b$10$RvpaaA4Hw6aBfPtyOPyx/.Iv5vmk4CbhSkLlZUvhTRA8GysiLZL0G",
+  "gender": "Male",
+  "name": "Hoàng Lâm",
+  "phone": "0123456789",
+  "avatar": "https://storage.googleapis.com/wibuteam-8d09e.appspot.com/avatar/c7b5aeadfd942fca7685.jpg?GoogleAccessId=firebase-adminsdk-99tfq%40wibuteam-8d09e.iam.gserviceaccount.com&Expires=1709917200&Signature=TslHw0s7Wzrklp3JMj3qm%2FvbKh%2B%2BhdpEzufbje4thm3rdmIc%2FCot%2FbQW2kugy29dvNTdhRknB2jFH%2Bsmli9xLsPSbReJqtbl555ioumVAuTFmdJdIt0pw2LY3TlOQVz%2Fw0uzQd9HiSkiETSgVYJe4SPZRR8uNonslqZk3L99WsECB7YInSJ5JyD9zab3k21%2FJvVCtqUY1KhTvmSRLu2lknGspOiTuO%2B0g8R640scBLrN%2BCQwPMjUzd8lUkNVum8LWu3Jf7cCywyR54gHmd50czINmHjkoRYtEMGCmhElcHRr%2F%2B8QJuJamxr1197wVh09%2FqHuwpG42oSo4wGJVWgx7A%3D%3D",
+  "dob": "2003-09-22",
+  "emailVerified": true
+},
+{
+  "_id": {
+    "$oid": "658d75f898221d1f01248588"
+  },
+  "address": [],
+  "role": "user",
+  "isBaned": false,
+  "created_at": {
+    "$date": "2023-12-28T13:19:52.942Z"
+  },
+  "id": "a08bea464b3174c8faa9de48e4521303ceb9c8c81df3dfb3c084bfae70c9a958",
+  "email": "thlam21@clc.fitus.edu.vn",
+  "googleId": "105168123092324232439",
+  "__v": 0,
+  "password": "$2b$10$BHFlxEdYqmWYb8qMJT746erFs1tKJwSp7ORLU/dgtTmN7/Z3tBJem",
+  "emailVerified": true
+},
+{
+  "_id": {
+    "$oid": "658e407e3bebe4ee8e718daf"
+  },
+  "address": [],
+  "role": "user",
+  "isBaned": false,
+  "created_at": {
+    "$date": "2023-12-29T03:43:58.419Z"
+  },
+  "id": "6c96707c0a901d85a456357d73c869df29b44030b9ff4ee765689360948ea370",
+  "email": "meomeomeo@gmeo.com",
+  "password": "$2b$10$xSKKSG78/0M0vJmLNLhgw.CS1.hzJ6.gojS3j8Qcrgp9L2i03JPAO",
+  "__v": 0,
+  "emailVerified": true
+},
+{
+  "_id": {
+    "$oid": "658e4185657072e93c59583f"
+  },
+  "address": [],
+  "role": "user",
+  "isBaned": false,
+  "created_at": {
+    "$date": "2023-12-29T03:48:21.788Z"
+  },
+  "id": "71b4654b18e1850c35e578fb368d16c9c38f5b855df607ddd7308a438dd9b7fe",
+  "email": "pickle0986944765@gmail.com",
+  "googleId": "112284765389261812216",
+  "__v": 0,
+  "emailVerified": true
+},
+{
+  "_id": {
+    "$oid": "6598011dd8ea5bf006f3b4d0"
+  },
+  "address": [
+    "48 BTX"
+  ],
+  "role": "user",
+  "isBaned": false,
+  "emailVerified": true,
+  "created_at": {
+    "$date": "2024-01-05T13:16:13.239Z"
+  },
+  "id": "60dba3291a43127d7af9bc28e5e2842986feadf2d88d0b106c6bf00d2f7afd24",
+  "email": "tmkhoa21@clc.fitus.edu.vn",
+  "password": "$2b$10$L.Bd6G/PxMUGhLd7jvnFDOgkAK0CaaW2k3k1Rnowi53g7T7hYtTiW",
+  "__v": 0
+}]

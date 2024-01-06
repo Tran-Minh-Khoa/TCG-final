@@ -147,3 +147,86 @@ changePasswordForm.addEventListener("submit", (e) => {
         })
     }
 })
+
+const addAddressForm = document.getElementById("addAddressForm")
+
+addAddressForm.addEventListener('submit', (e) => {
+    e.preventDefault()
+    const formData = new FormData(addAddressForm)
+    const formBody = {};
+
+    for(let [key, value] of formData.entries()) {
+        formBody[key] = value;
+    }
+
+    fetch("/account/address/add", {
+        method: "POST",
+        body: JSON.stringify(formBody),
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        }
+    })
+    .then(response => {
+        if(response.ok){
+            window.location.reload(true)
+        }
+    })
+})
+
+const updateAddressForm = document.getElementById('updateAddressForm')
+const updateAddressOffcanvas = document.getElementById("updateAddressOffcanvas")
+const updateAddressOffcanvasInstance = new bootstrap.Offcanvas(updateAddressOffcanvas)
+
+function editAddress(addressId) {
+    fetch(`/account/get-address-detail/${addressId}`, {
+        method: "GET"
+    })
+    .then(response => {
+        if(response.ok){
+            return response.json()
+        }
+        else{
+            return null
+        }
+    })
+    .then(data => {
+        if(data !== null){
+            updateAddressForm.elements['addressID'].value = data.id
+            updateAddressForm.elements['firstName'].value = data.firstName
+            updateAddressForm.elements['lastName'].value = data.lastName
+            updateAddressForm.elements['company'].value = data.company
+            updateAddressForm.elements['phone'].value = data.phone
+            updateAddressForm.elements['address'].value = data.address
+            updateAddressForm.elements['city'].value = data.city
+            updateAddressForm.elements['zipCode'].value = data.zipCode
+            updateAddressForm.elements['country'].value = data.country
+
+            updateAddressOffcanvasInstance.show()
+        }
+    })
+}
+
+updateAddressForm.addEventListener('submit', (e) => {
+    e.preventDefault()
+    const formData = new FormData(updateAddressForm)
+    const formBody = {};
+
+    for(let [key, value] of formData.entries()) {
+        formBody[key] = value;
+    }
+    delete formBody.addressID
+    formBody['id'] = updateAddressForm.elements['addressID'].value
+
+    fetch("/account/address/update", {
+        method: "POST",
+        body: JSON.stringify(formBody),
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        }
+    })
+    .then(response => {
+        if(response.ok){
+            window.location.reload(true)
+        }
+    })
+})

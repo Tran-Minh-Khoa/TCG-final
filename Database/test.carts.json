@@ -1,0 +1,42 @@
+[{
+  "_id": {
+    "$oid": "65940fca4139a43f73721c73"
+  },
+  "userId": "ab5983a0510918036c16871de6b3cd24dadb9cceb2771ea908d0beff9a1abaa6",
+  "items": [
+    {
+      "productId": "sv3pt5-52",
+      "quantity": 3,
+      "price": 0.30000000000000004,
+      "_id": {
+        "$oid": "65940fca4139a43f73721c74"
+      }
+    },
+    {
+      "productId": "sv3pt5-60",
+      "quantity": 3,
+      "price": 0.30000000000000004,
+      "_id": {
+        "$oid": "65942d2ecee0d7ea65589616"
+      }
+    },
+    {
+      "productId": "sv3-79",
+      "quantity": 8,
+      "price": 16.4,
+      "_id": {
+        "$oid": "65943bbf6b3c774c38244ae9"
+      }
+    },
+    {
+      "productId": "sv1-126",
+      "quantity": 1,
+      "price": 0.1,
+      "_id": {
+        "$oid": "659805a883364579a2860fbd"
+      }
+    }
+  ],
+  "totalPrice": 17.100000000000005,
+  "__v": 3
+}]

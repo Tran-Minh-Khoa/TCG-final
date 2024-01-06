@@ -52,12 +52,13 @@
                 name="userName"
                 placeholder="User Name"
                 value="<%= user.name %>"
+                readonly
               />
             </div>
             <!--Gender (dropdown)-->
             <div class="form-group col-md-6">
               <label for="gender">Gender</label>
-              <select class="form-control custom-select" id="gender" name="gender">
+              <select class="form-control custom-select" id="gender" name="gender" disabled>
                 <option value="male" <%= user.gender === 'male' ? 'selected' : '' %>>Male</option>
                 <option value="female" <%= user.gender === 'female' ? 'selected' : '' %>>Female</option>
                 <option value="other" <%= user.gender === 'other' ? 'selected' : '' %>>Other</option>
@@ -80,20 +81,14 @@
                 name="phoneNumber"
                 placeholder="Phone Number"
                 value="<%= user.phone %>"
+                readonly
               />
             </div>
-            <!--Address-->
-            <div class="form-group col-md-6">
+             <div class="form-group col-md-6">
               <label for="address">Address</label>
-              <input
-                type="text"
-                class="form-control"
-                id="address"
-                name="address"
-                placeholder="Address"
-                value="<%= user.address %>"
-              />
+              <input type="text" class="form-control" id="address" name="address" placeholder="Address" value="<%= user.address && user.address.length > 0 ? user.address[0] : '' %>" readonly />
             </div>
+
           </div>
           <!--End Form Row-->
 

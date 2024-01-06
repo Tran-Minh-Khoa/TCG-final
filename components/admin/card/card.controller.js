@@ -14,14 +14,17 @@ exports.CardPage = async function (req, res, next) {
     "/admin/js/datatables/table-card.js",
     "/admin/vendor/datatables/jquery.dataTables.min.js",
     "/admin/vendor/datatables/dataTables.bootstrap4.min.js",
+    "/adminExtra/scripts/card-list.js",
   ];
   const products = await service.GetAllCards();
+
   res.render("admin/card", {
     layout: "admin/layouts/layout",
     title: "Cards",
     scripts: scripts,
     styles: styles,
     products: products,
+    currentUser: req.user,
   });
 };
 
@@ -37,7 +40,7 @@ exports.CardEditPage = async function (req, res, next) {
   const subtypes = await subTypeService.GetAllSubtypes();
   const types = await typeService.GetAllTypes();
   const rarities = await rarityService.GetAllRarities();
-  const sets = await setService.GetAllSets(id);
+  const sets = await setService.GetAllSets();
   const card = await service.GetCard(id);
   res.render("admin/card-edit", {
     layout: "admin/layouts/layout",
@@ -49,17 +52,31 @@ exports.CardEditPage = async function (req, res, next) {
     types: types,
     sets: sets,
     rarities: rarities,
+    currentUser: req.user,
   });
 };
 
-exports.CardAddPage = function (req, res, next) {
-  const styles = [];
-  const scripts = ["/adminExtra/scripts/image-drop.js"];
+exports.CardAddPage = async function (req, res, next) {
+  const styles = ["/adminExtra/styles/card-edit.css"];
+  const scripts = [
+    "/adminExtra/scripts/image-drop.js",
+    "/adminExtra/scripts/card-add-submit.js",
+    "/adminExtra/scripts/card-form.js",
+  ];
+  const subtypes = await subTypeService.GetAllSubtypes();
+  const types = await typeService.GetAllTypes();
+  const rarities = await rarityService.GetAllRarities();
+  const sets = await setService.GetAllSets();
   res.render("admin/card-add", {
     layout: "admin/layouts/layout",
     title: "Add",
     scripts: scripts,
     styles: styles,
+    subtypes: subtypes,
+    types: types,
+    sets: sets,
+    rarities: rarities,
+    currentUser: req.user,
   });
 };
 
@@ -67,9 +84,8 @@ exports.CardUpload = async function (req, res, next) {
   try {
     if (req.file) {
       const file = req.file;
-      console.log(req.body);
       // Sử dụng await để nhận URL trả về từ hàm uploadCard
-      const imageUrl = await cardService.uploadCard(file);
+      const imageUrl = await cardService.uploadCard(file, req.body.id);
       const updateCard = await cardService.updateCard(req.body, imageUrl);
       // Trả về URL của tệp tin đã tải lên
       console.log(updateCard);
@@ -93,7 +109,7 @@ exports.ListCardUpdate = async function (req, res, next) {
       console.log(req.body.imgStatus);
       // Duyệt qua từng file để tải lên và lưu URL vào listImageUrl
       const imgStatus = JSON.parse(req.body.imgStatus); // Chuỗi JSON chuyển đoreq.body.imgStatus;
-      let fileIndex=0
+      let fileIndex = 0;
       // Duyệt qua từng thuộc tính trong imgStatus để kiểm tra và xử lý tương ứng
       for (let i = 1; i <= Object.keys(imgStatus).length; i++) {
         const key = `image${i}`;
@@ -101,7 +117,7 @@ exports.ListCardUpdate = async function (req, res, next) {
 
         if (imgStatus[key] === true) {
           const file = files[fileIndex++]; // Vị trí file tương ứng với key trong imgStatus
-          const imageUrl = await cardService.uploadCard(file,req.body.id);
+          const imageUrl = await cardService.uploadCard(file, req.body.id);
           listImageUrl.push(imageUrl);
         } else {
           listImageUrl.push(null);
@@ -119,5 +135,65 @@ exports.ListCardUpdate = async function (req, res, next) {
   } catch (error) {
     console.error(error);
     res.status(500).send("Error uploading files.");
+  }
+};
+
+exports.DisableCard = async (req, res, next) => {
+  const { cardId } = req.params;
+
+  try {
+    const updatedCard = await service.DisableCard(cardId);
+    res.status(200).json(updatedCard);
+  } catch (error) {
+    console.error("Error disabling card:", error);
+    res.status(500).send("Internal Server Error");
+  }
+};
+
+exports.EnableCard = async (req, res, next) => {
+  const { cardId } = req.params;
+
+  try {
+    const updatedCard = await service.EnableCard(cardId);
+    res.status(200).json(updatedCard);
+  } catch (error) {
+    console.error("Error enabling card:", error);
+    res.status(500).send("Internal Server Error");
+  }
+};
+
+exports.DeleteCard = async function (req, res, next) {
+  const { cardId } = req.params;
+
+  try {
+    const deletedCard = await service.DeleteCard(cardId);
+
+    if (!deletedCard) {
+      return res.status(404).json({ message: "Card not found" });
+    }
+
+    res.status(200).json({ message: "Card deleted successfully", deletedCard });
+  } catch (error) {
+    console.error("Error in card deletion API:", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
+exports.GetCard = async function (req, res, next) {
+  const cardId = req.params.id;
+
+  try {
+    const card = await cardService.GetCard(cardId);
+
+    if (card) {
+      // If card is found, send it as JSON response
+      res.status(200).json(card);
+    } else {
+      // If card is not found, send a 404 response
+      res.status(404).json({ error: "Card not found" });
+    }
+  } catch (error) {
+    console.error("Error in GetCard controller:", error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 };

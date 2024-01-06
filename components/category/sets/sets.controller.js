@@ -18,6 +18,7 @@ exports.SetPage = async function (req, res, next) {
     scripts: scripts,
     styles: styles,
     sets: sets,
+    currentUser: req.user,
   });
 };
 
@@ -33,6 +34,7 @@ exports.SetEditPage = async function (req, res, next) {
     scripts: scripts,
     styles: styles,
     set: set,
+    currentUser: req.user,
   });
 };
 
@@ -44,6 +46,7 @@ exports.SetAddPage = async function (req, res, next) {
     title: "Set Edit",
     scripts: scripts,
     styles: styles,
+    currentUser: req.user,
   });
 };
 

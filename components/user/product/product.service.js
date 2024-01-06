@@ -2,10 +2,10 @@ const Card = require('../../../models/Card');
 exports.getProductsByFilter = async (filterString, page = 1, perPage = 24, sortString, priceString) => {
   try {
     const filters = JSON.parse(filterString || '{}');
-    console.log(filters)
+    // console.log(filters)
     const sortSelect = JSON.parse(sortString || '{"name":"Date, new to old","updateAt":-1}');
     const price = JSON.parse(priceString || '{"min":0,"max":100}');
-    console.log(price)
+    // console.log(price)
 
     filters['marketPrices'] = {
       $gte: price.min,
@@ -13,9 +13,9 @@ exports.getProductsByFilter = async (filterString, page = 1, perPage = 24, sortS
     }
     const { name: sortName, ...sortMethod } = sortSelect
     const { min, max } = price
-    console.log(sortSelect)
+    // console.log(sortSelect)
     const allFilteredProducts = await Card.find(filters).sort(sortMethod);
-    console.log(allFilteredProducts.length)
+    // console.log(allFilteredProducts.length)
     const allCard = await Card.find();
     const skip = (page - 1) * perPage;
     const filteredProducts = allFilteredProducts.slice(skip, skip + perPage);
@@ -65,20 +65,20 @@ exports.getProducts = async (filterString, page = 1, perPage = 24, sortString, p
         filters[key] = { $in: filters[key] };
       }
     }
-    console.log(filters)
+    // console.log(filters)
     const sortSelect = JSON.parse(sortString || '{"name":"Date, new to old","updateAt":-1}');
     const price = JSON.parse(priceString || '{"min":0,"max":100}');
-    console.log(price)
+    // console.log(price)
 
     filters['marketPrices'] = {
       $gte: price.min,
       $lte: price.max
     }
     const { name: sortName, ...sortMethod } = sortSelect
-    console.log(filters)
+    // console.log(filters)
     const allFilteredProducts = await Card.find(filters).sort(sortMethod);
-    console.log(allFilteredProducts.length)
-    console.log(page)
+    // console.log(allFilteredProducts.length)
+    // console.log(page)
     const skip = (page - 1) * perPage;
     const filteredProducts = allFilteredProducts.slice(skip, skip + perPage);
     // console.log(filteredProducts)
@@ -122,7 +122,7 @@ exports.postReview = async (id, review) => {
     if (!card) {
       return res.status(404).json({ message: 'Card not found' });
     }
-    console.log(review)
+    // console.log(review)
     card.reviews.push(review);
     const updatedCard = await card.save();
     console.log('Updated card thanh cong');
@@ -132,13 +132,23 @@ exports.postReview = async (id, review) => {
     throw new Error('Error fetching filtered products from database: ' + error.message);
   }
 }
-exports.getReviews = async (id) => {
+exports.getReviews = async (id, page, perPage = 5) => {
   try {
     const card = await Card.findOne({ id: id });
     if (!card) {
       return res.status(404).json({ message: 'Card not found' });
     }
-    return card.reviews;
+    const allReviews = card.reviews;
+    const skip = (page - 1) * perPage;
+    const filteredReviews = allReviews.slice(skip, skip + perPage);
+
+    const totalReviews = allReviews.length;
+    const totalPages = Math.ceil(totalReviews / perPage);
+
+    return {
+      reviews: filteredReviews,
+      totalPages: totalPages,
+    };
   }
   catch (error) {
     throw new Error('Error fetching filtered products from database: ' + error.message);

@@ -5,6 +5,7 @@ const controller = require('./card.controller')
 const Cart = require('../../../models/Cart');
 const Order = require('../../../models/Order');
 const OrderDetail = require('../../../models/OrderDetail');
+const Card = require('../../../models/Card');
 const serviceCart = require('./cart.service');
 /* GET home page. */
 router.get('/', controller.CartPage);
@@ -124,11 +125,42 @@ router.post('/checkout', async (req, res) => {
       // Đợi cho tất cả các chi tiết đơn hàng được lưu
       await Promise.all(orderDetailPromises);
   
-      const responseUrl = `/payment/${orderID}`
+      const responseUrl = `/cart/checkout/${orderID}`
       console.log(responseUrl)
       res.status(201).redirect(responseUrl)
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
   });
+  router.get('/checkout/:id', async (req, res, next) => {
+    const scripts = ["/scripts/checkout.js"];
+    const styles = ["/styles/checkout.css"];
+
+    const orderId = req.params.id
+
+    const order = await Order.findOne({id: orderId})
+    const orderDetails = await OrderDetail.find({orderId: orderId})
+
+    const bill_detail = {
+        total_price: order?.totalPrice,
+        bill_items: []
+    }
+
+    for (const item of orderDetails) {
+        const card = await Card.findOne({id: item.cardId})
+        const product = {
+          card : card,
+          quantity: item.quantity,
+          price: item.totalPrice
+        }
+        bill_detail.bill_items.push(product)
+    }
+    
+    res.render("user/checkout", {
+      layout: "user/layouts/layout",
+      title: "Checkout",
+      scripts: scripts,
+      styles: styles,
+      bill_detail: bill_detail})
+    });
 module.exports = router;

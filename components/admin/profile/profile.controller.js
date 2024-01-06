@@ -6,32 +6,33 @@ exports.ProfileEditPage = async function (req, res, next) {
     "/adminExtra/scripts/image-drop-single.js",
     "/adminExtra/scripts/profile-form-submit.js",
   ];
+  console.log(req.user);
   const user = await AccountService.getUserProfile(req.user.id);
-  console.log(user);
   res.render("admin/profile", {
     layout: "admin/layouts/layout",
     title: "Profile",
     scripts: scripts,
     styles: styles,
     user: user,
+    currentUser: req.user,
   });
 };
 
 exports.UpdateProfile = async (req, res, next) => {
-  console.log(req.body);
   try {
     if (req.file) {
       const file = req.file;
-      console.log(req.body);
       // Sử dụng await để nhận URL trả về từ hàm uploadCard
       const imageUrl = await AccountService.uploadAvatar(file);
-      const updateCard = await AccountService.updateProfile(req.body, imageUrl);
+      const updateUser = await AccountService.updateProfile(req.body, imageUrl);
+      req.user.name = updateUser.name;
+      req.user.avatar = updateUser.avatar;
       // Trả về URL của tệp tin đã tải lên
-      console.log(updateCard);
       res.status(200).send(imageUrl);
     } else {
-      const updateCard = await AccountService.updateProfile(req.body, null);
-      res.status(200).send(updateCard);
+      const updateUser = await AccountService.updateProfile(req.body, null);
+      req.user.name = updateUser.name;
+      res.status(200).send(updateUser);
     }
   } catch (error) {
     console.error(error);

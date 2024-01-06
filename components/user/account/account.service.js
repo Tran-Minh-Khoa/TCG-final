@@ -4,7 +4,7 @@ const OrderDetail = require('../../../models/OrderDetail');
 const Card = require('../../../models/Card');
 const bcrypt = require('bcrypt');
 const admin = require('firebase-admin');
-
+const { v4: uuidv4 } = require('uuid'); // Import function v4 từ thư viện uuid
 const bucket = admin.storage().bucket();
 exports.changePassword = async (userId, oldPassword, newPassword) => {
   try {
@@ -134,4 +134,39 @@ exports.getUserOrderDetail = async (orderId) => {
   }
 
   return order_detail
+}
+exports.addUserAddress = async (userId, newAddress) => {
+  console.log(newAddress)
+  const user = await User.findOne({ id: userId })
+  user.address.push({id: uuidv4(), ...newAddress})
+  await user.save()
+  return user
+}
+exports.updateUserAddress = async (userId, updateAddress) => {
+  const user = await User.findOne({ id: userId })
+  user.address.forEach((address, index) => {
+    if (address.id === updateAddress.id) {
+      user.address[index] = updateAddress;
+    }
+  });
+
+  // Lưu lại user sau khi cập nhật
+  await user.save();
+
+  return user
+}
+exports.getUserAddresses = async(userId) => {
+  const user = await User.findOne({id: userId})
+  const addresses = user.address
+  return addresses
+}
+exports.getUserAddressDetail = async(userId, addressId) => {
+  const user = await User.findOne({id: userId}) 
+  var address_detail = {}
+  user.address.forEach((address, index) => {
+    if (address.id === addressId) {
+      address_detail = user.address[index]
+    }
+  })
+  return address_detail
 }

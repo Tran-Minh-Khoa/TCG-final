@@ -4,15 +4,19 @@ document.getElementById("confirmBtn").addEventListener("click", function (e) {
 });
 
 async function SubmitForm(event) {
-  const formData = {
-    id: document.getElementById("setID").value,
-    name: document.getElementById("setName").value,
-    series: document.getElementById("series").value,
-    isActive: document.getElementById("isActive").value === "true", // Convert string to boolean
-  };
-  console.log(formData);
-  await PostData(formData);
-  window.location.href = "/admin/set";
+  try {
+    const formData = {
+      id: document.getElementById("setID").value,
+      name: document.getElementById("setName").value,
+      series: document.getElementById("series").value,
+      isActive: document.getElementById("isActive").value === "true", // Convert string to boolean
+    };
+    console.log(formData);
+    await PostData(formData);
+    window.location.href = "/admin/set";
+  } catch (error) {
+    displayErrorModal("Error", error.message);
+  }
 }
 
 async function PostData(formData) {
@@ -35,5 +39,6 @@ async function PostData(formData) {
   } catch (error) {
     console.log(error);
     displayErrorModal("Error", error.message);
+    throw error;
   }
 }

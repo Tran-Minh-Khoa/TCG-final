@@ -8,20 +8,24 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-const EmailService = async ({customerMail, token}) => {
-  const mailOptions = {
-    from: 'your_email@gmail.com', // Địa chỉ email người gửi
-    to:customerMail, // Địa chỉ email người nhận
-    subject:'TCG-Trading Card Games - Email Verification', // Chủ đề email
-    html : `<h1>please click <a href="http://localhost:3000/register/verify/${token}">here</a> to verify your account</h1>`
-  };
+const EmailService = ({ customerMail, href, subject }) => {
+  return new Promise((resolve, reject) => {
+    const mailOptions = {
+      from: 'your_email@gmail.com', // Địa chỉ email người gửi
+      to: customerMail, // Địa chỉ email người nhận
+      subject: subject, // Chủ đề email
+      html: `<h1>please click <a href="${href}">here</a> to verify your account</h1>`
+    };
 
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      console.error('Error sending email:', error);
-    } else {
-      console.log('Email sent:', info.response);
-    }
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.error('Error sending email:', error);
+        reject(error); // Trả về lỗi nếu có lỗi xảy ra
+      } else {
+        console.log('Email sent:', info.response);
+        resolve(info); // Trả về thông tin gửi email thành công
+      }
+    });
   });
 };
 

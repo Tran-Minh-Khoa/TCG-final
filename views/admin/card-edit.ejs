@@ -37,8 +37,10 @@
               <label for="setID">Set</label>
               <select class="form-control custom-select" id="setID" name="setID">
                 <% sets.forEach(function(set) { %>
-                <option value="<%= set.id %>" <%= card.setId === set.id ? 'selected' : '' %>><%= set.name %></option>
-                <% }); %>
+    <% if (set.isActive) { %>
+        <option value="<%= set.id %>" <%= card.setId === set.id ? 'selected' : '' %>><%= set.name %></option>
+    <% } %>
+<% }); %>
               </select>
 
 
@@ -143,7 +145,7 @@
       </div>
     </div>
 
-    <div class="d-flex justify-content-end">
+    <div class="d-flex justify-content-start">
       <div class="col-md-9">
         <a href="/admin/card">
           <button type="button" class="btn btn-primary" id="confirmBtn">
@@ -165,7 +167,7 @@
                 <form id="imageForm" enctype="multipart/form-data">
                   <label for="fileInput-1" style="cursor: pointer;">
                     <input type="file" id="fileInput-1" accept="image/*" style="display: none;" required />
-                    <img id="preview-image-1" alt="Card Preview 1" src="<%= card.images ? card.images[1] : '/img/card-back.png' %>" class="img-fluid" />
+                    <img id="preview-image-1" alt="Card Preview 1" src="<%= card.listImages ? card.listImages[0] : '/img/card-back.png' %>" class="img-fluid" />
                   </label>
                 </form>
               </div>
@@ -177,7 +179,7 @@
                 <form id="imageForm" enctype="multipart/form-data">
                   <label for="fileInput-2" style="cursor: pointer;">
                     <input type="file" id="fileInput-2" accept="image/*" style="display: none;" required />
-                    <img id="preview-image-2" alt="Card Preview 2" src="<%= card.images ? card.images[2] : '/img/card-back.png' %>" class="img-fluid" />
+                    <img id="preview-image-2" alt="Card Preview 2" src="<%= card.listImages ? card.listImages[1] : '/img/card-back.png' %>" class="img-fluid" />
                   </label>
                 </form>
               </div>
@@ -189,7 +191,7 @@
                 <form id="imageForm" enctype="multipart/form-data">
                   <label for="fileInput-3" style="cursor: pointer;">
                     <input type="file" id="fileInput-3" accept="image/*" style="display: none;" required />
-                    <img id="preview-image-3" alt="Card Preview 3" src="<%= card.images ? card.images[3] : '/img/card-back.png' %>" class="img-fluid" />
+                    <img id="preview-image-3" alt="Card Preview 3" src="<%= card.listImages ? card.listImages[2] : '/img/card-back.png' %>" class="img-fluid" />
                   </label>
                 </form>
               </div>

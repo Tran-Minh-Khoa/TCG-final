@@ -10,7 +10,6 @@ async function GetData(event) {
     name: document.getElementById("userName").value,
     gender: document.getElementById("gender").value,
     phone: document.getElementById("phoneNumber").value,
-    address: document.getElementById("address").value,
     role: document.getElementById("roles").value,
     isBaned: document.getElementById("banned").value,
   };

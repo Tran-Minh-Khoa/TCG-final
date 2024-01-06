@@ -1,0 +1,287 @@
+[{
+  "_id": {
+    "$oid": "658a462559b8b7c1f165001a"
+  },
+  "id": "acespec",
+  "name": "ACE SPEC"
+},
+{
+  "_id": {
+    "$oid": "658a462559b8b7c1f165001b"
+  },
+  "id": "ancient",
+  "name": "Ancient"
+},
+{
+  "_id": {
+    "$oid": "658a462559b8b7c1f165001c"
+  },
+  "id": "break",
+  "name": "BREAK"
+},
+{
+  "_id": {
+    "$oid": "658a462559b8b7c1f165001d"
+  },
+  "id": "baby",
+  "name": "Baby"
+},
+{
+  "_id": {
+    "$oid": "658a462559b8b7c1f165001e"
+  },
+  "id": "basic",
+  "name": "Basic"
+},
+{
+  "_id": {
+    "$oid": "658a462559b8b7c1f165001f"
+  },
+  "id": "ex",
+  "name": "EX"
+},
+{
+  "_id": {
+    "$oid": "658a462559b8b7c1f1650020"
+  },
+  "id": "eternamax",
+  "name": "Eternamax"
+},
+{
+  "_id": {
+    "$oid": "658a462559b8b7c1f1650021"
+  },
+  "id": "fusionstrike",
+  "name": "Fusion Strike"
+},
+{
+  "_id": {
+    "$oid": "658a462559b8b7c1f1650022"
+  },
+  "id": "future",
+  "name": "Future"
+},
+{
+  "_id": {
+    "$oid": "658a462559b8b7c1f1650023"
+  },
+  "id": "gx",
+  "name": "GX"
+},
+{
+  "_id": {
+    "$oid": "658a462559b8b7c1f1650024"
+  },
+  "id": "goldenrodgamecorner",
+  "name": "Goldenrod Game Corner"
+},
+{
+  "_id": {
+    "$oid": "658a462559b8b7c1f1650025"
+  },
+  "id": "item",
+  "name": "Item"
+},
+{
+  "_id": {
+    "$oid": "658a462559b8b7c1f1650026"
+  },
+  "id": "legend",
+  "name": "LEGEND"
+},
+{
+  "_id": {
+    "$oid": "658a462559b8b7c1f1650027"
+  },
+  "id": "levelup",
+  "name": "Level-Up"
+},
+{
+  "_id": {
+    "$oid": "658a462559b8b7c1f1650028"
+  },
+  "id": "mega",
+  "name": "MEGA"
+},
+{
+  "_id": {
+    "$oid": "658a462559b8b7c1f1650029"
+  },
+  "id": "pokémontool",
+  "name": "Pokémon Tool"
+},
+{
+  "_id": {
+    "$oid": "658a462559b8b7c1f165002a"
+  },
+  "id": "pokémontoolf",
+  "name": "Pokémon Tool F"
+},
+{
+  "_id": {
+    "$oid": "658a462559b8b7c1f165002b"
+  },
+  "id": "prime",
+  "name": "Prime"
+},
+{
+  "_id": {
+    "$oid": "658a462559b8b7c1f165002c"
+  },
+  "id": "prismstar",
+  "name": "Prism Star"
+},
+{
+  "_id": {
+    "$oid": "658a462559b8b7c1f165002d"
+  },
+  "id": "radiant",
+  "name": "Radiant"
+},
+{
+  "_id": {
+    "$oid": "658a462559b8b7c1f165002e"
+  },
+  "id": "rapidstrike",
+  "name": "Rapid Strike"
+},
+{
+  "_id": {
+    "$oid": "658a462559b8b7c1f165002f"
+  },
+  "id": "restored",
+  "name": "Restored"
+},
+{
+  "_id": {
+    "$oid": "658a462559b8b7c1f1650030"
+  },
+  "id": "rocketssecretmachine",
+  "name": "Rocket's Secret Machine"
+},
+{
+  "_id": {
+    "$oid": "658a462559b8b7c1f1650031"
+  },
+  "id": "sp",
+  "name": "SP"
+},
+{
+  "_id": {
+    "$oid": "658a462559b8b7c1f1650032"
+  },
+  "id": "singlestrike",
+  "name": "Single Strike"
+},
+{
+  "_id": {
+    "$oid": "658a462559b8b7c1f1650033"
+  },
+  "id": "special",
+  "name": "Special"
+},
+{
+  "_id": {
+    "$oid": "658a462559b8b7c1f1650034"
+  },
+  "id": "stadium",
+  "name": "Stadium"
+},
+{
+  "_id": {
+    "$oid": "658a462559b8b7c1f1650035"
+  },
+  "id": "stage1",
+  "name": "Stage 1"
+},
+{
+  "_id": {
+    "$oid": "658a462559b8b7c1f1650036"
+  },
+  "id": "stage2",
+  "name": "Stage 2"
+},
+{
+  "_id": {
+    "$oid": "658a462559b8b7c1f1650037"
+  },
+  "id": "star",
+  "name": "Star"
+},
+{
+  "_id": {
+    "$oid": "658a462559b8b7c1f1650038"
+  },
+  "id": "supporter",
+  "name": "Supporter"
+},
+{
+  "_id": {
+    "$oid": "658a462559b8b7c1f1650039"
+  },
+  "id": "tagteam",
+  "name": "TAG TEAM"
+},
+{
+  "_id": {
+    "$oid": "658a462559b8b7c1f165003a"
+  },
+  "id": "teamplasma",
+  "name": "Team Plasma"
+},
+{
+  "_id": {
+    "$oid": "658a462559b8b7c1f165003b"
+  },
+  "id": "technicalmachine",
+  "name": "Technical Machine"
+},
+{
+  "_id": {
+    "$oid": "658a462559b8b7c1f165003c"
+  },
+  "id": "tera",
+  "name": "Tera"
+},
+{
+  "_id": {
+    "$oid": "658a462559b8b7c1f165003d"
+  },
+  "id": "ultrabeast",
+  "name": "Ultra Beast"
+},
+{
+  "_id": {
+    "$oid": "658a462559b8b7c1f165003e"
+  },
+  "id": "v",
+  "name": "V"
+},
+{
+  "_id": {
+    "$oid": "658a462559b8b7c1f165003f"
+  },
+  "id": "vunion",
+  "name": "V-UNION"
+},
+{
+  "_id": {
+    "$oid": "658a462559b8b7c1f1650040"
+  },
+  "id": "vmax",
+  "name": "VMAX"
+},
+{
+  "_id": {
+    "$oid": "658a462559b8b7c1f1650041"
+  },
+  "id": "vstar",
+  "name": "VSTAR"
+},
+{
+  "_id": {
+    "$oid": "658a462559b8b7c1f1650042"
+  },
+  "id": "ex",
+  "name": "ex"
+}]

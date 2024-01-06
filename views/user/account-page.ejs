@@ -56,6 +56,10 @@
                             <span class="column-title">Status</span>
                             <% if(item.status === "pending") { %>
                             <span class="status-icon status-pending">Pending</span>
+                            <% } else if(item.status === "shipping") { %>
+                            <span class="status-icon status-pending">Shipping</span>
+                            <% } else if(item.status === "completed") { %>
+                            <span class="status-icon status-received">Completed</span>
                             <% } %>
                         </div>
                     </div>

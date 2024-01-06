@@ -1,0 +1,224 @@
+[{
+  "_id": {
+    "$oid": "658a45c559b8b7c1f164fff4"
+  },
+  "id": "amazingrare",
+  "name": "Amazing Rare"
+},
+{
+  "_id": {
+    "$oid": "658a45c559b8b7c1f164fff5"
+  },
+  "id": "classiccollection",
+  "name": "Classic Collection"
+},
+{
+  "_id": {
+    "$oid": "658a45c559b8b7c1f164fff6"
+  },
+  "id": "common",
+  "name": "Common"
+},
+{
+  "_id": {
+    "$oid": "658a45c559b8b7c1f164fff7"
+  },
+  "id": "doublerare",
+  "name": "Double Rare"
+},
+{
+  "_id": {
+    "$oid": "658a45c559b8b7c1f164fff8"
+  },
+  "id": "hyperrare",
+  "name": "Hyper Rare"
+},
+{
+  "_id": {
+    "$oid": "658a45c559b8b7c1f164fff9"
+  },
+  "id": "illustrationrare",
+  "name": "Illustration Rare"
+},
+{
+  "_id": {
+    "$oid": "658a45c559b8b7c1f164fffa"
+  },
+  "id": "legend",
+  "name": "LEGEND"
+},
+{
+  "_id": {
+    "$oid": "658a45c559b8b7c1f164fffb"
+  },
+  "id": "promo",
+  "name": "Promo"
+},
+{
+  "_id": {
+    "$oid": "658a45c559b8b7c1f164fffc"
+  },
+  "id": "radiantrare",
+  "name": "Radiant Rare"
+},
+{
+  "_id": {
+    "$oid": "658a45c559b8b7c1f164fffd"
+  },
+  "id": "rare",
+  "name": "Rare"
+},
+{
+  "_id": {
+    "$oid": "658a45c559b8b7c1f164fffe"
+  },
+  "id": "rareace",
+  "name": "Rare ACE"
+},
+{
+  "_id": {
+    "$oid": "658a45c559b8b7c1f164ffff"
+  },
+  "id": "rarebreak",
+  "name": "Rare BREAK"
+},
+{
+  "_id": {
+    "$oid": "658a45c559b8b7c1f1650000"
+  },
+  "id": "rareholo",
+  "name": "Rare Holo"
+},
+{
+  "_id": {
+    "$oid": "658a45c559b8b7c1f1650001"
+  },
+  "id": "rareholoex",
+  "name": "Rare Holo EX"
+},
+{
+  "_id": {
+    "$oid": "658a45c559b8b7c1f1650002"
+  },
+  "id": "rarehologx",
+  "name": "Rare Holo GX"
+},
+{
+  "_id": {
+    "$oid": "658a45c559b8b7c1f1650003"
+  },
+  "id": "rarehololvx",
+  "name": "Rare Holo LV.X"
+},
+{
+  "_id": {
+    "$oid": "658a45c559b8b7c1f1650004"
+  },
+  "id": "rareholostar",
+  "name": "Rare Holo Star"
+},
+{
+  "_id": {
+    "$oid": "658a45c559b8b7c1f1650005"
+  },
+  "id": "rareholov",
+  "name": "Rare Holo V"
+},
+{
+  "_id": {
+    "$oid": "658a45c559b8b7c1f1650006"
+  },
+  "id": "rareholovmax",
+  "name": "Rare Holo VMAX"
+},
+{
+  "_id": {
+    "$oid": "658a45c559b8b7c1f1650007"
+  },
+  "id": "rareholovstar",
+  "name": "Rare Holo VSTAR"
+},
+{
+  "_id": {
+    "$oid": "658a45c559b8b7c1f1650008"
+  },
+  "id": "rareprime",
+  "name": "Rare Prime"
+},
+{
+  "_id": {
+    "$oid": "658a45c559b8b7c1f1650009"
+  },
+  "id": "rareprismstar",
+  "name": "Rare Prism Star"
+},
+{
+  "_id": {
+    "$oid": "658a45c559b8b7c1f165000a"
+  },
+  "id": "rarerainbow",
+  "name": "Rare Rainbow"
+},
+{
+  "_id": {
+    "$oid": "658a45c559b8b7c1f165000b"
+  },
+  "id": "raresecret",
+  "name": "Rare Secret"
+},
+{
+  "_id": {
+    "$oid": "658a45c559b8b7c1f165000c"
+  },
+  "id": "rareshining",
+  "name": "Rare Shining"
+},
+{
+  "_id": {
+    "$oid": "658a45c559b8b7c1f165000d"
+  },
+  "id": "rareshiny",
+  "name": "Rare Shiny"
+},
+{
+  "_id": {
+    "$oid": "658a45c559b8b7c1f165000e"
+  },
+  "id": "rareshinygx",
+  "name": "Rare Shiny GX"
+},
+{
+  "_id": {
+    "$oid": "658a45c559b8b7c1f165000f"
+  },
+  "id": "rareultra",
+  "name": "Rare Ultra"
+},
+{
+  "_id": {
+    "$oid": "658a45c559b8b7c1f1650010"
+  },
+  "id": "specialillustrationrare",
+  "name": "Special Illustration Rare"
+},
+{
+  "_id": {
+    "$oid": "658a45c559b8b7c1f1650011"
+  },
+  "id": "trainergalleryrareholo",
+  "name": "Trainer Gallery Rare Holo"
+},
+{
+  "_id": {
+    "$oid": "658a45c559b8b7c1f1650012"
+  },
+  "id": "ultrarare",
+  "name": "Ultra Rare"
+},
+{
+  "_id": {
+    "$oid": "658a45c559b8b7c1f1650013"
+  },
+  "id": "uncommon",
+  "name": "Uncommon"
+}]

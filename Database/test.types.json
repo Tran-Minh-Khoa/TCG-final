@@ -1,0 +1,77 @@
+[{
+  "_id": {
+    "$oid": "658980f6619cf5bc32366b07"
+  },
+  "id": "grass",
+  "name": "Grass"
+},
+{
+  "_id": {
+    "$oid": "658980f6619cf5bc32366b08"
+  },
+  "id": "fire",
+  "name": "Fire"
+},
+{
+  "_id": {
+    "$oid": "658980f6619cf5bc32366b09"
+  },
+  "id": "water",
+  "name": "Water"
+},
+{
+  "_id": {
+    "$oid": "658980f6619cf5bc32366b0a"
+  },
+  "id": "lightning",
+  "name": "Lightning"
+},
+{
+  "_id": {
+    "$oid": "658980f6619cf5bc32366b0b"
+  },
+  "id": "fighting",
+  "name": "Fighting"
+},
+{
+  "_id": {
+    "$oid": "658980f6619cf5bc32366b0c"
+  },
+  "id": "psychic",
+  "name": "Psychic"
+},
+{
+  "_id": {
+    "$oid": "658980f6619cf5bc32366b0d"
+  },
+  "id": "colorless",
+  "name": "Colorless"
+},
+{
+  "_id": {
+    "$oid": "658980f6619cf5bc32366b0e"
+  },
+  "id": "darkness",
+  "name": "Darkness"
+},
+{
+  "_id": {
+    "$oid": "658980f6619cf5bc32366b0f"
+  },
+  "id": "metal",
+  "name": "Metal"
+},
+{
+  "_id": {
+    "$oid": "658980f6619cf5bc32366b10"
+  },
+  "id": "dragon",
+  "name": "Dragon"
+},
+{
+  "_id": {
+    "$oid": "658980f6619cf5bc32366b11"
+  },
+  "id": "fairy",
+  "name": "Fairy"
+}]
