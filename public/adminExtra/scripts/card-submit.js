@@ -80,7 +80,7 @@ async function gatherAndPrintFormData(event) {
   deleteImgForm.deleteImgStatus = deleteArray;
 
   await DeleteImages(deleteImgForm);
-  //window.location.href = "/admin/card";
+  window.location.href = "/admin/card";
 }
 
 function CheckValidInput(formData) {

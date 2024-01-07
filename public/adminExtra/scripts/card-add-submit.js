@@ -77,7 +77,7 @@ async function gatherAndPrintFormData(event) {
   if (newFormData.get("image") != null) {
     PostCardList(newFormData);
   }
-  //window.location.href = "/admin/card";
+  window.location.href = "/admin/card";
 }
 
 async function CheckValidInput(formData) {
