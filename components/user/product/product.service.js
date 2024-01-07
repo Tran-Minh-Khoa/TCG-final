@@ -126,7 +126,7 @@ exports.getProducts = async (
 exports.getProductsByName = async (keyword) => {
   const foundProducts = await Card.find({
     name: { $regex: keyword, $options: "i" },
-    isActice: true,
+    isActive: true,
   }).limit(5);
   return foundProducts;
 };
