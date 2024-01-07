@@ -68,7 +68,7 @@ exports.ForgetPassword = async (req, res, next) => {
     await user.save();
 
     // Gửi email xác nhận và đợi cho việc gửi email hoàn thành trước khi trả về status 200
-    EmailService({ customerMail: email, href: `http://localhost:3000/login/reset-password/${token}`, subject: "TCG-Trading Card Games - Khôi phục mật khẩu" })
+    EmailService({ customerMail: email, href: `https://tcg-trading-card-game-final.onrender.com/login/reset-password/${token}`, subject: "TCG-Trading Card Games - Khôi phục mật khẩu" })
       .then(() => {
         return res.status(200).send('Please check your email to verify your account');
       })
