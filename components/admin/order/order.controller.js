@@ -99,9 +99,8 @@ async function formatAndReplaceOrderDate(order) {
   const year = date.getFullYear();
 
   // Replace the orderDate property with the formatted date
-  order.formatedDate = `${day}/${month}/${year} ${hours}:${minutes}`;
+  order.formatedDate = `${year}/${month}/${day} ${hours}:${minutes}`;
 }
-
 async function roundTotalPrice(order) {
   order.totalPrice = parseFloat(order.totalPrice.toFixed(2));
 }

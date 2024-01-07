@@ -194,3 +194,18 @@ exports.DeleteCard = async (cardId) => {
     throw error;
   }
 };
+exports.DeleteListImages = async (cardId, ListImagesDelete) => {
+  try {
+    const result = await Card.findOne({ id: cardId });
+    ListImagesDelete.forEach((imageDelete, index) => {
+      if (imageDelete) {
+        result.listImages[index] =
+          "https://firebasestorage.googleapis.com/v0/b/wibuteam-8d09e.appspot.com/o/card-back.png?alt=media&token=2a3b69e0-c3af-4303-a910-974bbe1ba7d6";
+      }
+    });
+    await result.save();
+  } catch (error) {
+    console.error("Error deleting card:", error);
+    throw error;
+  }
+};

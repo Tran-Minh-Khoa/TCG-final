@@ -80,7 +80,7 @@ app.use("/cart", ensureAuthenticated, cartRouter);
 app.use("/login", loginRouter);
 app.use("/register", registerRouter);
 app.use("/logout", logoutRouter);
-app.use("/account",ensureAuthenticated ,accountRouter);
+app.use("/account", ensureAuthenticated, accountRouter);
 app.use("/payment", paymentRouter);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

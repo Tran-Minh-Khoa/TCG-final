@@ -37,10 +37,10 @@
               <label for="setID">Set</label>
               <select class="form-control custom-select" id="setID" name="setID">
                 <% sets.forEach(function(set) { %>
-    <% if (set.isActive) { %>
-        <option value="<%= set.id %>" <%= card.setId === set.id ? 'selected' : '' %>><%= set.name %></option>
-    <% } %>
-<% }); %>
+                <% if (set.isActive) { %>
+                <option value="<%= set.id %>" <%= card.setId === set.id ? 'selected' : '' %>><%= set.name %></option>
+                <% } %>
+                <% }); %>
               </select>
 
 
@@ -168,6 +168,9 @@
                   <label for="fileInput-1" style="cursor: pointer;">
                     <input type="file" id="fileInput-1" accept="image/*" style="display: none;" required />
                     <img id="preview-image-1" alt="Card Preview 1" src="<%= card.listImages ? card.listImages[0] : '/img/card-back.png' %>" class="img-fluid" />
+                    <button type="button" class="close" id="delete-1" style="position: absolute; top: 0; right: 0; " aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
                   </label>
                 </form>
               </div>
@@ -180,6 +183,9 @@
                   <label for="fileInput-2" style="cursor: pointer;">
                     <input type="file" id="fileInput-2" accept="image/*" style="display: none;" required />
                     <img id="preview-image-2" alt="Card Preview 2" src="<%= card.listImages ? card.listImages[1] : '/img/card-back.png' %>" class="img-fluid" />
+                    <button type="button" class="close" id="delete-2" style="position: absolute; top: 0; right: 0; " aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
                   </label>
                 </form>
               </div>
@@ -192,6 +198,9 @@
                   <label for="fileInput-3" style="cursor: pointer;">
                     <input type="file" id="fileInput-3" accept="image/*" style="display: none;" required />
                     <img id="preview-image-3" alt="Card Preview 3" src="<%= card.listImages ? card.listImages[2] : '/img/card-back.png' %>" class="img-fluid" />
+                    <button type="button" class="close" id="delete-3" style="position: absolute; top: 0; right: 0; " aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
                   </label>
                 </form>
               </div>

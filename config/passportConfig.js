@@ -71,6 +71,9 @@ passport.use('local-login', new LocalStrategy({
       else {
         return done(null, false, { message: 'This account\'s password hasn\'t been set. Please use quick sign in instead' });
       }
+      if(user.isBaned){
+        return done(null, false, { message: 'Your account has been banned' });
+      }
       if (!user.emailVerified ) {
         return done(null, false, { message: 'Please verify your email' });
       }
@@ -93,6 +96,9 @@ passport.use(new GoogleStrategy({
   // Kiểm tra xem email đã được sử dụng chưa
   User.findOne({ 'id': id }).then((user) => {
     if (user) {
+      if(user.isBaned){
+        return done(null, false, { message: 'Your account has been banned' });
+      }
       return done(null, user);
     } else {
 

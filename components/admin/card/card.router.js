@@ -16,6 +16,7 @@ router.post(
   multerUpload.array("image", 3),
   controller.ListCardUpdate
 );
+router.post("/deleteListImages", controller.DeleteListImages);
 router.put("/disable/:cardId", controller.DisableCard);
 router.put("/enable/:cardId", controller.EnableCard);
 router.delete("/delete/:cardId", controller.DeleteCard);

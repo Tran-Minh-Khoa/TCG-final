@@ -17,6 +17,7 @@ exports.CardPage = async function (req, res, next) {
     "/adminExtra/scripts/card-list.js",
   ];
   const products = await service.GetAllCards();
+  await Promise.all(products.map(formatAndReplaceOrderDate));
 
   res.render("admin/card", {
     layout: "admin/layouts/layout",
@@ -197,3 +198,28 @@ exports.GetCard = async function (req, res, next) {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
+exports.DeleteListImages = async function (req, res, next) {
+  console.log(req.body);
+
+  const CardId = req.body.cardId;
+  const ListImagesDelete = req.body.deleteImgStatus;
+  try {
+    const card = await cardService.DeleteListImages(CardId, ListImagesDelete);
+    res.status(200).json(card);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error deleting images.");
+  }
+};
+
+async function formatAndReplaceOrderDate(card) {
+  const date = new Date(card.updatedAt);
+  const hours = date.getHours().toString().padStart(2, "0");
+  const minutes = date.getMinutes().toString().padStart(2, "0");
+  const day = date.getDate().toString().padStart(2, "0");
+  const month = (date.getMonth() + 1).toString().padStart(2, "0"); // Months are zero-based
+  const year = date.getFullYear();
+
+  // Replace the orderDate property with the formatted date
+  card.formatedDate = `${year}/${month}/${day} ${hours}:${minutes}`;
+}

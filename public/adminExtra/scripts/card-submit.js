@@ -1,3 +1,4 @@
+const imgDelete = [false, false, false];
 document
   .getElementById("confirmBtn")
   .addEventListener("click", function (event) {
@@ -70,11 +71,16 @@ async function gatherAndPrintFormData(event) {
     imgStatus.image3 = false;
   }
   newFormData.append("imgStatus", JSON.stringify(imgStatus)); // JSON.stringify(imgStatus);
-  PostData(formData);
+  await PostData(formData);
   if (newFormData.get("image") != null) {
-    PostCardList(newFormData);
+    await PostCardList(newFormData);
   }
-  window.location.href = "/admin/card";
+  var deleteImgForm = {};
+  deleteImgForm.cardId = document.getElementById("cardID").value;
+  deleteImgForm.deleteImgStatus = deleteArray;
+
+  await DeleteImages(deleteImgForm);
+  //window.location.href = "/admin/card";
 }
 
 function CheckValidInput(formData) {
@@ -93,30 +99,43 @@ function CheckValidInput(formData) {
   return null;
 }
 
-function PostData(formDataObject) {
-  fetch("/admin/card/upload", {
-    method: "POST",
-    body: formDataObject,
-  })
-    .then((data) => {
-      console.log("Success:", data);
-    })
-    .catch((error) => {
-      console.error("Error:", error);
+async function PostData(formDataObject) {
+  try {
+    const response = await fetch("/admin/card/upload", {
+      method: "POST",
+      body: formDataObject,
     });
+    console.log("Success:", response);
+  } catch (error) {
+    console.error("Error:", error);
+  }
 }
 
-function PostCardList(formDataObject) {
-  fetch("/admin/card/updateListCard", {
-    method: "POST",
-    body: formDataObject,
-  })
-    .then((data) => {
-      console.log("Success:", data);
-    })
-    .catch((error) => {
-      console.error("Error:", error);
+async function DeleteImages(formDataObject) {
+  try {
+    const response = await fetch("/admin/card/deleteListImages", {
+      method: "POST",
+      body: JSON.stringify(formDataObject),
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
+    console.log("Success:", response);
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+async function PostCardList(formDataObject) {
+  try {
+    const response = await fetch("/admin/card/updateListCard", {
+      method: "POST",
+      body: formDataObject,
+    });
+    console.log("Success:", response);
+  } catch (error) {
+    console.error("Error:", error);
+  }
 }
 
 function GetCurrentDate() {
