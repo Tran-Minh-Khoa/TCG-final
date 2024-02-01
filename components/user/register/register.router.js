@@ -39,7 +39,7 @@ router.post('/', async (req, res, next) => {
         //   ;
         // })
       const savedUser = await newUser.save();
-      await EmailService({ customerMail: email, href: `http://localhost:3000/register/verify/${token}`, subject: "TCG-Trading Card Games - Email Verification" });
+      await EmailService({ customerMail: email, href: `https://flashcard-backend-kuup.onrender.com/register/verify/${token}`, subject: "TCG-Trading Card Games - Email Verification" });
 
       return res.redirect('/login');
     }
